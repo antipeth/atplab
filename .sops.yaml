@@ -1,0 +1,7 @@
+keys:
+  - &admin_atp age1gym933jnyln9nud8vhg44vtp983prgfpnlxr0zw2tr9x9s575vyqyufmyd
+creation_rules:
+  - path_regex: sops/.*
+    key_groups:
+      - age:
+          - *admin_atp
