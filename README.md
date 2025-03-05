@@ -87,3 +87,20 @@ It decrypt all .nix file in `sops/eval/<machine-name>`. After you've finished yo
 ```
 just encrypt <machine-name>
 ```
+
+## Acknowledgements
+
+Config:
+- <https://gitlab.com/Zaney/zaneyos>
+- <https://github.com/yonzilch/nixos-server-config>
+- <https://github.com/ryan4yin/nix-config>
+- <https://github.com/xddxdd/nixos-config>
+- <https://gitea.c3d2.de/c3d2/nix-config>
+- <https://github.com/Mic92/dotfiles>
+
+Project:
+- <https://github.com/ryan4yin/nixos-and-flakes-book>
+- <https://git.clan.lol/clan/clan-core>
+- <https://github.com/Mic92/sops-nix>
+- <https://github.com/nix-community/disko>
+- <https://github.com/nix-community/nixos-anywhere>
