@@ -145,6 +145,13 @@
               url = "https://gotify.0pt.us.kg";
               target = "newtab";
             }
+            {
+              title = "Glances";
+              description = "Monitor yourself";
+              icon = "hl-glances-light";
+              url = "https://glances.0pt.us.kg";
+              target = "newtab";
+            }
           ];
         }
         {

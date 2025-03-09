@@ -3,7 +3,7 @@
     enable = true;
     extraArgs = [
       "--webserver"
-      "--disable-webui"
+      # "--disable-webui"
     ];
     port = 61208;
   };

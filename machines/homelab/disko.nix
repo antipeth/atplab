@@ -10,7 +10,6 @@
             boot = {
               size = "1M";
               type = "EF02"; # for grub MBR
-              # 优先级设置为最高，保证这块空间在硬盘开头
               priority = 0;
             };
             ESP = {
