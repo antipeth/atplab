@@ -6,7 +6,7 @@
 }:
 {
   boot = {
-    kernelPackages = pkgs.linuxPackages-libre;
+    kernelPackages = pkgs.linuxPackages_6_12;
     kernelParams = [
       # "amd_pstate=passive"
       "pcie_aspm=force"

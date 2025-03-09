@@ -6,12 +6,15 @@
 
     ../../modules/services/dns.nix
     ../../modules/services/ssh.nix
+    ../../modules/services/tailscale.nix
     ../../modules/system/base.nix
     ../../modules/system/environment.nix
     ../../modules/system/minimalise.nix
     ../../modules/system/nix.nix
 
     ./services/traefik.nix
+    ./services/headscale.nix
+    ./services/netdata.nix
   ];
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;

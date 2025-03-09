@@ -33,22 +33,22 @@
           http.tls = {
             certResolver = "myresolver";
             domains = {
-              main = "0pt.icu";
-              sans = [ "*.0pt.icu" ];
+              main = "0pt.us.kg";
+              sans = [ "*.0pt.us.kg" ];
             };
           };
         };
       };
 
-      certificatesResolvers.myresolver.acme = {
-        dnsChallenge = {
-          provider = import ../../../sops/eval/crystal/traefik-dns-provider.nix;
-          delayBeforeCheck = "10";
-        };
-        email = import ../../../sops/eval/crystal/traefik-cert-email.nix;
-        storage = "${config.services.traefik.dataDir}/acme.json";
-        # httpChallenge.entryPoint = "web";
-      };
+      # certificatesResolvers.myresolver.acme = {
+      #   dnsChallenge = {
+      #     provider = import ../../../sops/eval/crystal/traefik-dns-provider.nix;
+      #     delayBeforeCheck = "10";
+      #   };
+      #   email = import ../../../sops/eval/crystal/traefik-cert-email.nix;
+      #   storage = "${config.services.traefik.dataDir}/acme.json";
+      #   # httpChallenge.entryPoint = "web";
+      # };
 
       # certificatesResolvers.myresolver.acme = {
       #   tlschallenge = true;
@@ -71,12 +71,12 @@
           #   service = "syncthing";
           #   tls.certresolver = "myresolver";
           # };
-          # alist = {
-          #   entryPoints = [ "websecure" ];
-          #   rule = "Host(`alist.0pt.icu`)";
-          #   service = "alist";
-          #   tls.certresolver = "myresolver";
-          # };
+          headscale = {
+            entryPoints = [ "websecure" ];
+            rule = "Host(`headscale.0pt.us.kg`)";
+            service = "headscale";
+            tls.certresolver = "myresolver";
+          };
           # netdata = {
           #  entryPoints = [ "websecure" ];
           #  rule = "Host(`data.0pt.icu`)";
@@ -103,15 +103,15 @@
           #     passHostHeader = false;
           #   };
           # };
-          # alist = {
-          #   loadBalancer = {
-          #     servers = [
-          #       {
-          #         url = "http://localhost:5244";
-          #       }
-          #     ];
-          #   };
-          # };
+          headscale = {
+            loadBalancer = {
+              servers = [
+                {
+                  url = "http://127.0.0.1:8080";
+                }
+              ];
+            };
+          };
           # netdata = {
           #   loadBalancer = {
           #     servers = [

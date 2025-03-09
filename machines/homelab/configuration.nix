@@ -12,6 +12,7 @@
     ../../modules/services/blacklist.nix
     ../../modules/services/dns.nix
     ../../modules/services/ssh.nix
+    ../../modules/services/tailscale.nix
 
     ./services/alist.nix
     ./services/cockpit.nix
