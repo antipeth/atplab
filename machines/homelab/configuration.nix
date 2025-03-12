@@ -37,6 +37,7 @@
 
   # Enable networking
   networking = {
+    hostId = "2aff655b";
     hostName = "homelab";
   };
 
