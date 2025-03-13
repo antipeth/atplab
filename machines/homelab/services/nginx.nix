@@ -3,10 +3,17 @@
   users.users.nginx.extraGroups = [
     "acme"
   ];
-  sops.secrets.homelab-acme-environment = {
-    mode = "0440";
-    owner = config.users.users.acme.name;
-    group = config.users.users.acme.group;
+  sops.secrets = {
+    homelab-acme-environment1 = {
+      mode = "0440";
+      owner = config.users.users.acme.name;
+      group = config.users.users.acme.group;
+    };
+    homelab-acme-environment2 = {
+      mode = "0440";
+      owner = config.users.users.acme.name;
+      group = config.users.users.acme.group;
+    };
   };
   security.acme = {
     acceptTerms = true;
@@ -14,11 +21,19 @@
     certs."0pt.us.kg" = {
       domain = "0pt.us.kg";
       extraDomainNames = [ "*.0pt.us.kg" ];
-      dnsProvider = import ../../../sops/eval/homelab/acme-dns-provider.nix;
-      environmentFile = config.sops.secrets.homelab-acme-environment.path;
+      dnsProvider = import ../../../sops/eval/homelab/acme-dns-provider1.nix;
+      environmentFile = config.sops.secrets.homelab-acme-environment1.path;
       dnsPropagationCheck = false;
       # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
     };
+    # certs."0pt.ddns-ip.net" = {
+    #   domain = "0pt.ddns-ip.net";
+    #   extraDomainNames = [ "0pt.ddns-ip.net" ];
+    #   dnsProvider = import ../../../sops/eval/homelab/acme-dns-provider2.nix;
+    #   environmentFile = config.sops.secrets.homelab-acme-environment2.path;
+    #   dnsPropagationCheck = false;
+    #   # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+    # };
   };
   services.nginx = {
     enable = true;
