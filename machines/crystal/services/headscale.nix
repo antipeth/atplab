@@ -18,7 +18,7 @@
         v4 = "100.64.0.0/10";
         allocation = "sequential";
       };
-      server_url = "https://headscale.0pt.us.kg";
+      server_url = "https://headscale.0pt.icu";
     };
   };
 }

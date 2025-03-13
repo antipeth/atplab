@@ -2,7 +2,7 @@
   services.dashy = {
     enable = true;
     virtualHost = {
-      domain = "0pt.us.kg";
+      domain = "0pt.icu";
       enableNginx = true;
     };
     settings = {
@@ -93,63 +93,63 @@
               title = "Syncthing";
               description = "Sync for everything";
               icon = "hl-syncthing";
-              url = "https://sync.0pt.us.kg/";
+              url = "https://sync.0pt.icu/";
               target = "newtab";
             }
             {
               title = "Immich";
               description = "Family DCIM";
               icon = "hl-immich";
-              url = "https://pic.0pt.us.kg";
+              url = "https://pic.0pt.icu";
               target = "newtab";
             }
             {
               title = "Cockpit";
               description = "Dashboard of the nas machine";
               icon = "hl-cockpit-light";
-              url = "https://dashboard.0pt.us.kg";
+              url = "https://dashboard.0pt.icu";
               target = "newtab";
             }
             {
               title = "Forgejo";
               description = "Git Server in local";
               icon = "hl-forgejo";
-              url = "https://git.0pt.us.kg";
+              url = "https://git.0pt.icu";
               target = "newtab";
             }
             {
               title = "Alist";
               description = "File Client for the local";
               icon = "hl-alist";
-              url = "https://alist.0pt.us.kg";
+              url = "https://alist.0pt.icu";
               target = "newtab";
             }
             {
               title = "Code Server";
               description = "Web VSCode";
               icon = "hl-vscode";
-              url = "https://code.0pt.us.kg";
+              url = "https://code.0pt.icu";
               target = "newtab";
             }
             {
               title = "Wakapi";
               description = "Seft-built Code Stat";
               icon = "hl-wakapi";
-              url = "https://wakapi.0pt.us.kg";
+              url = "https://wakapi.0pt.icu";
               target = "newtab";
             }
             {
               title = "Gotify";
               description = "Seft-built notification server";
               icon = "hl-gotify";
-              url = "https://gotify.0pt.us.kg";
+              url = "https://gotify.0pt.icu";
               target = "newtab";
             }
             {
               title = "Glances";
               description = "Monitor yourself";
               icon = "hl-glances-light";
-              url = "https://glances.0pt.us.kg";
+              url = "https://glances.0pt.icu";
               target = "newtab";
             }
           ];
@@ -166,19 +166,19 @@
             {
               type = "gl-current-cpu";
               options = {
-                hostname = "https://glances.0pt.us.kg";
+                hostname = "https://glances.0pt.icu";
               };
             }
             {
               type = "gl-current-mem";
               options = {
-                hostname = "https://glances.0pt.us.kg";
+                hostname = "https://glances.0pt.icu";
               };
             }
             {
               type = "gl-alerts";
               options = {
-                hostname = "https://glances.0pt.us.kg";
+                hostname = "https://glances.0pt.icu";
               };
             }
           ];
@@ -194,7 +194,7 @@
             {
               type = "gl-system-load";
               options = {
-                hostname = "https://glances.0pt.us.kg";
+                hostname = "https://glances.0pt.icu";
               };
             }
           ];
@@ -211,21 +211,21 @@
             {
               type = "gl-cpu-history";
               options = {
-                hostname = "https://glances.0pt.us.kg";
+                hostname = "https://glances.0pt.icu";
                 limit = 60;
               };
             }
             {
               type = "gl-mem-history";
               options = {
-                hostname = "https://glances.0pt.us.kg";
+                hostname = "https://glances.0pt.icu";
                 limit = 80;
               };
             }
             {
               type = "gl-load-history";
               options = {
-                hostname = "https://glances.0pt.us.kg";
+                hostname = "https://glances.0pt.icu";
               };
             }
           ];
@@ -242,13 +242,13 @@
             {
               type = "gl-disk-space";
               options = {
-                hostname = "https://glances.0pt.us.kg";
+                hostname = "https://glances.0pt.icu";
               };
             }
             {
               type = "gl-disk-io";
               options = {
-                hostname = "https://glances.0pt.us.kg";
+                hostname = "https://glances.0pt.icu";
               };
             }
           ];

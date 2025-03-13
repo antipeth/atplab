@@ -31,24 +31,31 @@
         websecure = {
           address = ":443";
           http.tls = {
-            certResolver = "myresolver";
+            certResolver = "leresolver";
             domains = {
-              main = "0pt.us.kg";
-              sans = [ "*.0pt.us.kg" ];
+              main = "0pt.icu";
+              sans = [ "*.0pt.icu" ];
             };
           };
         };
       };
 
-      # certificatesResolvers.myresolver.acme = {
-      #   dnsChallenge = {
-      #     provider = import ../../../sops/eval/crystal/traefik-dns-provider.nix;
-      #     delayBeforeCheck = "10";
-      #   };
-      #   email = import ../../../sops/eval/crystal/traefik-cert-email.nix;
-      #   storage = "${config.services.traefik.dataDir}/acme.json";
-      #   # httpChallenge.entryPoint = "web";
-      # };
+      certificatesResolvers.leresolver.acme = {
+        dnsChallenge = {
+          provider = import ../../../sops/eval/crystal/traefik-dns-provider.nix;
+          resolvers = [
+            "1.1.1.1:53"
+            "8.8.8.8:53"
+          ];
+          # propagation = {
+          delayBeforeCheck = 10;
+          # };
+        };
+        email = import ../../../sops/eval/crystal/traefik-cert-email.nix;
+        storage = "${config.services.traefik.dataDir}/acme.json";
+        caServer = "https://acme-staging-v02.api.letsencrypt.org/directory";
+        # httpChallenge.entryPoint = "web";
+      };
 
       # certificatesResolvers.myresolver.acme = {
       #   tlschallenge = true;
@@ -73,9 +80,9 @@
           # };
           headscale = {
             entryPoints = [ "websecure" ];
-            rule = "Host(`headscale.0pt.us.kg`)";
+            rule = "Host(`headscale.0pt.icu`)";
             service = "headscale";
-            tls.certresolver = "myresolver";
+            tls.certresolver = "leresolver";
           };
           # netdata = {
           #  entryPoints = [ "websecure" ];

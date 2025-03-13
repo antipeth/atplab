@@ -12,9 +12,10 @@
     ../../modules/system/minimalise.nix
     ../../modules/system/nix.nix
 
-    ./services/traefik.nix
+    # ./services/traefik.nix
     ./services/headscale.nix
     ./services/netdata.nix
+    ./services/nginx.nix
   ];
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;

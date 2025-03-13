@@ -4,12 +4,7 @@
     "acme"
   ];
   sops.secrets = {
-    homelab-acme-environment1 = {
-      mode = "0440";
-      owner = config.users.users.acme.name;
-      group = config.users.users.acme.group;
-    };
-    homelab-acme-environment2 = {
+    homelab-acme-environment = {
       mode = "0440";
       owner = config.users.users.acme.name;
       group = config.users.users.acme.group;
@@ -18,35 +13,27 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = import ../../../sops/eval/homelab/acme-cert-email.nix;
-    certs."0pt.us.kg" = {
-      domain = "0pt.us.kg";
-      extraDomainNames = [ "*.0pt.us.kg" ];
-      dnsProvider = import ../../../sops/eval/homelab/acme-dns-provider1.nix;
-      environmentFile = config.sops.secrets.homelab-acme-environment1.path;
+    certs."0pt.icu" = {
+      domain = "0pt.icu";
+      extraDomainNames = [ "*.0pt.icu" ];
+      dnsProvider = import ../../../sops/eval/homelab/acme-dns-provider.nix;
+      environmentFile = config.sops.secrets.homelab-acme-environment.path;
       dnsPropagationCheck = false;
       # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
     };
-    # certs."0pt.ddns-ip.net" = {
-    #   domain = "0pt.ddns-ip.net";
-    #   extraDomainNames = [ "0pt.ddns-ip.net" ];
-    #   dnsProvider = import ../../../sops/eval/homelab/acme-dns-provider2.nix;
-    #   environmentFile = config.sops.secrets.homelab-acme-environment2.path;
-    #   dnsPropagationCheck = false;
-    #   # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
-    # };
   };
   services.nginx = {
     enable = true;
     virtualHosts = {
-      "0pt.us.kg" = {
+      "0pt.icu" = {
         forceSSL = true;
         # sslCertificate = "/var/nas.local.crt";
         # sslCertificateKey = "/var/nas.local.key";
-        useACMEHost = "0pt.us.kg";
+        useACMEHost = "0pt.icu";
       };
-      "alist.0pt.us.kg" = {
+      "alist.0pt.icu" = {
         forceSSL = true;
-        useACMEHost = "0pt.us.kg";
+        useACMEHost = "0pt.icu";
         locations."/" = {
           proxyPass = "http://127.0.0.1:5244";
           extraConfig = ''
@@ -72,9 +59,9 @@
           '';
         };
       };
-      "code.0pt.us.kg" = {
+      "code.0pt.icu" = {
         forceSSL = true;
-        useACMEHost = "0pt.us.kg";
+        useACMEHost = "0pt.icu";
         locations."/" = {
           proxyPass = "http://127.0.0.1:8080";
           extraConfig = ''
@@ -85,9 +72,9 @@
           '';
         };
       };
-      "dashboard.0pt.us.kg" = {
+      "dashboard.0pt.icu" = {
         forceSSL = true;
-        useACMEHost = "0pt.us.kg";
+        useACMEHost = "0pt.icu";
         locations."/" = {
           proxyPass = "http://127.0.0.1:9090";
           extraConfig = ''
@@ -121,9 +108,9 @@
           '';
         };
       };
-      "git.0pt.us.kg" = {
+      "git.0pt.icu" = {
         forceSSL = true;
-        useACMEHost = "0pt.us.kg";
+        useACMEHost = "0pt.icu";
         locations."/" = {
           proxyPass = "http://127.0.0.1:3000";
           extraConfig = ''
@@ -139,9 +126,9 @@
           '';
         };
       };
-      "glances.0pt.us.kg" = {
+      "glances.0pt.icu" = {
         forceSSL = true;
-        useACMEHost = "0pt.us.kg";
+        useACMEHost = "0pt.icu";
         locations."/" = {
           proxyPass = "http://127.0.0.1:61208";
           extraConfig = ''
@@ -165,9 +152,9 @@
           '';
         };
       };
-      "gotify.0pt.us.kg" = {
+      "gotify.0pt.icu" = {
         forceSSL = true;
-        useACMEHost = "0pt.us.kg";
+        useACMEHost = "0pt.icu";
         locations."/" = {
           proxyPass = "http://127.0.0.1:1245";
           extraConfig = ''
@@ -197,9 +184,9 @@
           '';
         };
       };
-      "pic.0pt.us.kg" = {
+      "pic.0pt.icu" = {
         forceSSL = true;
-        useACMEHost = "0pt.us.kg";
+        useACMEHost = "0pt.icu";
         locations."/" = {
           proxyPass = "http://[::1]:${toString config.services.immich.port}";
           proxyWebsockets = true;
@@ -225,9 +212,9 @@
           '';
         };
       };
-      "sync.0pt.us.kg" = {
+      "sync.0pt.icu" = {
         forceSSL = true;
-        useACMEHost = "0pt.us.kg";
+        useACMEHost = "0pt.icu";
         locations."/" = {
           proxyPass = "http://127.0.0.1:8384";
           extraConfig = ''
@@ -252,9 +239,9 @@
           '';
         };
       };
-      "wakapi.0pt.us.kg" = {
+      "wakapi.0pt.icu" = {
         forceSSL = true;
-        useACMEHost = "0pt.us.kg";
+        useACMEHost = "0pt.icu";
         locations."/" = {
           proxyPass = "http://127.0.0.1:3001";
           extraConfig = ''
