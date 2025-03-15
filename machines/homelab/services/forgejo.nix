@@ -27,7 +27,7 @@
         DESCRIPTION = "How about use the 🧊?";
       };
       server = {
-        DOMAIN = "git.0pt.us.kg";
+        DOMAIN = "git.0pt.icu";
         # You need to specify this to remove the port from URLs in the web UI.
         ROOT_URL = "https://${config.services.forgejo.settings.server.DOMAIN}/";
         HTTP_ADDR = "127.0.0.1";
