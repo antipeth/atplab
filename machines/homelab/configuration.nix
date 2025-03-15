@@ -15,6 +15,7 @@
     ../../modules/services/tailscale.nix
 
     ./services/alist.nix
+    ./services/aria2.nix
     ./services/cockpit.nix
     ./services/code-server.nix
     ./services/dashy.nix

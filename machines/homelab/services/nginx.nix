@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   users.users.nginx.extraGroups = [
     "acme"
@@ -56,6 +56,21 @@
             # Set as shown below. You can use other values for the numbers as you wish
             proxy_headers_hash_max_size 512;
             proxy_headers_hash_bucket_size 128;
+          '';
+        };
+      };
+      "aria2.0pt.icu" = {
+        forceSSL = true;
+        useACMEHost = "0pt.icu";
+        root = "${pkgs.ariang}/share/ariang";
+        locations."/jsonrpc" = {
+          proxyPass = "http://127.0.0.1:${toString config.services.aria2.settings.rpc-listen-port}";
+          extraConfig = ''
+            proxy_set_header Connection "upgrade";
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
           '';
         };
       };
