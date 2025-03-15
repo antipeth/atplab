@@ -31,25 +31,19 @@
         websecure = {
           address = ":443";
           http.tls = {
-            certResolver = "leresolver";
+            certResolver = "myresolver";
             domains = {
-              main = "0pt.icu";
-              sans = [ "*.0pt.icu" ];
+              main = "0pt.im";
+              sans = [ "*.0pt.im" ];
             };
           };
         };
       };
 
-      certificatesResolvers.leresolver.acme = {
+      certificatesResolvers.myresolver.acme = {
         dnsChallenge = {
           provider = import ../../../sops/eval/crystal/traefik-dns-provider.nix;
-          resolvers = [
-            "1.1.1.1:53"
-            "8.8.8.8:53"
-          ];
-          # propagation = {
           delayBeforeCheck = 10;
-          # };
         };
         email = import ../../../sops/eval/crystal/traefik-cert-email.nix;
         storage = "${config.services.traefik.dataDir}/acme.json";
@@ -80,9 +74,9 @@
           # };
           headscale = {
             entryPoints = [ "websecure" ];
-            rule = "Host(`headscale.0pt.icu`)";
+            rule = "Host(`headscale.0pt.im`)";
             service = "headscale";
-            tls.certresolver = "leresolver";
+            # tls.certresolver = "myresolver";
           };
           # netdata = {
           #  entryPoints = [ "websecure" ];
