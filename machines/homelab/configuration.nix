@@ -22,6 +22,7 @@
     ./services/forgejo.nix
     ./services/glances.nix
     ./services/gotify.nix
+    ./services/home-assistant.nix
     ./services/immich.nix
     ./services/jellyfin.nix
     ./services/nginx.nix
