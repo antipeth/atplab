@@ -6,7 +6,7 @@
     extraComponents = [
       # Components required to complete the onboarding
       "analytics"
-      "google_translate"
+      # "google_translate"
       "esphome"
       "met"
       "radio_browser"
@@ -21,11 +21,11 @@
     config = {
       # Includes dependencies for a basic setup
       # https://www.home-assistant.io/integrations/default_config/
-      # default_config = { };
+      default_config = { };
       http = {
-        server_host = "127.0.0.1";
-        port = 8123;
-        trusted_proxies = [ "127.0.0.1" ];
+        server_host = "::1";
+        server_port = 8123;
+        trusted_proxies = [ "::1" ];
         use_x_forwarded_for = true;
       };
     };
