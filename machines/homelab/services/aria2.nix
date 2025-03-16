@@ -15,7 +15,7 @@
       continue = true;
       max-concurrent-downloads = 5;
       quiet = true;
-      # advaanced
+      # advanced
       allow-overwrite = true;
       auto-file-renaming = true;
       disk-cache = "64M";
