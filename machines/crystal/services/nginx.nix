@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   users.users.nginx.extraGroups = [
     "acme"
@@ -27,27 +27,14 @@
         forceSSL = true;
         sslCertificate = "/var/0pt.im.pem";
         sslCertificateKey = "/var/0pt.im.key";
-        # useACMEHost = "0pt.im";
-        # extraConfig = ''
-        #   ssl_protocols TLSv1.2 TLSv1.3;
-        # '';
         locations."/" = {
           proxyPass = "http://127.0.0.1:8080";
           proxyWebsockets = true;
           recommendedProxySettings = true;
-          #   extraConfig = ''
-          #     proxy_http_version 1.1;
-          #     proxy_set_header Upgrade $http_upgrade;
-          #     proxy_set_header Connection "upgrade";
-          #     # shut down for cdn
-          #     proxy_set_header Host $server_name;
-          #     proxy_redirect http:// https://;
-          #     proxy_buffering off;
-          #     proxy_set_header X-Real-IP $remote_addr;
-          #     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          #     proxy_set_header X-Forwarded-Proto $scheme;
-          #     add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
-          #   '';
+          extraConfig = ''
+            proxy_buffering off;
+            add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
+          '';
         };
       };
     };
