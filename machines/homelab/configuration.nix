@@ -23,6 +23,7 @@
     ./services/glances.nix
     ./services/gotify.nix
     ./services/immich.nix
+    ./services/jellyfin.nix
     ./services/nginx.nix
     ./services/postgres.nix
     ./services/power-management.nix

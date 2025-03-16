@@ -1,5 +1,23 @@
 { config, pkgs, ... }:
 {
+  # recommendedProxyConfig = pkgs.writeText "nginx-recommended-proxy-headers.conf" ''
+  #   proxy_set_header        Host $host;
+  #   proxy_set_header        X-Real-IP $remote_addr;
+  #   proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+  #   proxy_set_header        X-Forwarded-Proto $scheme;
+  #   proxy_set_header        X-Forwarded-Host $host;
+  #   proxy_set_header        X-Forwarded-Server $host;
+  # '';
+  # $connection_upgrade is used for websocket proxying
+  # map $http_upgrade $connection_upgrade {
+  #     default upgrade;
+  #     '''      close;
+  # }
+  #   ${optionalString config.proxyWebsockets ''
+  #   proxy_http_version 1.1;
+  #   proxy_set_header Upgrade $http_upgrade;
+  #   proxy_set_header Connection $connection_upgrade;
+  # ''}
   users.users.nginx.extraGroups = [
     "acme"
   ];
@@ -197,6 +215,26 @@
             proxy_headers_hash_max_size 512;
             proxy_headers_hash_bucket_size 128;
           '';
+        };
+      };
+      "jellyfin.0pt.icu" = {
+        forceSSL = true;
+        useACMEHost = "0pt.icu";
+        locations = {
+          "/" = {
+            proxyPass = "http://127.0.0.1:8096";
+            recommendedProxySettings = true;
+            extraConfig = ''
+              proxy_redirect off;
+              proxy_buffering off;
+              client_max_body_size 500M;
+            '';
+          };
+          "/socket" = {
+            proxyPass = "http://127.0.0.1:8096";
+            recommendedProxySettings = true;
+            proxyWebsockets = true;
+          };
         };
       };
       "pic.0pt.icu" = {

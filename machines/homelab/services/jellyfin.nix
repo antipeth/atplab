@@ -2,10 +2,9 @@
 {
   services.jellyfin = {
     enable = true;
-    openFirewall = true;
     dataDir = "/media/jellyfin";
     cacheDir = "/var/cache/jellyfin";
-    configDir = "var/lib/jellyfin/config";
+    configDir = "/var/lib/jellyfin/config";
     user = "atp";
     group = "users";
   };
