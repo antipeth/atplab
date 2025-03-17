@@ -125,13 +125,6 @@
               target = "newtab";
             }
             {
-              title = "Code Server";
-              description = "Web VSCode";
-              icon = "hl-vscode";
-              url = "https://code.0pt.icu";
-              target = "newtab";
-            }
-            {
               title = "Wakapi";
               description = "Seft-built Code Stat";
               icon = "hl-wakapi";

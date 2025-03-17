@@ -17,7 +17,7 @@
     ./services/alist.nix
     ./services/aria2.nix
     ./services/cockpit.nix
-    ./services/code-server.nix
+    # ./services/code-server.nix
     ./services/dashy.nix
     ./services/forgejo.nix
     ./services/glances.nix

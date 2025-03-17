@@ -92,19 +92,19 @@
           '';
         };
       };
-      "code.0pt.icu" = {
-        forceSSL = true;
-        useACMEHost = "0pt.icu";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:8080";
-          extraConfig = ''
-            proxy_set_header Host $host;
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection upgrade;
-            proxy_set_header Accept-Encoding gzip;
-          '';
-        };
-      };
+      # "code.0pt.icu" = {
+      #   forceSSL = true;
+      #   useACMEHost = "0pt.icu";
+      #   locations."/" = {
+      #     proxyPass = "http://127.0.0.1:8080";
+      #     extraConfig = ''
+      #       proxy_set_header Host $host;
+      #       proxy_set_header Upgrade $http_upgrade;
+      #       proxy_set_header Connection upgrade;
+      #       proxy_set_header Accept-Encoding gzip;
+      #     '';
+      #   };
+      # };
       "dashboard.0pt.icu" = {
         forceSSL = true;
         useACMEHost = "0pt.icu";
