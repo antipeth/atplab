@@ -125,6 +125,13 @@
               target = "newtab";
             }
             {
+              title = "Ariang";
+              description = "A modern web frontend making aria2 easier to use.";
+              icon = "hl-ariang";
+              url = "https://aria2.0pt.icu";
+              target = "newtab";
+            }
+            {
               title = "Wakapi";
               description = "Seft-built Code Stat";
               icon = "hl-wakapi";
