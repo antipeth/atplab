@@ -104,6 +104,13 @@
               target = "newtab";
             }
             {
+              title = "Homebox";
+              description = "A simple home inventory management software";
+              icon = "hl-homebox";
+              url = "https://homebox.0pt.icu";
+              target = "newtab";
+            }
+            {
               title = "Cockpit";
               description = "Dashboard of the nas machine";
               icon = "hl-cockpit-light";

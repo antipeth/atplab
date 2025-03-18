@@ -23,6 +23,7 @@
     ./services/glances.nix
     ./services/gotify.nix
     # ./services/home-assistant.nix
+    ./services/homebox.nix
     ./services/immich.nix
     ./services/jellyfin.nix
     ./services/nginx.nix

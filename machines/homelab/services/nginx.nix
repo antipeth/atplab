@@ -228,6 +228,18 @@
           '';
         };
       };
+      "homebox.0pt.icu" = {
+        forceSSL = true;
+        useACMEHost = "0pt.icu";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:7745";
+          recommendedProxySettings = true;
+          extraConfig = ''
+            proxy_redirect off;
+            proxy_buffering off;
+          '';
+        };
+      };
       "jellyfin.0pt.icu" = {
         forceSSL = true;
         useACMEHost = "0pt.icu";
