@@ -13,6 +13,7 @@
     ../../modules/system/nix.nix
 
     ./services/headscale.nix
+    ./services/murmur.nix
     ./services/nginx.nix
   ];
   boot = {

@@ -22,6 +22,7 @@
   };
   services.nginx = {
     enable = true;
+    streamConfig = import ../../../sops/eval/crystal/nginx-stream-config.nix;
     virtualHosts = {
       "headscale.0pt.im" = {
         forceSSL = true;
@@ -38,5 +39,10 @@
         };
       };
     };
+  };
+  networking.firewall = {
+    allowedTCPPorts = [
+      10000
+    ];
   };
 }
