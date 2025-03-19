@@ -38,6 +38,32 @@
           '';
         };
       };
+      # "garage.0pt.im" = {
+      #   forceSSL = true;
+      #   sslCertificate = "/var/0pt.im.pem";
+      #   sslCertificateKey = "/var/0pt.im.key";
+      #   locations."/" = {
+      #     proxyPass = "http://127.0.0.1:3900";
+      #     proxyWebsockets = true;
+      #     recommendedProxySettings = true;
+      #     extraConfig = ''
+      #       proxy_buffering off;
+      #     '';
+      #   };
+      # };
+      # "garageweb.0pt.im" = {
+      #   forceSSL = true;
+      #   sslCertificate = "/var/0pt.im.pem";
+      #   sslCertificateKey = "/var/0pt.im.key";
+      #   locations."/" = {
+      #     proxyPass = "http://127.0.0.1:3902";
+      #     # proxyWebsockets = true;
+      #     recommendedProxySettings = true;
+      #     extraConfig = ''
+      #       proxy_buffering off;
+      #     '';
+      #   };
+      # };
     };
   };
   networking.firewall = {
