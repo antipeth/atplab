@@ -8,6 +8,7 @@
         paths = [
           "/var/lib/alist"
           "/var/lib/forgejo"
+          "/var/lib/homebox"
           "/var/lib/postgresql"
           "/var/lib/wakapi"
         ];
@@ -36,6 +37,7 @@
         paths = [
           "/var/lib/alist"
           "/var/lib/forgejo"
+          "/var/lib/homebox"
           "/var/lib/postgresql"
           "/var/lib/wakapi"
         ];
