@@ -2,11 +2,9 @@
 {
   services.jellyfin = {
     enable = true;
-    dataDir = "/media/jellyfin";
+    dataDir = "/var/lib/jellyfin";
     cacheDir = "/var/cache/jellyfin";
     configDir = "/var/lib/jellyfin/config";
-    user = "atp";
-    group = "users";
   };
   environment.systemPackages = [
     pkgs.jellyfin
