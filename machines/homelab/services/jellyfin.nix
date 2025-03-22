@@ -10,5 +10,11 @@
     pkgs.jellyfin
     pkgs.jellyfin-web
     pkgs.jellyfin-ffmpeg
+    pkgs.nvtopPackages.amd
+    pkgs.yazi
   ];
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 }
