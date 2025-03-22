@@ -104,6 +104,13 @@
               target = "newtab";
             }
             {
+              title = "Jellyfin";
+              description = "The Free Software Media System";
+              icon = "hl-jellyfin";
+              url = "https://jellyfin.0pt.icu";
+              target = "newtab";
+            }
+            {
               title = "Homebox";
               description = "A simple home inventory management software";
               icon = "hl-homebox";
