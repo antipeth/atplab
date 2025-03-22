@@ -9,6 +9,7 @@
           "/var/lib/alist"
           "/var/lib/forgejo"
           "/var/lib/homebox"
+          "/var/lib/jellyfin"
           "/var/lib/postgresql"
           "/var/lib/wakapi"
         ];
@@ -38,6 +39,7 @@
           "/var/lib/alist"
           "/var/lib/forgejo"
           "/var/lib/homebox"
+          "/var/lib/jellyfin"
           "/var/lib/postgresql"
           "/var/lib/wakapi"
         ];
