@@ -5,6 +5,7 @@
     ./user.nix
 
     ../../modules/services/dns.nix
+    ../../modules/services/fail2ban.nix
     ../../modules/services/ssh.nix
     ../../modules/system/base.nix
     ../../modules/system/environment.nix
