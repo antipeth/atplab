@@ -63,7 +63,7 @@
             proxy_redirect off;
 
             # Nginx by default only allows file uploads up to 1M in size
-            # client_max_body_size 50000M;
+            client_max_body_size 50000M;
 
             # Timeout settings
             proxy_connect_timeout 600s;
