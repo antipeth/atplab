@@ -4,8 +4,15 @@
   inputs.clan-core.url = "https://git.clan.lol/clan/clan-core/archive/main.tar.gz";
   inputs.nixpkgs.follows = "clan-core/nixpkgs";
 
+  inputs.proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
+
   outputs =
-    { self, clan-core, ... }:
+    {
+      self,
+      clan-core,
+      proxmox-nixos,
+      ...
+    }:
     let
       # Usage see: https://docs.clan.lol
       clan = clan-core.lib.buildClan {
@@ -14,6 +21,19 @@
         meta.name = "atp";
 
         machines = {
+          freezer = {
+            nixpkgs.hostPlatform = "x86_64-linux";
+            imports = [
+              proxmox-nixos.nixosModules.proxmox-ve
+              ({
+                nixpkgs.overlays = [
+                  proxmox-nixos.overlays.x86_64-linux
+                ];
+
+                # The rest of your configuration...
+              })
+            ];
+          };
 
         };
       };

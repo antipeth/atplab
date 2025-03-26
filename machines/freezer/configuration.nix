@@ -16,6 +16,7 @@
     ../../modules/services/tailscale.nix
 
     ./services/power-management.nix
+    ./services/pve.nix
   ] ++ lib.filesystem.listFilesRecursive ../../modules/options;
 
   boot = {
