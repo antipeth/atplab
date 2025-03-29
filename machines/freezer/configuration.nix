@@ -17,6 +17,7 @@
 
     ./services/power-management.nix
     # ./services/pve.nix
+    ./vms/vm-network-tap.nix
   ] ++ lib.filesystem.listFilesRecursive ../../modules/options;
 
   boot = {
