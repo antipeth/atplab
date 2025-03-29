@@ -3,7 +3,7 @@
   networking = {
     # Encrypted DNS
     dhcpcd.extraConfig = "nohook resolv.conf";
-    nameservers = [
+    nameservers = lib.mkDefault [
       "127.0.0.1"
       "::1"
     ];
