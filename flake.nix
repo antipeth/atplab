@@ -37,9 +37,17 @@
               #
               #       # The rest of your configuration...
               #     })
+              microvm.nixosModules.host
+              {
+                microvm.vms = {
+                  vm1 = {
+                    pkgs = import nixpkgs { system = "x86_64-linux"; };
+                    config = import ./machines/freezer/vms/vm1.nix;
+                  };
+                };
+              }
             ];
           };
-
         };
       };
     in
