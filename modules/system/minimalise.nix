@@ -71,7 +71,7 @@
       systemd-pstore.enable = lib.mkForce false;
       systemd-udev-settle.enable = lib.mkForce false;
       systemd-update-utmp.enable = lib.mkForce false;
-      systemd-user-sessions.enable = lib.mkForce false;
+      systemd-user-sessions.enable = lib.mkDefault false;
     };
   };
 
@@ -80,11 +80,11 @@
 
   # Disable desktop environment related services
   xdg = {
-    autostart.enable = lib.mkForce false;
-    icons.enable = lib.mkForce false;
-    menus.enable = lib.mkForce false;
-    mime.enable = lib.mkForce false;
-    sounds.enable = lib.mkForce false;
+    autostart.enable = lib.mkDefault false;
+    icons.enable = lib.mkDefault false;
+    menus.enable = lib.mkDefault false;
+    mime.enable = lib.mkDefault false;
+    sounds.enable = lib.mkDefault false;
   };
 
 }
