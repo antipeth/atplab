@@ -6,11 +6,16 @@
 
   inputs.proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
 
+  inputs.microvm.url = "github:astro/microvm.nix";
+  inputs.microvm.inputs.nixpkgs.follows = "nixpkgs";
+
   outputs =
     {
       self,
       clan-core,
+      nixpkgs,
       proxmox-nixos,
+      microvm,
       ...
     }:
     let
