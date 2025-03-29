@@ -43,7 +43,10 @@
   console.keyMap = "us";
 
   # Set your time zone.
-  time.timeZone = "Asia/Singapore";
+  time = {
+    timeZone = "Asia/Singapore";
+    hardwareClockInLocalTime = false;
+  };
 
   # Select internationalisation properties.
   i18n = {
@@ -77,13 +80,24 @@
     };
   };
 
-  networking.nftables.enable = true;
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [
-      222
-      443
+  networking = {
+    nftables.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        222
+        443
+      ];
+    };
+    timeServers = [
+      "ntppool1.time.nl"
+      "ntppool2.time.nl"
+      "ntp.ripe.net"
     ];
+  };
+  services = {
+    timesyncd.enable = false;
+    ntpd-rs.enable = true;
   };
 
   system.stateVersion = "25.05";

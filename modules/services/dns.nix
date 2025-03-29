@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, ... }:
 {
   networking = {
     # Encrypted DNS
@@ -6,10 +6,6 @@
     nameservers = lib.mkDefault [
       "127.0.0.1"
       "::1"
-    ];
-    timeServers = [
-      "nts.netnod.se"
-      "nts.time.nl"
     ];
   };
 
