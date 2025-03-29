@@ -27,6 +27,7 @@
     ./services/homebox.nix
     ./services/immich.nix
     ./services/jellyfin.nix
+    ./services/kodi.nix
     ./services/nginx.nix
     ./services/postgres.nix
     ./services/power-management.nix
