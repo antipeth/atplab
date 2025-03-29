@@ -29,14 +29,14 @@
           freezer = {
             nixpkgs.hostPlatform = "x86_64-linux";
             imports = [
-              proxmox-nixos.nixosModules.proxmox-ve
-              ({
-                nixpkgs.overlays = [
-                  proxmox-nixos.overlays.x86_64-linux
-                ];
-
-                # The rest of your configuration...
-              })
+              #     proxmox-nixos.nixosModules.proxmox-ve
+              #     ({
+              #       nixpkgs.overlays = [
+              #         proxmox-nixos.overlays.x86_64-linux
+              #       ];
+              #
+              #       # The rest of your configuration...
+              #     })
             ];
           };
 
