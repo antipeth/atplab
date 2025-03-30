@@ -288,6 +288,20 @@
           '';
         };
       };
+      "radicale.0pt.icu" = {
+        forceSSL = true;
+        useACMEHost = "0pt.icu";
+        locations."/radicale/" = {
+          proxyPass = "http://127.0.0.1:5232/";
+          recommendedProxySettings = true;
+          extraConfig = ''
+            proxy_set_header  X-Script-Name /radicale;
+            proxy_set_header  X-Forwarded-Port $server_port;
+            proxy_pass_header Authorization;
+            proxy_redirect off;
+          '';
+        };
+      };
       "sync.0pt.icu" = {
         forceSSL = true;
         useACMEHost = "0pt.icu";
