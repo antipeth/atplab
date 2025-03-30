@@ -31,6 +31,7 @@
     ./services/nginx.nix
     ./services/postgres.nix
     ./services/power-management.nix
+    ./services/radicale.nix
     ./services/restic.nix
     ./services/samba.nix
     ./services/syncthing.nix
