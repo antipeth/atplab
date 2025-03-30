@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   boot = {
     supportedFilesystems = [ "zfs" ];
@@ -24,4 +25,5 @@
     };
     autoSnapshot.enable = true;
   };
+  systemd.services.zfs-zed.wantedBy = lib.mkForce [ ];
 }
