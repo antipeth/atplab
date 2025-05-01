@@ -1,12 +1,13 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }:
 {
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = inputs.chaotic.legacyPackages.x86_64-linux.linuxPackages_cachyos-server;
     kernelParams = [
       # "amd_pstate=passive"
       "pcie_aspm=force"

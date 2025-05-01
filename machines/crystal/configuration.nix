@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ./network.nix
@@ -18,7 +18,7 @@
     ./services/nginx.nix
   ];
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = inputs.chaotic.legacyPackages.x86_64-linux.linuxPackages_cachyos-server;
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
