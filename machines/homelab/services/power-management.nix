@@ -8,6 +8,7 @@
 {
   boot = {
     kernelPackages = inputs.chaotic.legacyPackages.x86_64-linux.linuxPackages_cachyos-server;
+    zfs.package = inputs.chaotic.legacyPackages.x86_64-linux.zfs_cachyos;
     kernelParams = [
       # "amd_pstate=passive"
       "pcie_aspm=force"
