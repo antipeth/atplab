@@ -25,5 +25,4 @@
     };
     autoSnapshot.enable = true;
   };
-  systemd.services.zfs-zed.wantedBy = lib.mkForce [ ];
 }
