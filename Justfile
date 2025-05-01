@@ -30,3 +30,8 @@ encrypt input:
 
 decrypt input:
   ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -d -i | echo "no commit after decrypt until you encrypt or update again"
+
+format:
+  # Use alejandra and deadnix to format code
+  deadnix -e
+  alejandra .
