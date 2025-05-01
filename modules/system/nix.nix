@@ -1,18 +1,34 @@
 {
+  inputs,
+  lib,
+  ...
+}:
+with lib;
+{
+  environment.etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs}";
   nix = {
     gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
+    optimise = {
+      automatic = true;
+      dates = [ "weekly" ];
+    };
     settings = {
       auto-optimise-store = true;
-      gc-keep-outputs = false;
-      gc-keep-derivations = false;
+      builders-use-substitutes = true;
       experimental-features = [
         "nix-command"
         "flakes"
       ];
+      connect-timeout = 5;
+      gc-keep-outputs = false;
+      gc-keep-derivations = false;
+      keep-going = true;
+      log-lines = 25;
+      nix-path = mkForce "nixpkgs=/etc/nix/inputs/nixpkgs";
       substituters = [
         "https://cache.garnix.io"
         "https://cache.nixos.org"
@@ -28,10 +44,7 @@
         "proxmox-nixos:nveXDuVVhFDRFx8Dn19f1WDEaNRJjPrF2CPD2D+m1ys="
       ];
     };
-    optimise = {
-      automatic = true;
-      dates = [ "weekly" ];
-    };
+
   };
   nixpkgs = {
     config.allowUnfree = true;
