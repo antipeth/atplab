@@ -1,20 +1,15 @@
 {
-	"data": "ENC[AES256_GCM,data:OYXnCaKCnlQH3lsR5SvAAA==,iv:hAIEhkKimAfzssRw6vZFcwhULErhkYrK6AiOQqCls8w=,tag:16uNMWfDxZEJ9gxgQQub4A==,type:str]",
+	"data": "ENC[AES256_GCM,data:HNri4yDUO/BouNFFk2EPEQ==,iv:nsQah+ME0qmlrWIEfLyALy6wjKXhAexweFmtZi6pxNA=,tag:V0KFhzU7FZCtqse+GKlprA==,type:str]",
 	"sops": {
-		"kms": null,
-		"gcp_kms": null,
-		"azure_kv": null,
-		"hc_vault": null,
 		"age": [
 			{
 				"recipient": "age1gym933jnyln9nud8vhg44vtp983prgfpnlxr0zw2tr9x9s575vyqyufmyd",
-				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5WXBSSkRBQnpDUnRQcERO\nVFFhMVh3SXVBSloxYXhkeVVKUHlWbU9aeUJRCklYMzFhTEVuSlE1WjF1Y3lnQ0du\nVFJFYXJBTk1BQ1JSSDkwY3p4Qnl1QW8KLS0tIGxoNEZ5RVkrRDhocHdTSzh0ZGgz\nRWUyUWZvTzE4MEViTDJ1T2QrV0Y2bDAKlD7XN458punBhzWHNd/iwlZrHKmtdtb/\nRR5C1to5v4Nfj0szzmS09ynpMdPcvz2pXk2B/C7aAlCYDc0YHe3e7g==\n-----END AGE ENCRYPTED FILE-----\n"
+				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAzdlNLcllXV25IZjQ4djFp\nRkh6ZDc4Z29wV1BGYitBaWU2KzRIbEtPN0NBCk5sdUhRZUszNU9QMGEzamFOdmhh\nT0JYYlFHcGxFL044dUVmcHZuMWJLd3MKLS0tIGVrd0JhWXNEc3Y0NEFZa0dwQmVC\nZmV5bTNDeU9FaFZ0RUNOM3dKMlhmb2MKnJJtE/T5l0hKt5v5aJcdFiuNPShnvtF9\npg8n12XG4r8Nd5sGj8/kYF+QEs6cXnwVq8ootv7fB/8Gpi0Fot5z8A==\n-----END AGE ENCRYPTED FILE-----\n"
 			}
 		],
-		"lastmodified": "2025-03-30T04:59:28Z",
-		"mac": "ENC[AES256_GCM,data:chPKFI4pyAk0vKpcQLfuqKD11sadZ24qmDocwRKy/tP4dAeEGjU9X/s8aLxOAyAATEJDOw7ub7KgG2M/dweR+sOnd7o3W3M2pA1OOQlHWvSAcnPUzGEdCKVrC+C+IbPQG1BeV9TtvsOPVqd7gNTxUfKSu+0dAbogXscXmu1z4RM=,iv:QPOVgeW7MGPi1oC3Dmo8ikVBcuYWKhRyT45QeQxr0qU=,tag:40rPzuxACGljxqzZazZ/nQ==,type:str]",
-		"pgp": null,
+		"lastmodified": "2025-05-01T04:42:46Z",
+		"mac": "ENC[AES256_GCM,data:9VujdyFNf100mNty8ubBk/VdVRgg24Qml4CEDHYb8wT0NAs9JuQLJKY5DwAP88yYoVF0DLvVpCMHoQhp2ze+tT4yJhW+NtViLjD5IOUOVpD1dOU9PfTLsfdeG7o61WXe12D97cFdIHlMwRjmH/jflQS1D31J6bsuxXZEW3zmEEY=,iv:lpmo5aHteWC2P8PxtUEUMQP3gskSW6WCFrYmbSTmNJE=,tag:+Q96FiXWYuPzXMj4xf3kpg==,type:str]",
 		"unencrypted_suffix": "_unencrypted",
-		"version": "3.9.4"
+		"version": "3.10.2"
 	}
 }

@@ -1,20 +1,15 @@
 {
-	"data": "ENC[AES256_GCM,data:HKAG,iv:QrPrUCFK3whyTGOWCar7mbV3EvMBSMojqtrY1I99Ow0=,tag:DcbKDK32yE72M1KjsarOFA==,type:str]",
+	"data": "ENC[AES256_GCM,data:Mxhi,iv:EAic4xBRRKQRBm6HxwbMjHny5AJPqr9Fgz/TfYfEZuU=,tag:6UTrqv7aXMHXyVkUITCdYA==,type:str]",
 	"sops": {
-		"kms": null,
-		"gcp_kms": null,
-		"azure_kv": null,
-		"hc_vault": null,
 		"age": [
 			{
 				"recipient": "age1gym933jnyln9nud8vhg44vtp983prgfpnlxr0zw2tr9x9s575vyqyufmyd",
-				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJN3FHVnp0WjcwYWFwUkp1\nc0FhLzBsTXp2a3NiaEhiQlk4c0I5Rm1peEQ0ClVCb1RyeWNOSGFxRDlJSldqODho\ndHVTTWVrOXNtYTBFTk50QnFFSjl0a0EKLS0tIHd5MEo4aGxsbTVHYjlSTmVZRTV5\nUk44MzdZRWg3RHpNOGExM1FyNlhDcFEKBoKtTB/RKrA1VAGswL7dCJiv4ss02t7N\nFuAFeZ7k+EstTQnFJXs9tD6jhivtKe86wvxtQZq80kL5krENUjE9Mw==\n-----END AGE ENCRYPTED FILE-----\n"
+				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0a1plTGRFYithUnlCOEVE\nUUxGNC9yRWhPbzNpbzhicXU0clQyZ2hMQXhNCkw4Q0dRdnFTY2ZuZ2h5ZmducVJO\nZDFGOVVrQXB3d2ZHLzRBTFIrZW93aDAKLS0tICtJdjJycmw4emxGNXRWYzk0QjVh\naVQ5L25BVk1lN0FySGoyUkZEOXNqeGMKq1+euJZf+rNlFhLlEKieDVU8o2GL6PvS\n9bnnksO88oOFflgk8mI0glzSMtjuijRXl1+KAZWBi3DhFDpx34IRWg==\n-----END AGE ENCRYPTED FILE-----\n"
 			}
 		],
-		"lastmodified": "2025-03-30T04:59:28Z",
-		"mac": "ENC[AES256_GCM,data:bVql8znhNlFEbWyiht9+M4sdEzmJhiiZg+8Q49sHSqveSD32mREoLBeoc8sYVKn1oBzrUMbk4/gO9ruJzAu1wH3nS6wDi3tOxE/ooZulzHQiXItS+GzoY4f+SpJ/kSRRoB8w+WQRMwRm3HKT+uDbTpZEqIsJmcnCD60lrTmN2DM=,iv:SXg+FVhpl9bNMII5DWe4rD5/pNDCbZbOaXpr/mA36Tg=,tag:TjJtqFwTT5QAqXiz8w/FLg==,type:str]",
-		"pgp": null,
+		"lastmodified": "2025-05-01T04:42:46Z",
+		"mac": "ENC[AES256_GCM,data:cvH2XnUMYlD4OD5V/byd8HrCskLVIRimMJM/+DoHakE3rZnmBM/yZq1husHZ6A3OpLmHAyWAtpDhKZW+s8tplliSpA8qehbe5QA5A2DEzHDwlHWOaE9b6SMgKl9GmTi/Fvpxb14UfFbz20xO/AAsc03gtQ01VG/xVqCyz/tUXtM=,iv:S0xIHQ3BB64zVv0B+kgUy0nU4zFjdphCuii42Ly3FBg=,tag:QO2fKIlyYqMsOWuOIZ/PXQ==,type:str]",
 		"unencrypted_suffix": "_unencrypted",
-		"version": "3.9.4"
+		"version": "3.10.2"
 	}
 }

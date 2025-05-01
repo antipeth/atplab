@@ -1,20 +1,15 @@
 {
-	"data": "ENC[AES256_GCM,data:eTAiyGdEItCvQA==,iv:CnGWfomC/FTl2LmC+55Bzh8GccZkhI9rajx+nJMIuOg=,tag:ScQfdGIBuURAVZ/n3qYyEQ==,type:str]",
+	"data": "ENC[AES256_GCM,data:fDCBviYKh5vA4Q==,iv:sb/nRc2kdt21CYsuQ72tTykaGZyqW+B0cDpZcQNvW2o=,tag:nf7hLrn7q3o4tFYgi+kSAg==,type:str]",
 	"sops": {
-		"kms": null,
-		"gcp_kms": null,
-		"azure_kv": null,
-		"hc_vault": null,
 		"age": [
 			{
 				"recipient": "age1gym933jnyln9nud8vhg44vtp983prgfpnlxr0zw2tr9x9s575vyqyufmyd",
-				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBRYkMxQXdzUDVYNGg2S1FJ\nQ2FPU2liTmFCVjFuZzJib2Q1WjVMSkpuSFdNCklITnFCM0lzVy84cGl1R2ZJeWFB\nVjhtMGorTGhha1J5bkxRMzc4MGM0Qm8KLS0tIEc2b3duVzRqRUxDWTQ4aEZTS2cy\nMmJzUndvS0xTaTlCUWZiQW40UHhLWncKt4k854b8mh6V6rA+AaT7PhzgR2qaSA7H\nlno37BvS2/AytAIZdeg35id6iZXLu38FvCrpLV9jAV/JVRJr8tCclA==\n-----END AGE ENCRYPTED FILE-----\n"
+				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAvVkJDU3dFTmw0b0tINjIw\nU3NFZU56cHc5M2Y5VDJyMGVtQlFVNnp3Zkc0CmhmaHMvK2RwbmR4NVlaNVhUUG41\nZTg3U1ZlTXFtZFhML0MvZHZJTGJPMlUKLS0tIGc5Vy9Kc3RwTzcrRVZBNmg4dHQ5\nZTJNWGlBazhZR1hndTY0ZHNFN3V4ZlEKF2IfGGq2nRZTCR4b0B+G4FWgMyt7HazK\ncnUfoftJ0cFU6cMUPDzsjyJ5WaNmlk8iikw+WV49dW7aDHeipSDvpw==\n-----END AGE ENCRYPTED FILE-----\n"
 			}
 		],
-		"lastmodified": "2025-03-30T04:59:28Z",
-		"mac": "ENC[AES256_GCM,data:yqMHfrMfYe4Q1GXr64KoqkEg8sFSSJfOVTvNqbdUsfv4JgwECa1kl/VKMyc4fnewDdBuaxkQvJ5eFsDMnP9M3e4qI+xszY78OZDd6MEr9SRFNDlom98b4FFb9eScaNNRHoLV77Tt3pQfpmFeJFfVuVJQ7BvjQDAY21QhulxS9iM=,iv:L3KKnKAcATEd0/e6wCyWuZzygeuKsGC+IiRxR0gxvxU=,tag:obYCpidfGcW7X21JwAf+3w==,type:str]",
-		"pgp": null,
+		"lastmodified": "2025-05-01T04:42:46Z",
+		"mac": "ENC[AES256_GCM,data:IU5GHrdJnGpNGYXRACNBE56M4wNe1liQrthmypIxj7N4UuqjnctpJ9ESi7lFfhW3uKOrgnTwWO4hyekewMMPQAzBkHP5ytFeq4PiQSk8836L2svH97Aj2p5Tjo0qUEJWDVBGQmo+t8GG9F9F/tF0f3HVOXZ2BM6TTHjxwnOkbFo=,iv:XG5cJpo/9JB3rsgaCN87tFXwtnfZEgjqmlOqjHdC7OM=,tag:sIFLdpF5+wQBr8uhwZ5F1w==,type:str]",
 		"unencrypted_suffix": "_unencrypted",
-		"version": "3.9.4"
+		"version": "3.10.2"
 	}
 }
