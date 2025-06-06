@@ -1,7 +1,6 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   boot = {
-    supportedFilesystems = [ "zfs" ];
+    supportedFilesystems = ["zfs"];
     kernelParams = [
       "zfs_force=1"
     ];
@@ -17,7 +16,7 @@
     autoScrub = {
       enable = true;
       interval = "weekly";
-      pools = [ "tank" ];
+      pools = ["tank"];
     };
     trim = {
       enable = true; # hdd no need
@@ -25,4 +24,5 @@
     };
     autoSnapshot.enable = true;
   };
+  systemd.services.zfs-zed.wantedBy = lib.mkForce [];
 }

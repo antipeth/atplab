@@ -1,5 +1,8 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  ...
+}: {
   boot = {
     consoleLogLevel = lib.mkForce 0;
     extraModprobeConfig = "blacklist mei mei_hdcp mei_me mei_pxp iTCO_wdt pstore sp5100_tco";
@@ -25,7 +28,7 @@
         "net.ipv4.tcp_wmem" = "4096 87380 1073741824";
       };
     };
-    kernelModules = [ "tcp_bbr" ];
+    kernelModules = ["tcp_bbr"];
     kernelParams = [
       "audit=0"
       "console=tty0"
@@ -82,7 +85,7 @@
 
   networking = {
     nftables.enable = true;
-    firewall = {
+    firewall = lib.mkDefault {
       enable = true;
       allowedTCPPorts = [
         222
