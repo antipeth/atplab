@@ -28,38 +28,83 @@
         ];
       };
     };
-    # nftables = {
-    #   ruleset = ''
-    #     table ip filter {
-    #       chain input {
-    #         type filter hook input priority 0; policy drop;
-    #
-    #         iifname { "eth1" } accept comment "Allow local network to access the router"
-    #         iifname "eth0" ct state { established, related } accept comment "Allow established traffic"
-    #         iifname "eth0" icmp type { echo-request, destination-unreachable, time-exceeded } counter accept comment "Allow select ICMP"
-    #         iifname "eth0" counter drop comment "Drop all other unsolicited traffic from wan"
-    #       }
-    #       chain forward {
-    #         type filter hook forward priority 0; policy drop;
-    #         iifname { "eth1" } oifname { "eth0" } accept comment "Allow trusted LAN to WAN"
-    #         iifname { "eth0" } oifname { "eth1" } ct state established, related accept comment "Allow established back to LANs"
-    #       }
-    #     }
-    #     table ip nat {
-    #       chain postrouting {
-    #         type nat hook postrouting priority 100; policy accept;
-    #         oifname "eth0" masquerade
-    #       }
-    #     }
-    #     table ip6 filter {
-    #      chain input {
-    #         type filter hook input priority 0; policy drop;
-    #       }
-    #       chain forward {
-    #         type filter hook forward priority 0; policy drop;
-    #       }
-    #     }
-    #   '';
-    # };
+    nftables = {
+      ruleset = ''
+        table ip filter {
+          chain input {
+            type filter hook input priority 0; policy drop;
+
+            # Allow lo loopback
+            iifname "lo" accept comment "Allow all loopback traffic"
+
+            # Allow SSH on port from eth0
+            iifname "eth0" tcp dport 222 ct state new,established accept comment "Allow SSH"
+
+            iifname { "eth1" } accept comment "Allow local network to access the router"
+            iifname "eth0" ct state { established, related } accept comment "Allow established traffic"
+            iifname "eth0" icmp type { echo-request, destination-unreachable, time-exceeded } counter accept comment "Allow select ICMP"
+            iifname "eth0" counter drop comment "Drop all other unsolicited traffic from wan"
+          }
+          chain forward {
+            type filter hook forward priority 0; policy drop;
+            iifname { "eth1" } oifname { "eth0" } accept comment "Allow trusted LAN"
+            iifname { "eth0" } oifname { "eth1" } ct state established, related accept comment "Allow established back to LANs"
+          }
+        }
+        table ip nat {
+          chain prerouting {
+            type nat hook prerouting priority 0; policy accept;
+          }
+          chain postrouting {
+            type nat hook postrouting priority 100; policy accept;
+            oifname "eth0" masquerade
+          }
+        }
+        table ip6 filter {
+         chain input {
+            type filter hook input priority 0; policy drop;
+          }
+          chain forward {
+            type filter hook forward priority 0; policy drop;
+          }
+        }
+      '';
+    };
+  };
+  services = {
+    unbound.settings = {
+      access-control = ["10.13.10.0/24 allow" "::/0 refuse"];
+      server.interface = [
+        "0.0.0.0"
+        "::0"
+      ];
+    };
+    dnsmasq = {
+      enable = true;
+      resolveLocalQueries = false;
+      settings = {
+        # Shut down the dns server by settings port 0
+        port = 0;
+
+        # sensible behaviours
+        domain-needed = true;
+        bogus-priv = true;
+        no-resolv = true;
+
+        # Cache dns queries.
+        cache-size = 1000;
+
+        interface = "eth1";
+        # bind-interfaces = true;
+        dhcp-range = ["eth1,10.13.10.2,10.13.10.254,255.255.255.0,12h"];
+        dhcp-host = "10.13.10.1";
+        dhcp-option = [
+          "option:router,10.13.10.1"
+          "option:dns-server,10.13.10.1"
+        ];
+        expand-hosts = true;
+        no-hosts = true;
+      };
+    };
   };
 }
