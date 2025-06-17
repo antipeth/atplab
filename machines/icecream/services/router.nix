@@ -72,6 +72,7 @@
     };
   };
   services = {
+    # DNS Settings
     unbound.settings = {
       access-control = ["10.13.10.0/24 allow" "::/0 refuse"];
       server.interface = [
@@ -79,6 +80,7 @@
         "::0"
       ];
     };
+    # DHCP server settings
     dnsmasq = {
       enable = true;
       resolveLocalQueries = false;
@@ -100,7 +102,7 @@
         dhcp-host = "10.13.10.1";
         dhcp-option = [
           "option:router,10.13.10.1"
-          "option:dns-server,8.8.8.8"
+          "option:dns-server,10.13.10.1"
         ];
         expand-hosts = true;
         no-hosts = true;
