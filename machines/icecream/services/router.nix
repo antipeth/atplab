@@ -38,17 +38,17 @@
             iifname "lo" accept comment "Allow all loopback traffic"
 
             # Allow SSH on port from eth0
-            iifname "eth0" tcp dport 222 ct state new,established accept comment "Allow SSH"
+            iifname { "eth0", "usb0" } tcp dport 222 ct state new,established accept comment "Allow SSH"
 
             iifname { "eth1" } accept comment "Allow local network to access the router"
-            iifname "eth0" ct state { established, related } accept comment "Allow established traffic"
-            iifname "eth0" icmp type { echo-request, destination-unreachable, time-exceeded } counter accept comment "Allow select ICMP"
-            iifname "eth0" counter drop comment "Drop all other unsolicited traffic from wan"
+            iifname { "eth0", "usb0" } ct state { established, related } accept comment "Allow established traffic"
+            iifname { "eth0", "usb0" } icmp type { echo-request, destination-unreachable, time-exceeded } counter accept comment "Allow select ICMP"
+            iifname { "eth0", "usb0" } counter drop comment "Drop all other unsolicited traffic from wan"
           }
           chain forward {
             type filter hook forward priority 0; policy drop;
-            iifname { "eth1" } oifname { "eth0" } accept comment "Allow trusted LAN"
-            iifname { "eth0" } oifname { "eth1" } ct state established, related accept comment "Allow established back to LANs"
+            iifname { "eth1" } oifname { "eth0", "usb0"} accept comment "Allow trusted LAN"
+            iifname { "eth0", "usb0" } oifname { "eth1" } ct state established, related accept comment "Allow established back to LANs"
           }
         }
         table ip nat {
@@ -57,7 +57,7 @@
           }
           chain postrouting {
             type nat hook postrouting priority 100; policy accept;
-            oifname "eth0" masquerade
+            oifname { "eth0", "usb0" } masquerade
           }
         }
         table ip6 filter {
@@ -100,7 +100,7 @@
         dhcp-host = "10.13.10.1";
         dhcp-option = [
           "option:router,10.13.10.1"
-          "option:dns-server,10.13.10.1"
+          "option:dns-server,8.8.8.8"
         ];
         expand-hosts = true;
         no-hosts = true;
