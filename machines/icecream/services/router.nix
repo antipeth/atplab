@@ -27,6 +27,18 @@
           }
         ];
       };
+      wlan0 = {
+        useDHCP = false;
+        ipv4.addresses = [
+          {
+            address = "10.13.12.1";
+            prefixLength = 24;
+          }
+        ];
+      };
+    };
+    vlans={
+      lan=
     };
     nftables = {
       ruleset = ''
@@ -40,15 +52,15 @@
             # Allow SSH on port from eth0
             iifname { "eth0", "usb0" } tcp dport 222 ct state new,established accept comment "Allow SSH"
 
-            iifname { "eth1" } accept comment "Allow local network to access the router"
+            iifname { "eth1", "wlan0" } accept comment "Allow local network to access the router"
             iifname { "eth0", "usb0" } ct state { established, related } accept comment "Allow established traffic"
             iifname { "eth0", "usb0" } icmp type { echo-request, destination-unreachable, time-exceeded } counter accept comment "Allow select ICMP"
             iifname { "eth0", "usb0" } counter drop comment "Drop all other unsolicited traffic from wan"
           }
           chain forward {
             type filter hook forward priority 0; policy drop;
-            iifname { "eth1" } oifname { "eth0", "usb0"} accept comment "Allow trusted LAN"
-            iifname { "eth0", "usb0" } oifname { "eth1" } ct state established, related accept comment "Allow established back to LANs"
+            iifname { "eth1", "wlan0" } oifname { "eth0", "usb0"} accept comment "Allow trusted LAN"
+            iifname { "eth0", "usb0" } oifname { "eth1", "wlan0" } ct state established, related accept comment "Allow established back to LANs"
           }
         }
         table ip nat {
@@ -74,7 +86,7 @@
   services = {
     # DNS Settings
     unbound.settings = {
-      access-control = ["10.13.10.0/24 allow" "::/0 refuse"];
+      access-control = ["10.13.10.0/24 allow" "10.13.12.0/24 allow" "::/0 refuse"];
       server.interface = [
         "0.0.0.0"
         "::0"
@@ -96,13 +108,15 @@
         # Cache dns queries.
         cache-size = 1000;
 
-        interface = "eth1";
+        interface = "eth1,wlan0";
         # bind-interfaces = true;
-        dhcp-range = ["eth1,10.13.10.2,10.13.10.254,255.255.255.0,12h"];
-        dhcp-host = "10.13.10.1";
+        dhcp-range = ["eth1,10.13.10.2,10.13.10.254,255.255.255.0,12h" "wlan0,10.13.12.2,10.13.12.254,255.255.255.0,12h"];
+        # dhcp-host = "10.13.10.1";
         dhcp-option = [
-          "option:router,10.13.10.1"
-          "option:dns-server,10.13.10.1"
+          "tag:eth1,option:router,10.13.10.1"
+          "tag:eth1,option:dns-server,10.13.10.1"
+          "tag:wlan0,option:router,10.13.12.1"
+          "tag:wlan0,option:dns-server,10.13.10.1"
         ];
         expand-hosts = true;
         no-hosts = true;

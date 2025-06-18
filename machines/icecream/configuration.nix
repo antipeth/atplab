@@ -17,6 +17,7 @@
 
       ./services/power-management.nix
       ./services/router.nix
+      ./services/wifi.nix
     ]
     ++ lib.filesystem.listFilesRecursive ../../modules/options;
   boot = {

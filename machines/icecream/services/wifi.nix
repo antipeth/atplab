@@ -1,25 +1,21 @@
-{
+{config, ...}: {
   services.hostapd = {
     enable = true;
     radios = {
       wlan0 = {
         band = "2g";
-        countryCode = "PL";
-        channel = 0; # ACS
+        channel = 11; # ACS
 
-        wifi4.enable = true;
+        wifi6.enable = true;
 
         networks = {
           wlan0 = {
-            ssid = "wifi-name";
+            ssid = "test";
             authentication = {
               mode = "wpa3-sae";
-              saePasswordsFile = "password";
+              saePasswordsFile = config.sops.secrets.icecream-wifi-password.path;
             };
-            bssid = "36:b9:ff:ff:ff:ff";
-            settings = {
-              bridge = "br-lan";
-            };
+            # bssid = "36:b9:ff:ff:ff:ff";
           };
         };
       };
