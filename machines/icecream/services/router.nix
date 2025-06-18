@@ -37,9 +37,6 @@
         ];
       };
     };
-    vlans={
-      lan=
-    };
     nftables = {
       ruleset = ''
         table ip filter {
