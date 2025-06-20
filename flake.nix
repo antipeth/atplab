@@ -20,20 +20,20 @@
 
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
+
+    daeuniverse.url = "github:daeuniverse/flake.nix";
   };
 
-  outputs =
-    inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } (
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} (
       {
         self,
         inputs,
         nixpkgs,
         microvm,
         ...
-      }:
-      {
-        systems = [ "x86_64-linux" ];
+      }: {
+        systems = ["x86_64-linux"];
         imports = [
           inputs.clan-core.flakeModules.default
         ];
@@ -59,32 +59,37 @@
                 {
                   microvm.vms = {
                     vm1 = {
-                      pkgs = import nixpkgs { system = "x86_64-linux"; };
+                      pkgs = import nixpkgs {system = "x86_64-linux";};
                       config = import ./machines/freezer/vms/vm1.nix;
                     };
                   };
                 }
               ];
             };
+            # icecream = {
+            #   nixpkgs.hostPlatform = "x86_64-linux";
+            #   imports = [
+            #     inputs.daeuniverse.nixosModules.dae
+            #     inputs.daeuniverse.nixosModules.daed
+            #   ];
+            # };
           };
         };
-        perSystem =
-          {
-            inputs',
-            pkgs,
-            ...
-          }:
-          {
-            devShells.default = pkgs.mkShell {
-              packages = with pkgs; [
-                inputs'.clan-core.packages.clan-cli
-                alejandra
-                commitlint-rs
-                deadnix
-                sops
-              ];
-            };
+        perSystem = {
+          inputs',
+          pkgs,
+          ...
+        }: {
+          devShells.default = pkgs.mkShell {
+            packages = with pkgs; [
+              inputs'.clan-core.packages.clan-cli
+              alejandra
+              commitlint-rs
+              deadnix
+              sops
+            ];
           };
+        };
       }
     );
   # let

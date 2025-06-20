@@ -48,6 +48,7 @@
 
             # Allow SSH on port from eth0
             iifname { "eth0", "usb0" } tcp dport 222 ct state new,established accept comment "Allow SSH"
+            iifname { "eth0", "usb0" } tcp dport 12345 ct state new,established accept comment "Allow APP"
 
             iifname { "eth1", "wlan0" } accept comment "Allow local network to access the router"
             iifname { "eth0", "usb0" } ct state { established, related } accept comment "Allow established traffic"

@@ -15,6 +15,7 @@
       ../../modules/services/ssh.nix
       # ../../modules/services/tailscale.nix
 
+      # ./services/daed.nix
       ./services/power-management.nix
       ./services/router.nix
       ./services/wifi.nix
