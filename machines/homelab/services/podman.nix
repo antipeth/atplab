@@ -13,5 +13,6 @@
   virtualisation.oci-containers.containers = {
     # alist = import ./docker/alist.nix;
     # wakapi = import ./docker/wakapi.nix;
+    # romm = import ./docker/romm.nix;
   };
 }
