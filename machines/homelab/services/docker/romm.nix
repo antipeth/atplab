@@ -16,9 +16,5 @@
     DB_USER = "romm";
     DB_PASSWD = "";
     ROMM_AUTH_SECRET_KEY = "9094bcfecb6dd7b4a55ca71f2dbc1ee929edd67d71f067d4880d3def3532f7b2";
-    IGDB_CLIENT_ID = "";
-    IGDB_CLIENT_SECRET = "";
-    SCREENSCRAPER_USER = "";
-    SCREENSCRAPER_PASSWORD = "";
   };
 }
