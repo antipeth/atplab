@@ -16,7 +16,7 @@
       url = "github:hercules-ci/flake-parts";
     };
 
-    proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
+    # proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
 
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";

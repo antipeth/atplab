@@ -1,7 +1,6 @@
-{ config, ... }:
-{
+{config, ...}: {
   services.fail2ban = {
-    enable = true;
+    enable = false;
     # Ban IP after 3 failures
     maxretry = 3;
     bantime = "24h"; # Ban IPs for one day on the first ban
