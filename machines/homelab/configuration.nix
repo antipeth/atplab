@@ -37,6 +37,8 @@
       ./services/samba.nix
       ./services/syncthing.nix
       ./services/wakapi.nix
+
+      ./services/docker/romm.nix
     ]
     ++ lib.filesystem.listFilesRecursive ../../modules/options;
   boot = {

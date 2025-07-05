@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   # recommendedProxyConfig = pkgs.writeText "nginx-recommended-proxy-headers.conf" ''
   #   proxy_set_header        Host $host;
   #   proxy_set_header        X-Real-IP $remote_addr;
@@ -33,7 +36,7 @@
     defaults.email = import ../../../sops/eval/homelab/acme-cert-email.nix;
     certs."0pt.icu" = {
       domain = "0pt.icu";
-      extraDomainNames = [ "*.0pt.icu" ];
+      extraDomainNames = ["*.0pt.icu"];
       dnsProvider = import ../../../sops/eval/homelab/acme-dns-provider.nix;
       environmentFile = config.sops.secrets.homelab-acme-environment.path;
       dnsPropagationCheck = false;
@@ -299,6 +302,26 @@
             proxy_set_header  X-Forwarded-Port $server_port;
             proxy_pass_header Authorization;
             proxy_redirect off;
+          '';
+        };
+      };
+      "romm.0pt.icu" = {
+        forceSSL = true;
+        useACMEHost = "0pt.icu";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8080";
+          recommendedProxySettings = true;
+          proxyWebsockets = true;
+          extraConfig = ''
+            # Hide version
+            server_tokens off;
+
+            # Security headers
+            add_header X-Frame-Options "SAMEORIGIN" always;
+            add_header X-Content-Type-Options "nosniff" always;
+            add_header X-XSS-Protection "1; mode=block" always;
+            add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+            add_header Referrer-Policy "no-referrer-when-downgrade" always;
           '';
         };
       };
