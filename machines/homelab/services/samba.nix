@@ -29,6 +29,16 @@
         "force user" = "atp";
         # "force group" = "groupname";
       };
+      photos = {
+        path = "/media/photos";
+        browseable = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "atp";
+        # "force group" = "groupname";
+      };
 
       # public = {
       #   path = "/hdd-pool/share";
