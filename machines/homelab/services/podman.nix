@@ -1,18 +1,25 @@
-{
-  virtualisation.containers.enable = true;
+_: {
   virtualisation = {
+    containers = {
+      containersConf.settings = {
+        containers.dns_servers = ["185.222.222.222" "45.11.45.11"];
+      };
+      enable = true;
+      storage.settings = {
+        storage.driver = "zfs";
+        storage.graphroot = "/var/lib/containers/storage";
+        storage.runroot = "/run/containers/storage";
+        storage.options.zfs.fsname = "zroot/root";
+      };
+    };
     podman = {
       enable = true;
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
       dockerCompat = true;
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
+      defaultNetwork.settings = {
+        dns = ["185.222.222.222" "45.11.45.11"];
+        dns_enabled = true;
+      };
     };
-  };
-  virtualisation.oci-containers.backend = "podman";
-  virtualisation.oci-containers.containers = {
-    # alist = import ./docker/alist.nix;
-    # wakapi = import ./docker/wakapi.nix;
-    # romm = import ./docker/romm.nix;
+    oci-containers.backend = "podman";
   };
 }
