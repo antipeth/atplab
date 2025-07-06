@@ -11,14 +11,14 @@
 
       ../../modules/services/blacklist.nix
       ../../modules/services/dns.nix
-      ../../modules/services/fail2ban.nix
+      # ../../modules/services/fail2ban.nix
       ../../modules/services/ssh.nix
       # ../../modules/services/tailscale.nix
 
       # ./services/daed.nix
       ./services/power-management.nix
       ./services/router.nix
-      ./services/wifi.nix
+      # ./services/wifi.nix
     ]
     ++ lib.filesystem.listFilesRecursive ../../modules/options;
   boot = {
