@@ -84,9 +84,8 @@
   };
 
   networking = {
-    nftables.enable = false;
-    firewall = lib.mkDefault {
-      enable = false;
+    nftables.enable = true;
+    firewall = {
       allowedTCPPorts = [
         222
         443
