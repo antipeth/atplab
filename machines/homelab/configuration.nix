@@ -26,6 +26,7 @@
       # ./services/home-assistant.nix
       ./services/homebox.nix
       ./services/immich.nix
+      ./services/iperf3.nix
       ./services/jellyfin.nix
       ./services/kodi.nix
       ./services/nginx.nix

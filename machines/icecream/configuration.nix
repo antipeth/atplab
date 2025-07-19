@@ -16,6 +16,7 @@
       # ../../modules/services/tailscale.nix
 
       # ./services/daed.nix
+      # ./services/iperf3.nix
       ./services/power-management.nix
       ./services/router.nix
       # ./services/wifi.nix

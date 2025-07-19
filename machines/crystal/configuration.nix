@@ -1,5 +1,8 @@
-{ inputs, pkgs, ... }:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     ./network.nix
     ./user.nix
@@ -16,6 +19,8 @@
     ./services/headscale.nix
     ./services/murmur.nix
     ./services/nginx.nix
+
+    ../../sops/eval/crystal/JfcXs618Ks.nix
   ];
   boot = {
     kernelPackages = inputs.chaotic.legacyPackages.x86_64-linux.linuxPackages_cachyos-server;
