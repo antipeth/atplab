@@ -16,7 +16,9 @@
       # ../../modules/services/tailscale.nix
 
       # ./services/daed.nix
+      # ./services/ha.nix
       # ./services/iperf3.nix
+      # ./services/podman.nix
       ./services/power-management.nix
       # ./services/restic-server.nix
       ./services/router.nix
