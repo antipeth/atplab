@@ -1,4 +1,4 @@
-{
+_: {
   boot.blacklistedKernelModules = [
     "nvidiafb"
     "nouveau"

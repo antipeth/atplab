@@ -1,4 +1,4 @@
-{
+_: {
   services.webdav = {
     enable = true;
     user = "atp";

@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   sops.secrets.homelab-hashedPassword.neededForUsers = true;
   users = {
     mutableUsers = false;

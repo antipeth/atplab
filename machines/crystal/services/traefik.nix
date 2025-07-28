@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   # if you don't use environmentFiles,
   # you can use these for test.
   # systemd.services.traefik.environment = {
@@ -17,7 +16,7 @@
 
   services.traefik = {
     enable = true;
-    environmentFiles = [ (config.sops.secrets.crystal-traefik-environment.path) ];
+    environmentFiles = [(config.sops.secrets.crystal-traefik-environment.path)];
     staticConfigOptions = {
       # log = {
       # level = "INFO";
@@ -34,7 +33,7 @@
             certResolver = "myresolver";
             domains = {
               main = "0pt.im";
-              sans = [ "*.0pt.im" ];
+              sans = ["*.0pt.im"];
             };
           };
         };
@@ -73,7 +72,7 @@
           #   tls.certresolver = "myresolver";
           # };
           headscale = {
-            entryPoints = [ "websecure" ];
+            entryPoints = ["websecure"];
             rule = "Host(`headscale.0pt.im`)";
             service = "headscale";
             # tls.certresolver = "myresolver";

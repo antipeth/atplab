@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   sops.secrets.auction-hashedPassword.neededForUsers = true;
   users = {
     mutableUsers = false;

@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   services.traefik = {
     enable = true;
     staticConfigOptions = {
@@ -23,12 +22,12 @@
       http = {
         routers = {
           syncthing = {
-            entryPoints = [ "web" ];
+            entryPoints = ["web"];
             rule = "Host(`sync.nas.local`)";
             service = "syncthing";
           };
           immich = {
-            entryPoints = [ "web" ];
+            entryPoints = ["web"];
             rule = "Host(`pic.nas.local`)";
             service = "immich";
           };

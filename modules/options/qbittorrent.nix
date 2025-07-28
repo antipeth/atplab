@@ -4,13 +4,11 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.services.qbittorrent;
   UID = 888;
   GID = 888;
-in
-{
+in {
   options.services.qbittorrent = {
     enable = mkEnableOption (lib.mdDoc "qBittorrent headless");
 
@@ -66,16 +64,16 @@ in
 
   config = mkIf cfg.enable {
     networking.firewall = mkIf cfg.openFirewall {
-      allowedTCPPorts = [ cfg.port ];
+      allowedTCPPorts = [cfg.port];
     };
 
     systemd.services.qbittorrent = {
       # based on the plex.nix service module and
       # https://github.com/qbittorrent/qBittorrent/blob/master/dist/unix/systemd/qbittorrent-nox%40.service.in
       description = "qBittorrent-nox service";
-      documentation = [ "man:qbittorrent-nox(1)" ];
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
+      documentation = ["man:qbittorrent-nox(1)"];
+      after = ["network.target"];
+      wantedBy = ["multi-user.target"];
 
       serviceConfig = {
         Type = "simple";
@@ -84,19 +82,17 @@ in
 
         # Run the pre-start script with full permissions (the "!" prefix) so it
         # can create the data directory if necessary.
-        ExecStartPre =
-          let
-            preStartScript = pkgs.writeScript "qbittorrent-run-prestart" ''
-              #!${pkgs.bash}/bin/bash
+        ExecStartPre = let
+          preStartScript = pkgs.writeScript "qbittorrent-run-prestart" ''
+            #!${pkgs.bash}/bin/bash
 
-              # Create data directory if it doesn't exist
-              if ! test -d "$QBT_PROFILE"; then
-                echo "Creating initial qBittorrent data directory in: $QBT_PROFILE"
-                install -d -m 0755 -o "${cfg.user}" -g "${cfg.group}" "$QBT_PROFILE"
-              fi
-            '';
-          in
-          "!${preStartScript}";
+            # Create data directory if it doesn't exist
+            if ! test -d "$QBT_PROFILE"; then
+              echo "Creating initial qBittorrent data directory in: $QBT_PROFILE"
+              install -d -m 0755 -o "${cfg.user}" -g "${cfg.group}" "$QBT_PROFILE"
+            fi
+          '';
+        in "!${preStartScript}";
 
         #ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox";
         ExecStart = "${cfg.package}/bin/qbittorrent-nox";

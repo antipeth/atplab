@@ -1,4 +1,4 @@
-{
+_: {
   services.homebox = {
     enable = true;
     settings = {

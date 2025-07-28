@@ -1,3 +1,0 @@
-{
-  TV_MODE = false;
-}

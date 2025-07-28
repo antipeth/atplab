@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   sops.secrets.freezer-hashedPassword.neededForUsers = true;
   users = {
     mutableUsers = false;

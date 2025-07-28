@@ -1,4 +1,4 @@
-{
+_: {
   services.prometheus = {
     enable = true;
     globalConfig.scrape_interval = "10s"; # "1m"
@@ -7,7 +7,7 @@
         job_name = "prometheus";
         static_configs = [
           {
-            targets = [ "localhost:9090" ];
+            targets = ["localhost:9090"];
           }
         ];
       }
@@ -15,11 +15,11 @@
         job_name = "netdata";
         metrics_path = "/api/v1/allmetrics";
         params = {
-          format = [ "prometheus" ];
+          format = ["prometheus"];
         };
         static_configs = [
           {
-            targets = [ "localhost:19999" ];
+            targets = ["localhost:19999"];
           }
         ];
       }

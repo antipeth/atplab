@@ -1,4 +1,4 @@
-{
+_: {
   networking = {
     usePredictableInterfaceNames = false;
     interfaces.eth0.ipv4.addresses = [

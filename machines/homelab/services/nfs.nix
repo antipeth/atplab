@@ -1,4 +1,4 @@
-{
+_: {
   services.nfs.server = {
     enable = true;
     lockdPort = 4001;

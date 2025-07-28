@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   services.caddy = {
     enable = true;
     virtualHosts."http://sync.0pt.us.kg" = {

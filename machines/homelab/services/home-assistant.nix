@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   services.home-assistant = {
     enable = true;
     extraComponents = [
@@ -73,7 +72,6 @@
       };
       frontend = {
         themes = {
-
           happy = {
             primary-color = "pink";
             text-primary-color = "purple";
@@ -99,11 +97,11 @@
           };
         };
       };
-      default_config = { };
+      default_config = {};
       http = {
         server_host = "::1";
         server_port = 8123;
-        trusted_proxies = [ "::1" ];
+        trusted_proxies = ["::1"];
         use_x_forwarded_for = true;
       };
     };

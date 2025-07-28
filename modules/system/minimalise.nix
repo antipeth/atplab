@@ -1,6 +1,4 @@
-{ lib, ... }:
-
-{
+{lib, ...}: {
   # Minimize boot
   boot = {
     bcache.enable = lib.mkForce false;
@@ -19,7 +17,7 @@
 
   # Minimize environment
   environment = {
-    defaultPackages = lib.mkForce [ ];
+    defaultPackages = lib.mkForce [];
   };
 
   # Disable unnecessary fonts
@@ -86,5 +84,4 @@
     mime.enable = lib.mkDefault false;
     sounds.enable = lib.mkDefault false;
   };
-
 }

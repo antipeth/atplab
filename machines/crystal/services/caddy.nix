@@ -1,4 +1,4 @@
-{
+_: {
   services.caddy = {
     enable = true;
     virtualHosts."1.example.com" = {

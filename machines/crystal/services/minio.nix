@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   sops.secrets.crystal-minio-root-credentials = {
     mode = "0440";
     owner = config.users.users.minio.name;

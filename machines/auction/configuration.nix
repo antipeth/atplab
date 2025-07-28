@@ -1,5 +1,4 @@
-{ inputs, pkgs, ... }:
-{
+{inputs, ...}: {
   imports = [
     ./network.nix
     ./user.nix

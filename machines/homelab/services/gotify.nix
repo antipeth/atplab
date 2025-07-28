@@ -1,4 +1,4 @@
-{
+_: {
   services.gotify = {
     enable = true;
     environment = {

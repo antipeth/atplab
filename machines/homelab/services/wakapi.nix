@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   sops.secrets.homelab-wakapi-passwordSalt = {
     mode = "0440";
     owner = config.users.users.wakapi.name;
@@ -26,7 +25,6 @@
         allow_signup = false;
         invite_codes = false;
       };
-
     };
   };
 }

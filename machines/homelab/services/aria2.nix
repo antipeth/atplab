@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   sops.secrets = {
     homelab-aria2-rpc-secret = {
       mode = "0440";

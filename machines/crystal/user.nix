@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   sops.secrets.crystal-hashedPassword.neededForUsers = true;
   users = {
     mutableUsers = false;

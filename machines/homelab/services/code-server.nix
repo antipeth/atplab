@@ -1,4 +1,4 @@
-{
+_: {
   services.code-server = {
     enable = true;
     disableUpdateCheck = true;

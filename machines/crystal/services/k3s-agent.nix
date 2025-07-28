@@ -1,4 +1,4 @@
-{
+_: {
   services.k3s = {
     enable = true;
     role = "agent"; # Or "agent" for worker only nodes

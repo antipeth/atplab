@@ -1,4 +1,4 @@
-{
+_: {
   services.murmur = {
     enable = true;
     port = 64738;
