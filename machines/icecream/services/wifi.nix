@@ -1,4 +1,5 @@
 {config, ...}: {
+  # Intel AX101
   services.hostapd = {
     enable = true;
     radios = {
