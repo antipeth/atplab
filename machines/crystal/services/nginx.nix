@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   users.users.nginx.extraGroups = [
     "acme"
   ];
@@ -13,7 +12,7 @@
     defaults.email = import ../../../sops/eval/crystal/acme-cert-email.nix;
     certs."0pt.icu" = {
       domain = "0pt.icu";
-      extraDomainNames = [ "*.0pt.icu" ];
+      extraDomainNames = ["*.0pt.icu"];
       dnsProvider = import ../../../sops/eval/crystal/acme-dns-provider.nix;
       environmentFile = config.sops.secrets.crystal-acme-environment.path;
       dnsPropagationCheck = false;
@@ -35,6 +34,20 @@
           extraConfig = ''
             proxy_buffering off;
             add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
+          '';
+        };
+      };
+      "backup1.lkt.icu" = {
+        forceSSL = true;
+        sslCertificate = "/var/lib/cf-cert/example.com.pem";
+        sslCertificateKey = "/var/lib/cf-cert/example.com.key";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8081";
+          # proxyWebsockets = true;
+          recommendedProxySettings = true;
+          extraConfig = ''
+            proxy_buffering off;
+            client_max_body_size 50000M;
           '';
         };
       };

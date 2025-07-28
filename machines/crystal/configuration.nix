@@ -19,6 +19,7 @@
     ./services/headscale.nix
     ./services/murmur.nix
     ./services/nginx.nix
+    ./services/restic-server.nix
 
     ../../sops/eval/crystal/JfcXs618Ks.nix
   ];
