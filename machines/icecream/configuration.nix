@@ -18,6 +18,7 @@
       # ./services/daed.nix
       # ./services/iperf3.nix
       ./services/power-management.nix
+      # ./services/restic-server.nix
       ./services/router.nix
       # ./services/wifi.nix
     ]
