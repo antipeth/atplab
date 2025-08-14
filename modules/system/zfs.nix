@@ -6,7 +6,7 @@
     ];
     zfs = {
       forceImportRoot = false;
-      devNodes = "/dev/disk/by-id";
+      devNodes = lib.mkDefault "/dev/disk/by-id";
     };
   };
   # Where hostID can be generated with:
@@ -24,5 +24,8 @@
     };
     autoSnapshot.enable = true;
   };
-  systemd.services.zfs-zed.wantedBy = lib.mkForce [];
+  systemd.services = {
+    zfs-share.enable = lib.mkForce false;
+    zfs-zed.enable = lib.mkForce false;
+  };
 }
