@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   boot.kernel.sysctl = {
     # if you use ipv4, this is all you need
     "net.ipv4.conf.all.forwarding" = true;
@@ -49,6 +49,8 @@
             # Allow SSH on port from eth0
             iifname { "eth0", "usb0" } tcp dport 222 ct state new,established accept comment "Allow SSH"
             iifname { "eth0", "usb0" } tcp dport 12345 ct state new,established accept comment "Allow APP"
+            iifname { "eth0", "usb0" } tcp dport 2023 ct state new,established accept comment "Allow APP"
+            iifname { "eth0", "usb0" } tcp dport 8123 ct state new,established accept comment "Allow APP"
 
             iifname { "eth1", "wlan0" } accept comment "Allow local network to access the router"
             iifname { "eth0", "usb0" } ct state { established, related } accept comment "Allow established traffic"
@@ -57,8 +59,8 @@
           }
           chain forward {
             type filter hook forward priority 0; policy drop;
-            iifname { "eth1", "wlan0" } oifname { "eth0", "usb0"} accept comment "Allow trusted LAN"
-            iifname { "eth0", "usb0" } oifname { "eth1", "wlan0" } ct state established, related accept comment "Allow established back to LANs"
+            iifname { "eth1", "wlan0" } oifname { "eth0", "usb0", "dae0" } accept comment "Allow trusted LAN"
+            iifname { "eth0", "usb0", "dae0" } oifname { "eth1", "wlan0" } ct state established, related accept comment "Allow established back to LANs"
           }
         }
         table ip nat {
@@ -67,7 +69,7 @@
           }
           chain postrouting {
             type nat hook postrouting priority 100; policy accept;
-            oifname { "eth0", "usb0" } masquerade
+            oifname { "eth0", "usb0", "dae0" } masquerade
           }
         }
         table ip6 filter {
@@ -82,22 +84,17 @@
     };
   };
   services = {
-    # DNS Settings
-    unbound.settings = {
-      access-control = ["10.13.10.0/24 allow" "10.13.12.0/24 allow" "::/0 refuse"];
-      server.interface = [
-        "0.0.0.0"
-        "::0"
-      ];
-    };
     # DHCP server settings
     dnsmasq = {
       enable = true;
       resolveLocalQueries = false;
       settings = {
         # Shut down the dns server by settings port 0
-        port = 0;
-
+        # port = 0;
+        server = [
+          "8.8.8.8"
+          "8.8.4.4"
+        ];
         # sensible behaviours
         domain-needed = true;
         bogus-priv = true;
@@ -112,12 +109,38 @@
         # dhcp-host = "10.13.10.1";
         dhcp-option = [
           "tag:eth1,option:router,10.13.10.1"
-          "tag:eth1,option:dns-server,10.13.10.1"
+          # "tag:eth1,option:dns-server,10.13.10.1"
+          "tag:eth1,option:dns-server,8.8.8.8"
           "tag:wlan0,option:router,10.13.12.1"
-          "tag:wlan0,option:dns-server,10.13.10.1"
+          # "tag:wlan0,option:dns-server,10.13.10.1"
+          "tag:wlan0,option:dns-server,8.8.8.8"
         ];
         expand-hosts = true;
         no-hosts = true;
+      };
+    };
+
+    # wifi settings
+    hostapd = {
+      enable = true;
+      radios = {
+        wlan0 = {
+          band = "2g";
+          channel = 11; # ACS
+
+          wifi6.enable = true;
+
+          networks = {
+            wlan0 = {
+              ssid = "test";
+              authentication = {
+                mode = "wpa3-sae";
+                saePasswordsFile = config.sops.secrets.icecream-wifi-password.path;
+              };
+              # bssid = "36:b9:ff:ff:ff:ff";
+            };
+          };
+        };
       };
     };
   };
