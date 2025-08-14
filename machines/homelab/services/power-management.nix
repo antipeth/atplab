@@ -6,10 +6,20 @@
   ...
 }: {
   boot = {
+    blacklistedKernelModules = [
+      "cfg80211" # Disable wifi
+      "nvidiafb"
+      "nouveau"
+      "nvidia"
+      "radeon"
+      # "amdgpu"
+      "snd_hda_intel" # Disable audio
+      "snd_hda_codec_hdmi"
+      "i915"
+    ];
     kernelPackages = inputs.chaotic.legacyPackages.x86_64-linux.linuxPackages_cachyos-server;
     zfs.package = inputs.chaotic.legacyPackages.x86_64-linux.zfs_cachyos;
     kernelParams = [
-      # "amd_pstate=passive"
       "pcie_aspm=force"
     ];
   };
@@ -28,11 +38,21 @@
         ''SUBSYSTEM=="block"''
         ''KERNEL=="sd[a-z]"''
         ''ATTR{queue/rotational}=="1"''
-        ''RUN+="${pkgs.hdparm}/bin/hdparm -B 90 -S 12 /dev/%k"''
+        ''RUN+="${pkgs.hdparm}/bin/hdparm -B 90 /dev/%k"''
+      ])
+      (mkRule [
+        ''ACTION=="add"''
+        ''SUBSYSTEM=="pci"''
+        ''DRIVER=="pcieport"''
+        ''ATTR{power/wakeup}="disabled"''
       ])
     ];
   powerManagement = {
     enable = true;
     cpuFreqGovernor = "powersave";
+  };
+  services.scx = {
+    enable = true;
+    scheduler = "scx_bpfland";
   };
 }

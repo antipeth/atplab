@@ -9,7 +9,7 @@
       ../../modules/system/nix.nix
       ../../modules/system/zfs.nix
 
-      ../../modules/services/blacklist.nix
+      # ../../modules/services/blacklist.nix
       ../../modules/services/dns.nix
       ../../modules/services/fail2ban.nix
       ../../modules/services/ssh.nix
@@ -27,13 +27,13 @@
       ./services/homebox.nix
       ./services/immich.nix
       ./services/iperf3.nix
-      ./services/jellyfin.nix
-      ./services/kodi.nix
+      # ./services/jellyfin.nix
+      # ./services/kodi.nix
       ./services/nginx.nix
       ./services/podman.nix
       ./services/postgres.nix
       ./services/power-management.nix
-      ./services/radicale.nix
+      # ./services/radicale.nix
       ./services/restic.nix
       ./services/samba.nix
       ./services/syncthing.nix
