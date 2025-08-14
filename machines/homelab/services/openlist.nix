@@ -1,5 +1,5 @@
 _: {
-  services.alist = {
+  services.openlist = {
     enable = true;
     user = "atp";
     group = "users";
