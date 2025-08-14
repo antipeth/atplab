@@ -22,6 +22,7 @@
       ./services/power-management.nix
       # ./services/restic-server.nix
       # ./services/router-br.nix
+      # ./services/router-switch.nix
       ./services/router.nix
 
       ./services/docker/ha.nix
