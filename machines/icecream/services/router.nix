@@ -90,11 +90,11 @@
       resolveLocalQueries = false;
       settings = {
         # Shut down the dns server by settings port 0
-        # port = 0;
-        server = [
-          "8.8.8.8"
-          "8.8.4.4"
-        ];
+        port = 0;
+        # server = [
+        #   "8.8.8.8"
+        #   "8.8.4.4"
+        # ];
         # sensible behaviours
         domain-needed = true;
         bogus-priv = true;
