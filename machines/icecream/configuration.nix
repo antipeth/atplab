@@ -18,11 +18,12 @@
       # ./services/daed.nix
       # ./services/ha.nix
       # ./services/iperf3.nix
-      # ./services/podman.nix
+      ./services/podman.nix
       ./services/power-management.nix
       # ./services/restic-server.nix
       ./services/router.nix
-      # ./services/wifi.nix
+
+      ./services/docker/ha.nix
     ]
     ++ lib.filesystem.listFilesRecursive ../../modules/options;
   boot = {
