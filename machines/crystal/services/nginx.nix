@@ -1,32 +1,32 @@
 {config, ...}: {
-  users.users.nginx.extraGroups = [
-    "acme"
-  ];
-  sops.secrets.crystal-acme-environment = {
-    mode = "0440";
-    owner = config.users.users.acme.name;
-    group = config.users.users.acme.group;
-  };
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = import ../../../sops/eval/crystal/acme-cert-email.nix;
-    certs."0pt.icu" = {
-      domain = "0pt.icu";
-      extraDomainNames = ["*.0pt.icu"];
-      dnsProvider = import ../../../sops/eval/crystal/acme-dns-provider.nix;
-      environmentFile = config.sops.secrets.crystal-acme-environment.path;
-      dnsPropagationCheck = false;
-      # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
-    };
-  };
+  # users.users.nginx.extraGroups = [
+  #   "acme"
+  # ];
+  # sops.secrets.crystal-acme-environment = {
+  #   mode = "0440";
+  #   owner = config.users.users.acme.name;
+  #   group = config.users.users.acme.group;
+  # };
+  # security.acme = {
+  #   acceptTerms = true;
+  #   defaults.email = import ../../../sops/eval/crystal/acme-cert-email.nix;
+  #   certs."0pt.icu" = {
+  #     domain = "0pt.icu";
+  #     extraDomainNames = ["*.0pt.icu"];
+  #     dnsProvider = import ../../../sops/eval/crystal/acme-dns-provider.nix;
+  #     environmentFile = config.sops.secrets.crystal-acme-environment.path;
+  #     dnsPropagationCheck = false;
+  #     # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+  #   };
+  # };
   services.nginx = {
     enable = true;
     streamConfig = import ../../../sops/eval/crystal/nginx-stream-config.nix;
     virtualHosts = {
-      "headscale.0pt.im" = {
+      "hs.0pt.dpdns.org" = {
         forceSSL = true;
-        sslCertificate = "/var/0pt.im.pem";
-        sslCertificateKey = "/var/0pt.im.key";
+        sslCertificate = "/var/lib/cf-cert/example1.com.pem";
+        sslCertificateKey = "/var/lib/cf-cert/example1.com.key";
         locations."/" = {
           proxyPass = "http://127.0.0.1:8080";
           proxyWebsockets = true;
