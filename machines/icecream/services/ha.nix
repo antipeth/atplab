@@ -1,6 +1,6 @@
 _: {
   services.home-assistant = {
-    enable = false;
+    enable = true;
     extraComponents = [
       # Components required to complete the onboarding
       "analytics"
@@ -23,24 +23,39 @@ _: {
       device_tracker = [
         {
           platform = "luci";
-          host = "100.10.10.1";
-          username = "ahnlgjie";
-          password = "agldaskjih";
+          host = "10.110.10.1";
+          username = "IIvJGracLwP59ILyJClGsJjsJ6";
+          password = "IoNmVXZegt7AbK49SL0BxtCPGz";
         }
       ];
       homeassistant = {
         name = "Home";
-        latitude = 10;
-        longitude = 10;
-        elevation = 10;
-        radius = 1000;
+        latitude = 10.0;
+        longitude = 10.0;
+        elevation = 10.0;
+        radius = 100;
         unit_system = "metric";
         currency = "USD";
         country = "US";
         time_zone = "Asia/Singapore";
       };
       isal = {};
-      # services.home-assistant.config.wled = {open_meteo = {};};
+      zone = [
+        {
+          name = "Home";
+          latitude = 10.0;
+          longitude = 10.0;
+          radius = 100;
+          icon = "mdi:account-multiple";
+        }
+        {
+          name = "School";
+          latitude = 20.0;
+          longitude = 20.0;
+          radius = 100;
+          icon = "mdi:school";
+        }
+      ];
     };
 
     lovelaceConfig = import ./ha/dashboard.nix;

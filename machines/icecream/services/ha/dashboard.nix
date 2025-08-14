@@ -38,6 +38,11 @@
             }
             {
               type = "tile";
+              entity = "device_tracker.homelab";
+              name = "Homelab";
+            }
+            {
+              type = "tile";
               entity = "device_tracker.icecream";
               name = "Icecream";
             }
