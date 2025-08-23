@@ -1,6 +1,8 @@
 {lib, ...}: {
   imports =
     [
+      # ./disk-extra1.nix
+      ./disk-extra2.nix
       ./user.nix
 
       ../../modules/system/base.nix
