@@ -15,13 +15,18 @@
       ../../modules/services/ssh.nix
       # ../../modules/services/tailscale.nix
 
+      # ./services/cloudflared.nix
       # ./services/daed.nix
+      # ./services/filebrowser.nix
+      # ./services/glances.nix
       # ./services/ha.nix
       # ./services/iperf3.nix
+      # ./services/netdata.nix
       ./services/podman.nix
       ./services/power-management.nix
       # ./services/restic-server.nix
       # ./services/router-br.nix
+      # ./services/router-bypath.nix
       # ./services/router-switch.nix
       ./services/router.nix
 
