@@ -49,6 +49,24 @@
           };
         };
       };
+      ex1 = {
+        name = "ex1";
+        device = "/dev/disk/by-path/virtio-pci-0000:08:00.0";
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/ex1";
+              };
+            };
+          };
+        };
+      };
     };
     zpool = {
       zroot = {
