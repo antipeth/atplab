@@ -8,6 +8,7 @@
     vim
     wget
     hdparm
+    rsync
     # openssl
   ];
 }
