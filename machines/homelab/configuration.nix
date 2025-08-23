@@ -19,6 +19,7 @@
       # ./services/cockpit.nix
       # ./services/code-server.nix
       ./services/dashy.nix
+      # ./services/filebrowser.nix
       ./services/forgejo.nix
       ./services/glances.nix
       ./services/gotify.nix
