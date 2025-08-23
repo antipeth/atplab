@@ -51,6 +51,8 @@
             iifname { "eth0", "usb0" } tcp dport 12345 ct state new,established accept comment "Allow APP"
             iifname { "eth0", "usb0" } tcp dport 2023 ct state new,established accept comment "Allow APP"
             iifname { "eth0", "usb0" } tcp dport 8123 ct state new,established accept comment "Allow APP"
+            iifname { "eth0", "usb0" } tcp dport 7844 ct state new,established accept comment "Allow APP"
+            iifname { "eth0", "usb0" } udp dport 7844 ct state new,established accept comment "Allow APP"
 
             iifname { "eth1", "wlan0" } accept comment "Allow local network to access the router"
             iifname { "eth0", "usb0" } ct state { established, related } accept comment "Allow established traffic"
