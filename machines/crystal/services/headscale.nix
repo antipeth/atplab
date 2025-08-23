@@ -18,7 +18,7 @@ _: {
         v4 = "100.64.0.0/10";
         allocation = "sequential";
       };
-      server_url = "https://headscale.0pt.im";
+      server_url = "https://hs.0pt.dpdns.org";
     };
   };
 }

@@ -23,20 +23,34 @@
     enable = true;
     streamConfig = import ../../../sops/eval/crystal/nginx-stream-config.nix;
     virtualHosts = {
-      "hs.0pt.dpdns.org" = {
-        forceSSL = true;
-        sslCertificate = "/var/lib/cf-cert/example1.com.pem";
-        sslCertificateKey = "/var/lib/cf-cert/example1.com.key";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:8080";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-          extraConfig = ''
-            proxy_buffering off;
-            add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
-          '';
-        };
-      };
+      # "test.0pt.dpdns.org" = {
+      #   forceSSL = true;
+      #   sslCertificate = "/var/lib/cf-cert/example1.com.pem";
+      #   sslCertificateKey = "/var/lib/cf-cert/example1.com.key";
+      #   locations."/" = {
+      #     proxyPass = "http://127.0.0.1:8080";
+      #     proxyWebsockets = true;
+      #     recommendedProxySettings = true;
+      #     extraConfig = ''
+      #       proxy_buffering off;
+      #       add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
+      #     '';
+      #   };
+      # };
+      # "hs.0pt.dpdns.org" = {
+      #   forceSSL = true;
+      #   sslCertificate = "/var/lib/cf-cert/example1.com.pem";
+      #   sslCertificateKey = "/var/lib/cf-cert/example1.com.key";
+      #   locations."/" = {
+      #     proxyPass = "http://127.0.0.1:8080";
+      #     proxyWebsockets = true;
+      #     recommendedProxySettings = true;
+      #     extraConfig = ''
+      #       proxy_buffering off;
+      #       add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
+      #     '';
+      #   };
+      # };
       "backup1.lkt.icu" = {
         forceSSL = true;
         sslCertificate = "/var/lib/cf-cert/example.com.pem";
