@@ -49,18 +49,18 @@
           OnCalendar = "21:10:00";
           Persistent = true;
         };
-        backupPrepareCommand = ''
-          ${pkgs.curl}/bin/curl "http://127.0.0.1:1245/message?token=AkFEQLUQdbIP7yG" \
-            -F "title=restic remote1 backup start" \
-            -F "message=$(date "+%H:%M:%S")" \
-            -F "priority=2"
-        '';
-        backupCleanupCommand = ''
-          ${pkgs.curl}/bin/curl "http://127.0.0.1:1245/message?token=AkFEQLUQdbIP7yG" \
-            -F "title=restic remote1 logs" \
-            -F "message=$(journalctl -u restic-backups-remote1.service --since '10 minute ago' -o cat) | over." \
-            -F "priority=1"
-        '';
+        # backupPrepareCommand = ''
+        #   ${pkgs.curl}/bin/curl "http://127.0.0.1:1245/message?token=AkFEQLUQdbIP7yG" \
+        #     -F "title=restic remote1 backup start" \
+        #     -F "message=$(date "+%H:%M:%S")" \
+        #     -F "priority=2"
+        # '';
+        # backupCleanupCommand = ''
+        #   ${pkgs.curl}/bin/curl "http://127.0.0.1:1245/message?token=AkFEQLUQdbIP7yG" \
+        #     -F "title=restic remote1 logs" \
+        #     -F "message=$(journalctl -u restic-backups-remote1.service --since '10 minute ago' -o cat) | over." \
+        #     -F "priority=1"
+        # '';
       };
     };
   };
