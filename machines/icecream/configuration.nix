@@ -21,6 +21,7 @@
       # ./services/glances.nix
       # ./services/ha.nix
       # ./services/iperf3.nix
+      # ./services/kodi.nix
       # ./services/netdata.nix
       ./services/podman.nix
       ./services/power-management.nix
