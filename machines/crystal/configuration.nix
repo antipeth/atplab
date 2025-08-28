@@ -6,13 +6,13 @@
     ../../modules/services/dns.nix
     ../../modules/services/fail2ban.nix
     ../../modules/services/ssh.nix
-    ../../modules/services/tailscale.nix
+    # ../../modules/services/tailscale.nix
     ../../modules/system/base.nix
     ../../modules/system/environment.nix
     ../../modules/system/minimalise.nix
     ../../modules/system/nix.nix
 
-    ./services/headscale.nix
+    # ./services/headscale.nix
     ./services/murmur.nix
     ./services/nginx.nix
     ./services/restic-server.nix
