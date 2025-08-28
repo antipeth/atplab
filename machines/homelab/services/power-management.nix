@@ -51,8 +51,8 @@
     enable = true;
     cpuFreqGovernor = "powersave";
   };
-  services.scx = {
-    enable = true;
-    scheduler = "scx_bpfland";
-  };
+  # services.scx = {
+  #   enable = true;
+  #   scheduler = "scx_bpfland";
+  # };
 }
