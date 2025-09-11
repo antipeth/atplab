@@ -43,8 +43,8 @@
             inputs = inputs;
             self = self;
           };
-          machines = {
-          };
+          # machines = {
+          # };
         };
         perSystem = {
           inputs',
