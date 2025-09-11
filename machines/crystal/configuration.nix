@@ -17,6 +17,7 @@
     ./services/murmur.nix
     ./services/nginx.nix
     ./services/restic-server.nix
+    # ./services/wakapi.nix
 
     ../../sops/eval/crystal/JfcXs618Ks.nix
   ];
