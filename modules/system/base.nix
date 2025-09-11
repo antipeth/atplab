@@ -87,15 +87,6 @@
         443
       ];
     };
-    timeServers = [
-      "ntppool1.time.nl"
-      "ntppool2.time.nl"
-      "ntp.ripe.net"
-    ];
-  };
-  services = {
-    timesyncd.enable = false;
-    ntpd-rs.enable = true;
   };
 
   system.stateVersion = "25.05";
