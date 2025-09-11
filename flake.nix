@@ -44,35 +44,6 @@
             self = self;
           };
           machines = {
-            freezer = {
-              nixpkgs.hostPlatform = "x86_64-linux";
-              imports = [
-                #     proxmox-nixos.nixosModules.proxmox-ve
-                #     ({
-                #       nixpkgs.overlays = [
-                #         proxmox-nixos.overlays.x86_64-linux
-                #       ];
-                #
-                #       # The rest of your configuration...
-                #     })
-                microvm.nixosModules.host
-                {
-                  microvm.vms = {
-                    vm1 = {
-                      pkgs = import nixpkgs {system = "x86_64-linux";};
-                      config = import ./machines/freezer/vms/vm1.nix;
-                    };
-                  };
-                }
-              ];
-            };
-            # icecream = {
-            #   nixpkgs.hostPlatform = "x86_64-linux";
-            #   imports = [
-            #     inputs.daeuniverse.nixosModules.dae
-            #     inputs.daeuniverse.nixosModules.daed
-            #   ];
-            # };
           };
         };
         perSystem = {
@@ -92,56 +63,4 @@
         };
       }
     );
-  # let
-  #   # Usage see: https://docs.clan.lol
-  #   clan = clan-core.lib.buildClan {
-  #     inherit self;
-  #     # Ensure this is unique among all clans you want to use.
-  #     meta.name = "atp";
-  #
-  #     machines = {
-  #       freezer = {
-  #         nixpkgs.hostPlatform = "x86_64-linux";
-  #         imports = [
-  #           #     proxmox-nixos.nixosModules.proxmox-ve
-  #           #     ({
-  #           #       nixpkgs.overlays = [
-  #           #         proxmox-nixos.overlays.x86_64-linux
-  #           #       ];
-  #           #
-  #           #       # The rest of your configuration...
-  #           #     })
-  #           microvm.nixosModules.host
-  #           {
-  #             microvm.vms = {
-  #               vm1 = {
-  #                 pkgs = import nixpkgs { system = "x86_64-linux"; };
-  #                 config = import ./machines/freezer/vms/vm1.nix;
-  #               };
-  #             };
-  #           }
-  #         ];
-  #       };
-  #     };
-  #   };
-  # in
-  # {
-  #   # All machines managed by Clan.
-  #   inherit (clan) nixosConfigurations clanInternals;
-  #   # Add the Clan cli tool to the dev shell.
-  #   # Use "nix develop" to enter the dev shell.
-  #   devShells =
-  #     clan-core.inputs.nixpkgs.lib.genAttrs
-  #       [
-  #         "x86_64-linux"
-  #         "aarch64-linux"
-  #         "aarch64-darwin"
-  #         "x86_64-darwin"
-  #       ]
-  #       (system: {
-  #         default = clan-core.inputs.nixpkgs.legacyPackages.${system}.mkShell {
-  #           packages = [ clan-core.packages.${system}.clan-cli ];
-  #         };
-  #       });
-  # };
 }
