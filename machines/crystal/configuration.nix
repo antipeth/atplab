@@ -30,12 +30,6 @@
       };
     };
   };
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 1076;
-    }
-  ];
 
   # Enable networking
   networking = {
