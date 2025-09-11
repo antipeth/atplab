@@ -19,11 +19,20 @@ install input:
 deploy input:
   ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -d -i ; git add . ; clan machines update {{input}} ; ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -e -i
 
+deploy-test input:
+  ls sops/eval/*/*.nix | xargs -n 1 sops -d -i ; git add . ; clan machines update {{input}} ; ls sops/eval/*/*.nix | xargs -n 1 sops -e -i
+
 encrypt input:
   ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -e -i
 
+ea:
+  ls sops/eval/*/*.nix | xargs -n 1 sops -e -i
+
 decrypt input:
   ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -d -i | echo "no commit after decrypt until you encrypt or update again"
+
+da:
+  ls sops/eval/*/*.nix | xargs -n 1 sops -d -i | echo "no commit after decrypt until you encrypt or update again"
 
 format:
   # Use alejandra and deadnix to format code
