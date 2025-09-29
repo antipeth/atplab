@@ -1,26 +1,30 @@
-{inputs, ...}: {
-  imports = [
-    ./network.nix
-    ./user.nix
+{
+  inputs,
+  lib,
+  ...
+}: {
+  imports =
+    [
+      ./network.nix
+      ./user.nix
 
-    ../../modules/services/dns.nix
-    ../../modules/services/fail2ban.nix
-    ../../modules/services/ntp.nix
-    ../../modules/services/ssh.nix
-    # ../../modules/services/tailscale.nix
-    ../../modules/system/base.nix
-    ../../modules/system/environment.nix
-    ../../modules/system/minimalise.nix
-    ../../modules/system/nix.nix
+      ../../modules/services/dns.nix
+      ../../modules/services/fail2ban.nix
+      ../../modules/services/ntp.nix
+      ../../modules/services/ssh.nix
+      ../../modules/system/base.nix
+      ../../modules/system/environment.nix
+      ../../modules/system/minimalise.nix
+      ../../modules/system/nix.nix
 
-    # ./services/headscale.nix
-    ./services/murmur.nix
-    ./services/nginx.nix
-    ./services/restic-server.nix
-    # ./services/wakapi.nix
+      ./services/komari-server.nix
+      ./services/murmur.nix
+      ./services/nginx.nix
+      ./services/restic-server.nix
 
-    ../../sops/eval/crystal/JfcXs618Ks.nix
-  ];
+      ../../sops/eval/crystal/JfcXs618Ks.nix
+    ]
+    ++ lib.filesystem.listFilesRecursive ../../modules/options;
   boot = {
     kernelPackages = inputs.chaotic.legacyPackages.x86_64-linux.linuxPackages_cachyos-server;
     loader = {
