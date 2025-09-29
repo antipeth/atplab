@@ -15,10 +15,30 @@
 in {
   options.services.komari-agent = {
     enable = mkEnableOption "komari-agent";
-    flags = mkOption {
+    endpoint = mkOption {
+      type = types.str;
+      default = "http://127.0.0.1:25774";
+      description = "The komari-agent connect server url";
+    };
+    token = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "The komari-agent api token";
+    };
+    disableAutoUpdate = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Disable automatic updates";
+    };
+    disableWebSsh = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Disable remote control(web ssh and rce)";
+    };
+    extraFlags = mkOption {
       type = types.str;
       default = "";
-      description = "komari-agent run flags";
+      description = "Extra commandline options for komari-agent";
     };
     user = mkOption {
       type = types.str;
@@ -33,6 +53,17 @@ in {
   };
 
   config = mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = cfg.endpoint != null;
+        message = "services.komari-agent: either endpoint must be specified";
+      }
+      {
+        assertion = cfg.token != null;
+        message = "services.komari-agent: either token must be specified";
+      }
+    ];
+
     nixpkgs.overlays = [
       (_final: prev: {
         komari-agent = prev.callPackage ../../pkgs/komari-agent/default.nix {};
@@ -47,7 +78,14 @@ in {
         Type = "simple";
         User = cfg.user;
         Group = cfg.group;
-        ExecStart = "${pkgs.komari-agent}/bin/komari-agent ${cfg.flags}";
+        ExecStart = ''
+          ${pkgs.komari-agent}/bin/komari-agent \
+          -e ${cfg.endpoint} \
+          ${lib.optionalString (cfg.token != null) "-t ${cfg.token} "} \
+          ${lib.optionalString cfg.disableAutoUpdate "--disable-auto-update"} \
+          ${lib.optionalString cfg.disableWebSsh "--disable-web-ssh"} \
+          ${cfg.extraFlags}
+        '';
         ExecStop = "on-failure";
         StateDirectory = "komari-agent";
         SyslogIdentifier = "komari-agent";
@@ -63,7 +101,5 @@ in {
       };
     };
     users.groups = mkIf (cfg.group == "komari-agent") {komari-agent = {};};
-
-    environment.systemPackages = [pkgs.komari-agent];
   };
 }
