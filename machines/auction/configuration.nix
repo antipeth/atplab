@@ -1,19 +1,27 @@
-{inputs, ...}: {
-  imports = [
-    ./network.nix
-    ./user.nix
+{
+  inputs,
+  lib,
+  ...
+}: {
+  imports =
+    [
+      ./network.nix
+      ./user.nix
 
-    ../../modules/services/dns.nix
-    ../../modules/services/fail2ban.nix
-    ../../modules/services/ntp.nix
-    ../../modules/services/ssh.nix
-    ../../modules/system/base.nix
-    ../../modules/system/environment.nix
-    ../../modules/system/minimalise.nix
-    ../../modules/system/nix.nix
+      ../../modules/services/dns.nix
+      ../../modules/services/fail2ban.nix
+      ../../modules/services/ntp.nix
+      ../../modules/services/ssh.nix
+      ../../modules/system/base.nix
+      ../../modules/system/environment.nix
+      ../../modules/system/minimalise.nix
+      ../../modules/system/nix.nix
 
-    ../../sops/eval/auction/YscKhAR1Lv.nix
-  ];
+      ./services/komari-agent-rs.nix
+
+      ../../sops/eval/auction/YscKhAR1Lv.nix
+    ]
+    ++ lib.filesystem.listFilesRecursive ../../modules/options;
   boot = {
     kernelPackages = inputs.chaotic.legacyPackages.x86_64-linux.linuxPackages_cachyos-server;
     loader = {

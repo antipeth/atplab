@@ -18,6 +18,7 @@
       ../../modules/system/nix.nix
 
       ./services/komari-server.nix
+      ./services/komari-agent-rs.nix
       ./services/murmur.nix
       ./services/nginx.nix
       ./services/restic-server.nix
