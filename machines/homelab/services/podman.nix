@@ -21,7 +21,6 @@ _: {
       enable = true;
       dockerCompat = true;
       defaultNetwork.settings = {
-        dns = ["185.222.222.222" "45.11.45.11"];
         dns_enabled = true;
       };
     };
