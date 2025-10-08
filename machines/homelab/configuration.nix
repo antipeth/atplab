@@ -1,8 +1,12 @@
-{lib, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   imports =
     [
       # ./disk-extra1.nix
-      ./disk-extra2.nix
+      # ./disk-extra2.nix
       ./user.nix
 
       ../../modules/system/base.nix
@@ -17,35 +21,36 @@
       ../../modules/services/ssh.nix
       # ../../modules/services/tailscale.nix
 
-      ./services/aria2.nix
+      # ./services/aria2.nix
       # ./services/cockpit.nix
       # ./services/code-server.nix
-      ./services/dashy.nix
+      # ./services/dashy.nix
       # ./services/filebrowser.nix
-      ./services/forgejo.nix
-      ./services/glances.nix
-      ./services/gotify.nix
+      # ./services/forgejo.nix
+      # ./services/glances.nix
+      # ./services/gotify.nix
       # ./services/home-assistant.nix
-      ./services/homebox.nix
+      # ./services/homebox.nix
       # ./services/immich.nix
-      ./services/iperf3.nix
+      # ./services/iperf3.nix
       # ./services/jellyfin.nix
       # ./services/kodi.nix
-      ./services/nginx.nix
-      ./services/openlist.nix
+      # ./services/nginx.nix
+      # ./services/openlist.nix
       # ./services/podman.nix
-      ./services/postgres.nix
-      ./services/power-management.nix
+      # ./services/postgres.nix
+      # ./services/power-management.nix
       # ./services/radicale.nix
-      ./services/restic.nix
-      ./services/samba.nix
-      ./services/syncthing.nix
-      ./services/wakapi.nix
+      # ./services/restic.nix
+      # ./services/samba.nix
+      # ./services/syncthing.nix
+      # ./services/wakapi.nix
 
       # ./services/docker/romm.nix
     ]
     ++ lib.filesystem.listFilesRecursive ../../modules/options;
   boot = {
+    kernelPackages = inputs.chaotic.legacyPackages.x86_64-linux.linuxPackages_cachyos-server;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
   };
