@@ -13,7 +13,7 @@ _: {
               priority = 0;
             };
             ESP = {
-              size = "1G";
+              size = "500M";
               type = "EF00";
               priority = 1;
               content = {
