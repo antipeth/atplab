@@ -22,13 +22,13 @@ deploy input:
 deploy-test input:
   ls sops/eval/*/*.nix | xargs -n 1 sops -d -i ; git add . ; clan machines update {{input}} ; ls sops/eval/*/*.nix | xargs -n 1 sops -e -i
 
-encrypt input:
+en input:
   ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -e -i
 
 ea:
   ls sops/eval/*/*.nix | xargs -n 1 sops -e -i
 
-decrypt input:
+de input:
   ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -d -i | echo "no commit after decrypt until you encrypt or update again"
 
 da:
