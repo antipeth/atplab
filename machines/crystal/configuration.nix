@@ -17,6 +17,7 @@
       ../../modules/system/minimalise.nix
       ../../modules/system/nix.nix
 
+      ./services/headscale.nix
       ./services/komari-server.nix
       ./services/komari-agent-rs.nix
       ./services/murmur.nix
