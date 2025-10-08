@@ -22,6 +22,10 @@ _: {
     podman = {
       enable = true;
       dockerCompat = true;
+      autoPrune = {
+        enable = true;
+        dates = "weekly";
+      };
       defaultNetwork.settings = {
         dns_enabled = true;
         ipv6_enabled = true;
