@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -17,8 +16,6 @@
       "snd_hda_codec_hdmi"
       "i915"
     ];
-    kernelPackages = inputs.chaotic.legacyPackages.x86_64-linux.linuxPackages_cachyos-server;
-    zfs.package = inputs.chaotic.legacyPackages.x86_64-linux.zfs_cachyos;
     kernelParams = [
       "pcie_aspm=force"
     ];

@@ -39,7 +39,7 @@
       # ./services/openlist.nix
       ./services/podman.nix
       # ./services/postgres.nix
-      # ./services/power-management.nix
+      ./services/power-management.nix
       # ./services/radicale.nix
       # ./services/restic.nix
       # ./services/samba.nix
