@@ -45,6 +45,7 @@
       # ./services/samba.nix
       # ./services/syncthing.nix
       # ./services/wakapi.nix
+      ./services/wol.nix
 
       # ./services/docker/romm.nix
     ]
