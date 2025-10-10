@@ -27,7 +27,7 @@
       # ./services/dashy.nix
       # ./services/filebrowser.nix
       # ./services/forgejo.nix
-      # ./services/glances.nix
+      ./services/glances.nix
       # ./services/gotify.nix
       # ./services/home-assistant.nix
       # ./services/homebox.nix
