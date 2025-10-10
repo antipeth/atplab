@@ -35,6 +35,7 @@
       # ./services/iperf3.nix
       # ./services/jellyfin.nix
       # ./services/kodi.nix
+      ./services/nginx-tune.nix
       # ./services/nginx.nix
       # ./services/openlist.nix
       ./services/podman.nix
