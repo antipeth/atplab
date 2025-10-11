@@ -1,14 +1,4 @@
-{lib, ...}: {
-  networking = {
-    # Encrypted DNS
-    dhcpcd.extraConfig = "nohook resolv.conf";
-    nameservers = lib.mkDefault [
-      "127.0.0.1"
-      "::1"
-    ];
-  };
-
-  # Encrypted DNS
+_: {
   services = {
     unbound = {
       enable = true;
@@ -20,7 +10,7 @@
           do-udp = true;
           hide-identity = true;
           hide-version = true;
-          interface = lib.mkDefault [
+          interface = [
             "127.0.0.1"
             "::1"
           ];

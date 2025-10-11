@@ -1,6 +1,5 @@
 _: {
   services = {
-    # timesyncd.enable = false;
     ntpd-rs = {
       enable = true;
       settings = {
@@ -22,4 +21,5 @@ _: {
       useNetworkingTimeServers = false;
     };
   };
+  time.timeZone = "Asia/Singapore";
 }
