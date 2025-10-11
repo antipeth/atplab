@@ -40,6 +40,7 @@
               ./machines/${host}
               chaotic.nixosModules.default
               disko.nixosModules.disko
+              sops-nix.nixosModules.sops
             ];
           };
         };
