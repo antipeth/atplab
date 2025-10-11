@@ -16,6 +16,8 @@
       ../../modules/system/environment.nix
       ../../modules/system/minimalise.nix
       ../../modules/system/nix.nix
+
+      ../../sops/eval/octopus/b8b701cb.nix
     ]
     ++ lib.filesystem.listFilesRecursive ../../modules/options;
   boot = {
