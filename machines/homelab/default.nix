@@ -7,19 +7,8 @@ in {
       ./disko.nix
       ./hardware.nix
       ./user.nix
-
-      ../../modules/system/base.nix
-      ../../modules/system/environment.nix
-      ../../modules/system/minimalise.nix
-      ../../modules/system/nix.nix
-      ../../modules/system/zfs.nix
-
-      # ../../modules/services/blacklist.nix
-      ../../modules/services/dns.nix
-      # ../../modules/services/fail2ban.nix
-      ../../modules/services/ssh.nix
-      # ../../modules/services/tailscale.nix
     ]
+    ++ ls ../../modules/system
     ++ ls ../../modules/options;
 
   boot.loader.limine.biosDevice = primary-disk;
