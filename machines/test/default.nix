@@ -1,6 +1,6 @@
 {lib, ...}: let
   ls = lib.filesystem.listFilesRecursive;
-  primary-disk = "/dev/disk/by-path/virtio-pci-0000:00:07.0";
+  primary-disk = "/dev/disk/by-path/virtio-pci-0000:04:00.0";
 in {
   imports =
     [
@@ -21,12 +21,8 @@ in {
     ]
     ++ ls ../../modules/options;
 
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/vda";
-    useOSProber = true;
-  };
-  # disko.devices.disk.main.device = primary-disk;
-  system.stateVersion = "25.11";
+  boot.loader.limine.biosDevice = primary-disk;
+  disko.devices.disk.main.device = primary-disk;
   networking.hostId = "36e145c4";
+  system.stateVersion = "25.11";
 }
