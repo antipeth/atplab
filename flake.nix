@@ -18,7 +18,7 @@
     daeuniverse.url = "github:daeuniverse/flake.nix";
   };
   outputs = inputs: let
-    host = "test";
+    hostname = "homelab";
   in
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
@@ -34,15 +34,15 @@
       };
       flake = {
         nixosConfigurations = {
-          "${host}" = inputs.nixpkgs.lib.nixosSystem {
+          "${hostname}" = inputs.nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = with inputs; [
-              ./machines/${host}
+              ./machines/${hostname}
               chaotic.nixosModules.default
               disko.nixosModules.disko
               sops-nix.nixosModules.sops
             ];
-            specialArgs = {inherit inputs;};
+            specialArgs = {inherit inputs hostname;};
           };
         };
       };
