@@ -6,27 +6,31 @@ hostname := `hostname`
 
 anywhere input:
   # Perform nixos-anywhere install
-  sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-generate-config ./machines/{{input}}/hardware.nix --flake .#{{input}} --target-host root@{{input}}
+  ls modules/private/{{input}}/* | xargs -n 1 sops decrypt -i ; sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-generate-config ./machines/{{input}}/hardware.nix --flake .#{{input}} --target-host root@{{input}} ; ls modules/private/{{input}}/* | xargs -n 1 sops encrypt -i
 
 anywhere-lb input:
   # Berform nixos-anywhere install (local builder)
-  sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-generate-config ./machines/{{input}}/hardware.nix --flake .#{{input}} --target-host root@{{input}} --build-on local --show-trace
+  ls modules/private/{{input}}/* | xargs -n 1 sops decrypt -i ; sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-generate-config ./machines/{{input}}/hardware.nix --flake .#{{input}} --target-host root@{{input}} --build-on local --show-trace ; ls modules/private/{{input}}/* | xargs -n 1 sops encrypt -i
 
 deploy input:
   # Perform remote deploy action
-  sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nixos-rebuild switch --flake .#{{input}} --target-host root@{{input}} -v
-
-en input:
-  ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -e -i
-
-ea:
-  ls sops/eval/*/*.nix | xargs -n 1 sops -e -i
-
-de input:
-  ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -d -i | echo "no commit after decrypt until you encrypt or update again"
+  ls modules/private/{{input}}/* | xargs -n 1 sops decrypt -i ; sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nixos-rebuild switch --flake .#{{input}} --target-host root@{{input}} -v ; ls modules/private/{{input}}/* | xargs -n 1 sops encrypt -i
 
 da:
-  ls sops/eval/*/*.nix | xargs -n 1 sops -d -i | echo "no commit after decrypt until you encrypt or update again"
+  # Decrypt all
+  ls modules/private/**/* | xargs -n 1 sops decrypt -i
+
+de input:
+  # Decrypt
+  ls modules/private/{{input}}/* | xargs -n 1 sops decrypt -i
+
+ea:
+  # encrypt all
+  ls modules/private/**/* | xargs -n 1 sops encrypt -i
+
+en input:
+  # Encrypt
+  ls modules/private/{{input}}/* | xargs -n 1 sops encrypt -i
 
 format:
   # Use alejandra and deadnix to format code
