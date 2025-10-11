@@ -3,7 +3,6 @@ _: {
     disk = {
       main = {
         type = "disk";
-        device = import ../../sops/eval/homelab/disko-main-device.nix;
         content = {
           type = "gpt";
           partitions = {
