@@ -42,6 +42,7 @@
               disko.nixosModules.disko
               sops-nix.nixosModules.sops
             ];
+            specialArgs = {inherit inputs;};
           };
         };
       };
