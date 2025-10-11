@@ -1,26 +1,12 @@
-keygen:
-  clan secrets key generate
+# use nushell for shell commands
+set shell := ["bash", "-c"]
 
-set input:
-  clan secrets set {{input}}
-
-get input:
-  clan secrets get {{input}}
-
-list-s:
-  clan secrets list
-
-list-m:
-  clan machines list
-
-install input:
-  ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -d -i ; git add . ; clan machines install {{input}} --target-host {{input}}  --update-hardware-config nixos-facter ; ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -e -i
+# Set hostname environment
+hostname := `hostname`
 
 deploy input:
-  ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -d -i ; git add . ; clan machines update {{input}} ; ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -e -i
-
-deploy-test input:
-  ls sops/eval/*/*.nix | xargs -n 1 sops -d -i ; git add . ; clan machines update {{input}} ; ls sops/eval/*/*.nix | xargs -n 1 sops -e -i
+  # Perform remote deploy action
+  sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nixos-rebuild switch --flake .#{{input}} --target-host root@{{input}} -v
 
 en input:
   ls sops/eval/{{input}}/*.nix | xargs -n 1 sops -e -i
