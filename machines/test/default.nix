@@ -1,4 +1,7 @@
-{lib, ...}: {
+{lib, ...}: let
+  ls = lib.filesystem.listFilesRecursive;
+  primary-disk = "/dev/disk/by-path/virtio-pci-0000:00:07.0";
+in {
   imports =
     [
       ./user.nix
@@ -7,28 +10,22 @@
       ../../modules/system/environment.nix
       ../../modules/system/minimalise.nix
       ../../modules/system/nix.nix
-      ../../modules/system/zfs.nix
+      # ../../modules/system/zfs.nix
 
       # ../../modules/services/blacklist.nix
-      ../../modules/services/dns.nix
+      # ../../modules/services/dns.nix
       # ../../modules/services/fail2ban.nix
       ../../modules/services/ssh.nix
       # ../../modules/services/tailscale.nix
     ]
-    ++ lib.filesystem.listFilesRecursive ../../modules/options;
-  boot = {
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    zfs = {
-      devNodes = "/dev/disk/by-path";
-    };
-  };
+    ++ ls ../../modules/options;
 
-  # Enable networking
-  networking = {
-    hostId = "36e145c4";
-    hostName = "test";
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/vda";
+    useOSProber = true;
   };
-
-  clan.core.networking.targetHost = "root@test";
+  # disko.devices.disk.main.device = primary-disk;
+  system.stateVersion = "25.11";
+  networking.hostId = "36e145c4";
 }
