@@ -4,11 +4,15 @@
     curl
     fastfetch
     git
+    helix
     lsof
-    vim
     wget
-    hdparm
-    rsync
-    # openssl
+    zellij
+    zoxide
   ];
+  programs.bash = {
+    interactiveShellInit = ''
+      eval "$(zoxide init bash)"
+    '';
+  };
 }
