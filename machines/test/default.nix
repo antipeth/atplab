@@ -5,6 +5,7 @@ in {
   imports =
     [
       ./user.nix
+      ./hardware.nix
 
       ../../modules/system/base.nix
       ../../modules/system/environment.nix
