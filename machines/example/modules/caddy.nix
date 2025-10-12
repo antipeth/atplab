@@ -30,18 +30,37 @@
 
   services.caddy = {
     enable = true;
-    configFile = pkgs.writeText "Caddyfile" ''
-      {
-        auto_https disable_certs
-        servers {
-         max_header_size 10240MB
-         }
-      }
-      jellyfin.example.com {
-        encode zstd
-        tls /etc/caddy/self-sign.crt /etc/caddy/self-sign.key
-        reverse_proxy 127.0.0.1:8096
+    # Standalone config file
+    # configFile = pkgs.writeText "Caddyfile" ''
+    #   {
+    #     auto_https disable_certs
+    #     servers {
+    #      max_header_size 10240MB
+    #      }
+    #   }
+    #   jellyfin.example.com {
+    #     encode zstd
+    #     tls /etc/caddy/self-sign.crt /etc/caddy/self-sign.key
+    #     reverse_proxy 127.0.0.1:8096
+    #   }
+    # '';
+    globalConfig = ''
+      auto_https disable_certs
+      servers {
+        max_header_size 10240MB
       }
     '';
+    virtualHosts = {
+      "example.com" = {
+        # logFormat = lib.mkForce ''
+        #   output discard
+        # '';
+        extraConfig = ''
+          encode zstd
+          tls /etc/caddy/self-sign.crt /etc/caddy/self-sign.key
+          reverse_proxy 127.0.0.1:8080
+        '';
+      };
+    };
   };
 }
