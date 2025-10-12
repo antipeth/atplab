@@ -8,6 +8,8 @@ in {
       ./hardware.nix
       ./network.nix
       ./user.nix
+
+      ./values/5d34qGBR17c.nix
     ]
     ++ ls ./modules
     ++ ls ../../modules/system
