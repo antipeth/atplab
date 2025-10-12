@@ -6,6 +6,7 @@ in {
     [
       ./disko.nix
       ./hardware.nix
+      ./network.nix
       ./user.nix
     ]
     # ++ ls ./modules
