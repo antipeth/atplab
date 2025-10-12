@@ -15,5 +15,5 @@ in {
   boot.loader.limine.biosDevice = primary-disk;
   disko.devices.disk.main.device = primary-disk;
   system.stateVersion = "25.11";
-  networking.hostId = "2aff655b";
+  networking.hostId = "2aff655b"; # Generate by head -c4 /dev/urandom | od -A none -t x4
 }
