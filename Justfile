@@ -24,6 +24,10 @@ de input:
   # Decrypt
   ls machines/{{input}}/values/* | xargs -n 1 sops decrypt -i
 
+ds input:
+  # Decrypt
+  ls machines/{{input}}/secrets/* | xargs -n 1 sops decrypt -i
+
 ea:
   # encrypt all
   ls modules/private/**/* | xargs -n 1 sops encrypt -i
@@ -31,6 +35,10 @@ ea:
 en input:
   # Encrypt
   ls machines/{{input}}/values/* | xargs -n 1 sops encrypt -i
+
+es input:
+  # Encrypt
+  ls machines/{{input}}/secrets/* | xargs -n 1 sops encrypt -i
 
 as input:
   # Add secret
