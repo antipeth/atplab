@@ -6,15 +6,15 @@ hostname := `hostname`
 
 anywhere input:
   # Perform nixos-anywhere install
-  ls modules/private/{{input}}/* | xargs -n 1 sops decrypt -i ; sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-generate-config ./machines/{{input}}/hardware.nix --flake .#{{input}} --target-host root@{{input}} ; ls modules/private/{{input}}/* | xargs -n 1 sops encrypt -i
+  ls machines/{{input}}/values/* | xargs -n 1 sops decrypt -i ; sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-generate-config ./machines/{{input}}/hardware.nix --flake .#{{input}} --target-host root@{{input}} ; ls machines/{{input}}/values/* | xargs -n 1 sops encrypt -i
 
 anywhere-lb input:
   # Berform nixos-anywhere install (local builder)
-  ls modules/private/{{input}}/* | xargs -n 1 sops decrypt -i ; sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-generate-config ./machines/{{input}}/hardware.nix --flake .#{{input}} --target-host root@{{input}} --build-on local --show-trace ; ls modules/private/{{input}}/* | xargs -n 1 sops encrypt -i
+  ls machines/{{input}}/values/* | xargs -n 1 sops decrypt -i ; sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-generate-config ./machines/{{input}}/hardware.nix --flake .#{{input}} --target-host root@{{input}} --build-on local --show-trace ; ls machines/{{input}}/values/* | xargs -n 1 sops encrypt -i
 
 deploy input:
   # Perform remote deploy action
-  ls modules/private/{{input}}/* | xargs -n 1 sops decrypt -i ; sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nixos-rebuild switch --flake .#{{input}} --target-host root@{{input}} -v ; ls modules/private/{{input}}/* | xargs -n 1 sops encrypt -i
+  ls machines/{{input}}/values/* | xargs -n 1 sops decrypt -i ; sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nixos-rebuild switch --flake .#{{input}} --target-host root@{{input}} -v ; ls machines/{{input}}/values/* | xargs -n 1 sops encrypt -i
 
 da:
   # Decrypt all
@@ -22,7 +22,7 @@ da:
 
 de input:
   # Decrypt
-  ls modules/private/{{input}}/* | xargs -n 1 sops decrypt -i
+  ls machines/{{input}}/values/* | xargs -n 1 sops decrypt -i
 
 ea:
   # encrypt all
@@ -30,7 +30,11 @@ ea:
 
 en input:
   # Encrypt
-  ls modules/private/{{input}}/* | xargs -n 1 sops encrypt -i
+  ls machines/{{input}}/values/* | xargs -n 1 sops encrypt -i
+
+as input:
+  # Add secret
+  sops {{input}}
 
 format:
   # Use alejandra and deadnix to format code
