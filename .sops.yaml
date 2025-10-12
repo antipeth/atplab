@@ -66,3 +66,8 @@ creation_rules:
       - age:
           - *admin_atp
           - *server_octopus
+
+  - path_regex: machines/squid/values/*
+    key_groups:
+      - age:
+          - *admin_atp
