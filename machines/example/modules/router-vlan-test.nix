@@ -1,4 +1,4 @@
-{
+{lib, ...}: {
   boot.kernel.sysctl = {
     # if you use ipv4, this is all you need
     "net.ipv4.conf.all.forwarding" = true;
@@ -13,7 +13,7 @@
     "net.ipv6.conf.all.use_tempaddr" = 0;
   };
   networking = {
-    firewall.enable = false;
+    firewall.enable = lib.mkForce false;
     vlans = {
       lan = {
         id = 10;
@@ -74,7 +74,7 @@
             iifname "lo" accept comment "Allow all loopback traffic"
 
             # Allow SSH on port from eth0
-            iifname { "eth0", "usb0" } tcp dport 222 ct state new,established accept comment "Allow SSH"
+            iifname { "eth0", "usb0" } tcp dport 22 ct state new,established accept comment "Allow SSH"
 
             iifname { "lan0", "wlan0" } accept comment "Allow local network to access the router"
             iifname { "eth0", "usb0" } ct state { established, related } accept comment "Allow established traffic"
@@ -111,7 +111,8 @@
     # DNS Settings
     unbound.settings = {
       # Disable iot access
-      access-control = ["10.13.10.0/24 allow" "10.13.12.0/24 allow" "::/0 refuse"];
+      access-control = ["10.13.10.0/24 allow" "10.13.12.0/24 allow" "::/0 refuse"]; # Allow Downstream LAN
+
       server.interface = [
         "0.0.0.0"
         "::0"
@@ -134,9 +135,7 @@
         cache-size = 1000;
 
         interface = "lan,iot,wlan0";
-        # bind-interfaces = true;
         dhcp-range = ["lan,10.13.10.2,10.13.10.254,255.255.255.0,12h" "iot,10.13.11.2,10.13.11.254,255.255.255.0,12h" "wlan0,10.13.12.2,10.13.12.254,255.255.255.0,12h"];
-        # dhcp-host = "10.13.10.1";
         dhcp-option = [
           "tag:lan,option:router,10.13.10.1"
           "tag:lan,option:dns-server,10.13.10.1"

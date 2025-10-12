@@ -58,6 +58,6 @@ _: {
       ];
     };
 
-    lovelaceConfig = import ./ha/dashboard.nix;
+    lovelaceConfig = import ./dashboard.nix;
   };
 }

@@ -1,4 +1,4 @@
-{config, ...}: {
+{lib, ...}: {
   boot.kernel.sysctl = {
     # if you use ipv4, this is all you need
     "net.ipv4.conf.all.forwarding" = true;
@@ -13,25 +13,17 @@
     "net.ipv6.conf.all.use_tempaddr" = 0;
   };
   networking = {
-    firewall.enable = false;
+    firewall.enable = lib.mkForce false;
+    bridges.br0.interfaces = ["eth1" "wlan0"];
     interfaces = {
       eth0 = {
         useDHCP = true;
       };
-      eth1 = {
+      br0 = {
         useDHCP = false;
         ipv4.addresses = [
           {
             address = "10.13.10.1";
-            prefixLength = 24;
-          }
-        ];
-      };
-      wlan0 = {
-        useDHCP = false;
-        ipv4.addresses = [
-          {
-            address = "10.13.12.1";
             prefixLength = 24;
           }
         ];
@@ -47,31 +39,28 @@
             iifname "lo" accept comment "Allow all loopback traffic"
 
             # Allow SSH on port from eth0
-            iifname { "eth0", "usb0" } tcp dport 222 ct state new,established accept comment "Allow SSH"
-            iifname { "eth0", "usb0" } tcp dport 12345 ct state new,established accept comment "Allow APP"
-            iifname { "eth0", "usb0" } tcp dport 2023 ct state new,established accept comment "Allow APP"
-            iifname { "eth0", "usb0" } tcp dport 8123 ct state new,established accept comment "Allow APP"
+            iifname { "eth0", "usb0" } tcp dport 22 ct state new,established accept comment "Allow SSH"
             iifname { "eth0", "usb0" } tcp dport 7844 ct state new,established accept comment "Allow APP"
             iifname { "eth0", "usb0" } udp dport 7844 ct state new,established accept comment "Allow APP"
 
-            iifname { "eth1", "wlan0" } accept comment "Allow local network to access the router"
+            iifname { "br0", "eth1", "wlan0" } accept comment "Allow local network to access the router"
             iifname { "eth0", "usb0" } ct state { established, related } accept comment "Allow established traffic"
             iifname { "eth0", "usb0" } icmp type { echo-request, destination-unreachable, time-exceeded } counter accept comment "Allow select ICMP"
             iifname { "eth0", "usb0" } counter drop comment "Drop all other unsolicited traffic from wan"
           }
           chain forward {
             type filter hook forward priority 0; policy drop;
-            iifname { "eth1", "wlan0" } oifname { "eth0", "usb0", "dae0" } accept comment "Allow trusted LAN"
-            iifname { "eth0", "usb0", "dae0" } oifname { "eth1", "wlan0" } ct state established, related accept comment "Allow established back to LANs"
+            iifname { "br0", "eth1", "wlan0" } oifname { "eth0", "usb0"} accept comment "Allow trusted LAN"
+            iifname { "eth0", "usb0" } oifname { "br0", "eth1", "wlan0" } ct state established, related accept comment "Allow established back to LANs"
           }
-        }
+        }Upstream LAN
         table ip nat {
           chain prerouting {
             type nat hook prerouting priority 0; policy accept;
           }
           chain postrouting {
             type nat hook postrouting priority 100; policy accept;
-            oifname { "eth0", "usb0", "dae0" } masquerade
+            oifname { "eth0", "usb0" } masquerade
           }
         }
         table ip6 filter {
@@ -86,17 +75,23 @@
     };
   };
   services = {
-    # DHCP server settings
+    # DNS Settings
+    unbound.settings = {
+      access-control = ["10.13.10.0/24 allow" "10.13.12.0/24 allow" "::/0 refuse"]; # Allow Downstream LAN
+      server.interface = [
+        "0.0.0.0"
+        "::0"
+      ];
+    };
+
+    # DHCP server use bridge
     dnsmasq = {
       enable = true;
       resolveLocalQueries = false;
       settings = {
         # Shut down the dns server by settings port 0
         port = 0;
-        # server = [
-        #   "8.8.8.8"
-        #   "8.8.4.4"
-        # ];
+
         # sensible behaviours
         domain-needed = true;
         bogus-priv = true;
@@ -105,24 +100,17 @@
         # Cache dns queries.
         cache-size = 1000;
 
-        interface = "eth1,wlan0";
-        # bind-interfaces = true;
-        dhcp-range = ["eth1,10.13.10.2,10.13.10.254,255.255.255.0,12h" "wlan0,10.13.12.2,10.13.12.254,255.255.255.0,12h"];
+        interface = "br0";
+        dhcp-range = ["br0,10.13.10.2,10.13.10.254,255.255.255.0,12h"];
         # dhcp-host = "10.13.10.1";
         dhcp-option = [
-          "tag:eth1,option:router,10.13.10.1"
-          # "tag:eth1,option:dns-server,10.13.10.1"
-          "tag:eth1,option:dns-server,8.8.8.8"
-          "tag:wlan0,option:router,10.13.12.1"
-          # "tag:wlan0,option:dns-server,10.13.10.1"
-          "tag:wlan0,option:dns-server,8.8.8.8"
+          "tag:br0,option:router,10.13.10.1"
+          "tag:br0,option:dns-server,10.13.10.1"
         ];
         expand-hosts = true;
         no-hosts = true;
       };
     };
-
-    # wifi settings
     hostapd = {
       enable = true;
       radios = {
@@ -137,10 +125,13 @@
               ssid = "test";
               authentication = {
                 mode = "wpa3-sae";
-                saePasswordsFile = config.sops.secrets.icecream-wifi-password.path;
+                saePasswordsFile = /run/secret;
               };
               # bssid = "36:b9:ff:ff:ff:ff";
             };
+          };
+          settings = {
+            bridge = "br0";
           };
         };
       };

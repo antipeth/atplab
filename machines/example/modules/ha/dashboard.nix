@@ -28,23 +28,18 @@
           cards = [
             {
               type = "heading";
-              heading = "书房";
+              heading = "Study room";
               icon = "mdi:desk-lamp";
             }
             {
               type = "tile";
-              entity = "device_tracker.asusbook";
-              name = "Asusbook";
+              entity = "device_tracker.device1-name";
+              name = "device1-name";
             }
             {
               type = "tile";
-              entity = "device_tracker.homelab";
-              name = "Homelab";
-            }
-            {
-              type = "tile";
-              entity = "device_tracker.icecream";
-              name = "Icecream";
+              entity = "device_tracker.device2-name";
+              name = "device2-name";
             }
           ];
         }

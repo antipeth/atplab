@@ -1,4 +1,4 @@
-{config, ...}: {
+{lib, ...}: {
   boot.kernel.sysctl = {
     # if you use ipv4, this is all you need
     "net.ipv4.conf.all.forwarding" = true;
@@ -13,8 +13,8 @@
     "net.ipv6.conf.all.use_tempaddr" = 0;
   };
   networking = {
+    firewall.enable = lib.mkForce false;
     bridges.switch-br.interfaces = ["eth0" "eth1" "wlan0"];
-    firewall.enable = false;
     interfaces = {
       switch-br = {
         useDHCP = true;
@@ -36,7 +36,7 @@
               ssid = "test";
               authentication = {
                 mode = "wpa3-sae";
-                saePasswordsFile = config.sops.secrets.icecream-wifi-password.path;
+                saePasswordsFile = /run/secret;
               };
               # bssid = "36:b9:ff:ff:ff:ff";
             };

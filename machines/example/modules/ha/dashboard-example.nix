@@ -27,7 +27,7 @@
           cards = [
             {
               type = "heading";
-              heading = "欢迎 👋";
+              heading = "Welcom👋";
             }
             {type = "custom:ha-demo-card";}
           ];
@@ -36,7 +36,7 @@
           cards = [
             {
               type = "heading";
-              heading = "客厅";
+              heading = "Living room";
               icon = "mdi:sofa";
               badges = [
                 {
@@ -81,7 +81,7 @@
           cards = [
             {
               type = "heading";
-              heading = "厨房";
+              heading = "Kichen";
               icon = "mdi:fridge";
               badges = [
                 {
@@ -124,7 +124,7 @@
           cards = [
             {
               type = "heading";
-              heading = "能源";
+              heading = "Power";
               icon = "mdi:transmission-tower";
             }
             {
@@ -170,7 +170,7 @@
           cards = [
             {
               type = "heading";
-              heading = "空调";
+              heading = "Air conditioner";
               icon = "mdi:thermometer";
             }
             {
@@ -203,7 +203,7 @@
           cards = [
             {
               type = "heading";
-              heading = "书房";
+              heading = "Study room";
               icon = "mdi:desk-lamp";
               badges = [
                 {
@@ -254,7 +254,7 @@
           cards = [
             {
               type = "heading";
-              heading = "室外";
+              heading = "Outdoor";
               icon = "mdi:tree";
             }
             {
@@ -292,7 +292,7 @@
           cards = [
             {
               type = "heading";
-              heading = "更新";
+              heading = "Update";
               icon = "mdi:update";
             }
             {

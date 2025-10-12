@@ -1,4 +1,4 @@
-{config, ...}: {
+{lib, ...}: {
   boot.kernel.sysctl = {
     # if you use ipv4, this is all you need
     "net.ipv4.conf.all.forwarding" = true;
@@ -13,7 +13,7 @@
     "net.ipv6.conf.all.use_tempaddr" = 0;
   };
   networking = {
-    firewall.enable = false;
+    firewall.enable = lib.mkForce false;
     interfaces = {
       eth0 = {
         useDHCP = true;
@@ -23,7 +23,7 @@
   services = {
     # DNS Settings
     unbound.settings = {
-      access-control = ["192.168.6.0/24 allow" "::/0 refuse"];
+      access-control = ["192.168.1.0/24 allow" "::/0 refuse"]; # Allow Upstream LAN
       server.interface = [
         "0.0.0.0"
         "::0"
