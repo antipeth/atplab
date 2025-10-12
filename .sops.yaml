@@ -2,8 +2,9 @@ keys:
   - &admin_atp age1gym933jnyln9nud8vhg44vtp983prgfpnlxr0zw2tr9x9s575vyqyufmyd
   - &server_auction age1ccwqnh66ktsccup8urtmdwqku3wc37s754j3l7k9vqagp6ll3veqhwjhxl
   - &server_crystal age1vacywlqvmx6d2tfshssjky3k8zeg0z80jeja44mepq0vtuderdjq4sl78v
-  - &server_icecream age1uxu7lwlge36s6vrep05jq23kt44ftvxmg3j5ymtdkje9llte7elq7tejwh
+  - &server_freezer age1c5pu3h32u47c7k3g6xhqexsu3wyuj68us0cktgy78v0luyxxx5xqed37zk
   - &server_homelab age1y3fpqvn85xagmg0c8nzefum7g6g27vzul6gk66474xmdy62j5ycq5ezaa2
+  - &server_icecream age1uxu7lwlge36s6vrep05jq23kt44ftvxmg3j5ymtdkje9llte7elq7tejwh
 creation_rules:
   - path_regex: machines/auction/values/*
     key_groups:
@@ -25,15 +26,15 @@ creation_rules:
           - *admin_atp
           - *server_crystal
 
-  - path_regex: machines/icecream/values/*
+  - path_regex: machines/freezer/values/*
     key_groups:
       - age:
           - *admin_atp
-  - path_regex: machines/icecream/secrets/*
+  - path_regex: machines/freezer/secrets/*
     key_groups:
       - age:
           - *admin_atp
-          - *server_icecream
+          - *server_freezer
 
   - path_regex: machines/homelab/values/*
     key_groups:
@@ -44,3 +45,13 @@ creation_rules:
       - age:
           - *admin_atp
           - *server_homelab
+
+  - path_regex: machines/icecream/values/*
+    key_groups:
+      - age:
+          - *admin_atp
+  - path_regex: machines/icecream/secrets/*
+    key_groups:
+      - age:
+          - *admin_atp
+          - *server_icecream
