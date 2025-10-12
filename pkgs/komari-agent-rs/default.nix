@@ -5,7 +5,7 @@
   ...
 }:
 stdenvNoCC.mkDerivation {
-  pname = "komari-agent";
+  pname = "komari-agent-rs";
   version = "1.0.83";
   src = fetchurl {
     url = "https://github.com/GenshinMinecraft/komari-monitor-rs/releases/download/latest/komari-monitor-rs-linux-x86_64-musl";
