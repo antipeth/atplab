@@ -1,12 +1,16 @@
 {config, ...}: {
-  sops.secrets.auction-hashedPassword.neededForUsers = true;
+  sops.secrets.auction-hashedPassword = {
+    format = "binary";
+    sopsFile = secrets/hashedPassword;
+    neededForUsers = true;
+  };
   users = {
     mutableUsers = false;
     users = {
       root = {
         hashedPasswordFile = config.sops.secrets.auction-hashedPassword.path;
         openssh.authorizedKeys.keys = [
-          (import ../../sops/eval/auction/public-key.nix)
+          (import values/public-key.nix)
         ];
       };
     };
