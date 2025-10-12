@@ -5,6 +5,7 @@ keys:
   - &server_freezer age1c5pu3h32u47c7k3g6xhqexsu3wyuj68us0cktgy78v0luyxxx5xqed37zk
   - &server_homelab age1y3fpqvn85xagmg0c8nzefum7g6g27vzul6gk66474xmdy62j5ycq5ezaa2
   - &server_icecream age1uxu7lwlge36s6vrep05jq23kt44ftvxmg3j5ymtdkje9llte7elq7tejwh
+  - &server_octopus age1uuym8hf6d2zypn6pfylv7klhau58s0uf5nk70yggeuefqa6yx9ls2puppv
 creation_rules:
   - path_regex: machines/auction/values/*
     key_groups:
@@ -55,3 +56,13 @@ creation_rules:
       - age:
           - *admin_atp
           - *server_icecream
+
+  - path_regex: machines/octopus/values/*
+    key_groups:
+      - age:
+          - *admin_atp
+  - path_regex: machines/octopus/secrets/*
+    key_groups:
+      - age:
+          - *admin_atp
+          - *server_octopus

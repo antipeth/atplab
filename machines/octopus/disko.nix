@@ -3,7 +3,6 @@ _: {
     disk = {
       main = {
         type = "disk";
-        device = "/dev/disk/by-path/virtio-pci-0000:00:06.0";
         content = {
           type = "gpt";
           partitions = {

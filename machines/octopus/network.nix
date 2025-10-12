@@ -4,23 +4,23 @@
     interfaces.eth0 = {
       ipv4.addresses = [
         {
-          address = import ../../sops/eval/octopus/ipv4-address1.nix;
-          prefixLength = import ../../sops/eval/octopus/ipv4-prefix.nix;
+          address = import values/ipv4-address1.nix;
+          prefixLength = import values/ipv4-prefix.nix;
         }
       ];
       ipv6.addresses = [
         {
-          address = import ../../sops/eval/octopus/ipv6-address1.nix;
-          prefixLength = import ../../sops/eval/octopus/ipv6-prefix.nix;
+          address = import values/ipv6-address1.nix;
+          prefixLength = import values/ipv6-prefix.nix;
         }
       ];
     };
     defaultGateway = {
-      address = import ../../sops/eval/octopus/ipv4-gateway.nix;
+      address = import values/ipv4-gateway.nix;
       interface = "eth0";
     };
     defaultGateway6 = {
-      address = import ../../sops/eval/octopus/ipv6-gateway.nix;
+      address = import values/ipv6-gateway.nix;
       interface = "eth0";
     };
   };
