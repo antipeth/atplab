@@ -4,7 +4,7 @@
   ...
 }: let
   ls = lib.filesystem.listFilesRecursive;
-  primary-disk = "/dev/disk/by-id/xxxxxx";
+  # primary-disk = "/dev/disk/by-id/xxxxxx";
 in {
   imports =
     [
@@ -27,7 +27,7 @@ in {
     kernelPackages = pkgs.linuxPackages_zen;
   };
   # boot.loader.limine.biosDevice = primary-disk;
-  disko.devices.disk.main.device = primary-disk;
+  # disko.devices.disk.main.device = primary-disk;
   system.stateVersion = "25.11";
   networking.hostId = "458eb6b8";
 }
