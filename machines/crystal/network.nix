@@ -1,6 +1,5 @@
 {lib, ...}: {
   networking = {
-    usePredictableInterfaceNames = false;
     useDHCP = lib.mkForce false;
     interfaces.eth0.ipv4.addresses = [
       {
