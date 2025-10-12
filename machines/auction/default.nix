@@ -30,4 +30,11 @@ in {
   # disko.devices.disk.main.device = primary-disk;
   system.stateVersion = "25.11";
   networking.hostId = "458eb6b8";
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 1076;
+    }
+  ];
+  zramSwap.enable = true;
 }
