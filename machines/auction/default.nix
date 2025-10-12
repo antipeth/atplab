@@ -12,6 +12,7 @@ in {
       ./network.nix
       ./user.nix
     ]
+    ++ ls ./modules
     ++ ls ../../modules/system
     ++ ls ../../modules/options;
 
