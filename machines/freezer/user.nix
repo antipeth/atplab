@@ -1,12 +1,16 @@
 {config, ...}: {
-  sops.secrets.freezer-hashedPassword.neededForUsers = true;
+  sops.secrets.freezer-hashedPassword = {
+    format = "binary";
+    sopsFile = secrets/hashedPassword;
+    neededForUsers = true;
+  };
   users = {
     mutableUsers = false;
     users = {
       root = {
         hashedPasswordFile = config.sops.secrets.freezer-hashedPassword.path;
         openssh.authorizedKeys.keys = [
-          (import ../../sops/eval/freezer/public-key.nix)
+          (import values/public-key.nix)
         ];
       };
     };
