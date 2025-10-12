@@ -5,23 +5,23 @@
   ...
 }:
 stdenvNoCC.mkDerivation {
-  pname = "komari-agent";
-  version = "1.0.83";
+  pname = "komari-server";
+  version = "1.1.1a";
   src = fetchurl {
-    url = "https://github.com/komari-monitor/komari-agent/releases/download/1.0.83/komari-agent-linux-amd64";
-    sha256 = "sha256-v+5wewXrHYiooeGllkWfiau0tv7xZOOMDa2vlwXWvSs=";
+    url = "https://github.com/komari-monitor/komari/releases/download/1.1.1a/komari-linux-amd64";
+    sha256 = "sha256-ewsyPTHKL3vKj2toOKWLTLAwvNt6vbpDVzISTto7Fx4=";
   };
   dontUnpack = true;
   installPhase = ''
     runHook preInstall
     mkdir -p $out/bin
-    cp $src $out/bin/komari-agent
-    chmod +x $out/bin/komari-agent
+    cp $src $out/bin/komari
+    chmod +x $out/bin/komari
     runHook postInstall
   '';
   meta = with lib; {
-    description = "komari agent";
-    homepage = "https://github.com/komari-monitor/komari-agent";
+    description = "A simple server monitor tool.";
+    homepage = "https://github.com/komari-monitor/komari";
     license = licenses.free;
     platforms = ["x86_64-linux"];
     maintainers = [atp];
