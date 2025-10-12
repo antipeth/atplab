@@ -1,6 +1,6 @@
 {lib, ...}: let
   ls = lib.filesystem.listFilesRecursive;
-  primary-disk = import ../../modules/private/homelab/disko-main-device.nix;
+  primary-disk = "/dev/disk/by-id/xxxxxx";
 in {
   imports =
     [
