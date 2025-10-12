@@ -1,33 +1,34 @@
-_: {
+{lib, ...}: {
   networking = {
     usePredictableInterfaceNames = false;
+    useDHCP = lib.mkForce false;
     interfaces.eth0.ipv4.addresses = [
       {
-        address = import ../../sops/eval/crystal/ipv4-address1.nix;
-        prefixLength = import ../../sops/eval/crystal/ipv4-prefix.nix;
+        address = import values/ipv4-address1.nix;
+        prefixLength = import values/ipv4-prefix.nix;
       }
     ];
     defaultGateway = {
-      address = import ../../sops/eval/crystal/ipv4-gateway.nix;
+      address = import values/ipv4-gateway.nix;
       interface = "eth0";
     };
-    # interfaces.eth0.ipv6.addresses = [
-    #   {
-    #     address = import ../../sops/eval/crystal/ipv6-address1.nix;
-    #     prefixLength = import ../../sops/eval/crystal/ipv6-prefix.nix;
-    #   }
-    #   {
-    #     address = import ../../sops/eval/crystal/ipv6-address2.nix;
-    #     prefixLength = import ../../sops/eval/crystal/ipv6-prefix.nix;
-    #   }
-    #   {
-    #     address = import ../../sops/eval/crystal/ipv6-address3.nix;
-    #     prefixLength = import ../../sops/eval/crystal/ipv6-prefix.nix;
-    #   }
-    # ];
-    # defaultGateway6 = {
-    #   address = import ../../sops/eval/crystal/ipv6-gateway.nix;
-    #   interface = "eth0";
-    # };
+    interfaces.eth0.ipv6.addresses = [
+      {
+        address = import values/ipv6-address1.nix;
+        prefixLength = import values/ipv6-prefix.nix;
+      }
+      {
+        address = import values/ipv6-address2.nix;
+        prefixLength = import values/ipv6-prefix.nix;
+      }
+      {
+        address = import values/ipv6-address3.nix;
+        prefixLength = import values/ipv6-prefix.nix;
+      }
+    ];
+    defaultGateway6 = {
+      address = import values/ipv6-gateway.nix;
+      interface = "eth0";
+    };
   };
 }

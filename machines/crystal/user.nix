@@ -1,12 +1,16 @@
 {config, ...}: {
-  sops.secrets.crystal-hashedPassword.neededForUsers = true;
+  sops.secrets.crystal-hashedPassword = {
+    format = "binary";
+    sopsFile = secrets/hashedPassword;
+    neededForUsers = true;
+  };
   users = {
     mutableUsers = false;
     users = {
       root = {
         hashedPasswordFile = config.sops.secrets.crystal-hashedPassword.path;
         openssh.authorizedKeys.keys = [
-          (import ../../sops/eval/crystal/public-key.nix)
+          (import values/public-key.nix)
         ];
       };
     };
