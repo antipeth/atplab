@@ -1,7 +1,13 @@
 keys:
   - &admin_atp age1gym933jnyln9nud8vhg44vtp983prgfpnlxr0zw2tr9x9s575vyqyufmyd
+  - &server_homelab age1y3fpqvn85xagmg0c8nzefum7g6g27vzul6gk66474xmdy62j5ycq5ezaa2
 creation_rules:
-  - path_regex: modules/private/.*
+  - path_regex: machines/homelab/values/*
     key_groups:
       - age:
           - *admin_atp
+  - path_regex: machines/homelab/secrets/*
+    key_groups:
+      - age:
+          - *admin_atp
+          - *server_homelab
