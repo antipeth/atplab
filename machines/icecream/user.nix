@@ -1,12 +1,16 @@
 {config, ...}: {
-  sops.secrets.icecream-hashedPassword.neededForUsers = true;
+  sops.secrets.icecream-hashedPassword = {
+    format = "binary";
+    sopsFile = secrets/hashedPassword;
+    neededForUsers = true;
+  };
   users = {
     mutableUsers = false;
     users = {
       root = {
         hashedPasswordFile = config.sops.secrets.icecream-hashedPassword.path;
         openssh.authorizedKeys.keys = [
-          (import ../../sops/eval/icecream/public-key.nix)
+          (import values/public-key.nix)
         ];
       };
     };
