@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   ...
@@ -20,10 +19,6 @@
       "pcie_aspm=force"
     ];
   };
-  environment.systemPackages = [
-    config.boot.kernelPackages.cpupower
-    config.boot.kernelPackages.turbostat
-  ];
   # Hard Driver
   services.udev.extraRules = let
     mkRule = as: lib.concatStringsSep ", " as;
@@ -48,8 +43,7 @@
     enable = true;
     cpuFreqGovernor = "powersave";
   };
-  # services.scx = {
-  #   enable = true;
-  #   scheduler = "scx_bpfland";
-  # };
+  services.scx = {
+    enable = false;
+  };
 }
