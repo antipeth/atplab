@@ -10,7 +10,7 @@
       root = {
         hashedPasswordFile = config.sops.secrets.homelab-hashedPassword.path;
         openssh.authorizedKeys.keys = [
-          (import ../../modules/private/homelab/public-key.nix)
+          (import values/public-key.nix)
         ];
       };
       atp = {
