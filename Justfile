@@ -5,7 +5,7 @@ set shell := ["bash", "-c"]
 hostname := `hostname`
 
 anywhere input:
-  # Perform nixos-anywhere install (generate-hardware-config)
+  # Perform nixos-anywhere install
   ls machines/{{input}}/values/* | xargs -n 1 sops decrypt -i ; sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nix run github:nix-community/nixos-anywhere -- --flake .#{{input}} --target-host root@{{input}} ; ls machines/{{input}}/values/* | xargs -n 1 sops encrypt -i
 
 anywhere-gh input:
@@ -21,7 +21,7 @@ deploy input:
   ls machines/{{input}}/values/* | xargs -n 1 sops decrypt -i ; sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nixos-rebuild switch --flake .#{{input}} --build-host root@{{input}} --target-host root@{{input}} -v ; ls machines/{{input}}/values/* | xargs -n 1 sops encrypt -i
 
 deploy-lb input:
-  # Perform remote deploy action
+  # Perform remote deploy action (local builder)
   ls machines/{{input}}/values/* | xargs -n 1 sops decrypt -i ; sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"{{input}}\"/" ./flake.nix ; git add . ; nixos-rebuild switch --flake .#{{input}} --target-host root@{{input}} -v ; ls machines/{{input}}/values/* | xargs -n 1 sops encrypt -i
 
 da:
