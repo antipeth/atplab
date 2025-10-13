@@ -21,7 +21,6 @@
     autoScrub = {
       enable = true;
       interval = "weekly";
-      pools = ["tank"];
     };
     trim = {
       enable = true; # hdd no need
