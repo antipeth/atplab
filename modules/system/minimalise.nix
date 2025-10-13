@@ -26,10 +26,10 @@ with lib; {
 
   # Disable unnecessary programs
   programs = {
-    bash = {
-      completion.enable = mkForce false;
-      enableLsColors = mkForce false;
-    };
+    # bash = {
+    #   completion.enable = mkForce false;
+    #   enableLsColors = mkForce false;
+    # };
     command-not-found.enable = mkForce false;
     nano.enable = mkForce false;
   };
