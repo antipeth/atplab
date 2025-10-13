@@ -18,5 +18,5 @@ in {
   system.stateVersion = "25.11";
   networking.hostId = "b677c87d";
   swapDevices = [];
-  # zramSwap.enable = true;
+  zramSwap.enable = true;
 }
