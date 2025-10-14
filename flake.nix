@@ -27,6 +27,7 @@
           packages = with pkgs; [
             alejandra
             deadnix
+            nixos-rebuild-ng
             rage
             sops
           ];
