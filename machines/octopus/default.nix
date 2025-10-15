@@ -10,6 +10,7 @@ in {
       ./user.nix
 
       ./values/5d34qGBR17c.nix
+      ./values/cockroachdb.nix
     ]
     ++ ls ./modules
     ++ ls ../../modules/system

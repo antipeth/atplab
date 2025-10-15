@@ -7,6 +7,8 @@ in {
       ./disko.nix
       ./hardware.nix
       ./user.nix
+
+      ./values/cockroachdb.nix
     ]
     ++ ls ./modules
     ++ ls ../../modules/system

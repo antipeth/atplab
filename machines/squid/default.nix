@@ -8,6 +8,8 @@ in {
       ./hardware.nix
       ./network.nix
       ./user.nix
+
+      ./values/cockroachdb.nix
     ]
     ++ ls ./modules
     ++ ls ../../modules/system
