@@ -12,7 +12,8 @@ in {
             "127.0.0.1"
             "::1"
           ];
-          magic_dns = false;
+          magic_dns = true;
+          base_domain = import ../values/hs-md-bd.nix;
         };
         server_url = "https://hs.0pt.dpdns.org";
       };
