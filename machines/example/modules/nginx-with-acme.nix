@@ -6,13 +6,6 @@
   users.users.nginx.extraGroups = [
     "acme"
   ];
-  sops.secrets = {
-    homelab-acme-environment = {
-      mode = "0440";
-      owner = config.users.users.acme.name;
-      group = config.users.users.acme.group;
-    };
-  };
   security.acme = {
     acceptTerms = true;
     defaults.email = "admin@example.com";
