@@ -10,7 +10,7 @@ in {
         HBOX_WEB_HOST = "127.0.0.1";
         HBOX_WEB_PORT = "7745";
         HBOX_OPTIONS_ALLOW_REGISTRATION = "true";
-        HBOX_STORAGE_DATA = "/var/lib/homebox/data";
+        HBOX_STORAGE_CONN_STRING = "file:///var/lib/homebox/data";
       };
     };
     nginx = {
