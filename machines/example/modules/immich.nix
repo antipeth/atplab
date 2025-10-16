@@ -1,15 +1,10 @@
 _: {
-  services.immich = {
-    enable = true;
-    port = 2283;
-    host = "localhost";
-    machine-learning.enable = false;
-    redis = {
+  services = {
+    immich = {
       enable = true;
-    };
-    database = {
-      enable = true;
-      port = 5432;
+      host = "127.0.0.1";
+      machine-learning.enable = false;
+      accelerationDevices = ["/dev/dri/renderD128"];
     };
   };
 }
