@@ -16,4 +16,5 @@ in {
   disko.devices.disk.main.device = primary-disk;
   system.stateVersion = "25.11";
   networking.hostId = "2aff655b";
+  boot.kernelParams = ["zfs.zfs_arc_max=21474836480"]; # Zfs arc is a beast, it would eat out all memory if you don't set limit!
 }
