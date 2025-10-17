@@ -8,71 +8,71 @@ keys:
   - &server_octopus age1uuym8hf6d2zypn6pfylv7klhau58s0uf5nk70yggeuefqa6yx9ls2puppv
   - &server_squid age1gwwmvkehwjlkky62smvvkpa6y33f3akcj28dl7tur8nyc3vra9astzjcau
 creation_rules:
-  - path_regex: machines/auction/values/*
+  - path_regex: machines/auction/values/.*
     key_groups:
       - age:
           - *admin_atp
-  - path_regex: machines/auction/secrets/*
+  - path_regex: machines/auction/secrets/.*
     key_groups:
       - age:
           - *admin_atp
           - *server_auction
 
-  - path_regex: machines/crystal/values/*
+  - path_regex: machines/crystal/values/.*
     key_groups:
       - age:
           - *admin_atp
-  - path_regex: machines/crystal/secrets/*
+  - path_regex: machines/crystal/secrets/.*
     key_groups:
       - age:
           - *admin_atp
           - *server_crystal
 
-  - path_regex: machines/freezer/values/*
+  - path_regex: machines/freezer/values/.*
     key_groups:
       - age:
           - *admin_atp
-  - path_regex: machines/freezer/secrets/*
+  - path_regex: machines/freezer/secrets/.*
     key_groups:
       - age:
           - *admin_atp
           - *server_freezer
 
-  - path_regex: machines/homelab/values/*
+  - path_regex: machines/homelab/values/.*
     key_groups:
       - age:
           - *admin_atp
-  - path_regex: machines/homelab/secrets/*
+  - path_regex: machines/homelab/secrets/.*
     key_groups:
       - age:
           - *admin_atp
           - *server_homelab
 
-  - path_regex: machines/icecream/values/*
+  - path_regex: machines/icecream/values/.*
     key_groups:
       - age:
           - *admin_atp
-  - path_regex: machines/icecream/secrets/*
+  - path_regex: machines/icecream/secrets/.*
     key_groups:
       - age:
           - *admin_atp
           - *server_icecream
 
-  - path_regex: machines/octopus/values/*
+  - path_regex: machines/octopus/values/.*
     key_groups:
       - age:
           - *admin_atp
-  - path_regex: machines/octopus/secrets/*
+  - path_regex: machines/octopus/secrets/.*
     key_groups:
       - age:
           - *admin_atp
           - *server_octopus
 
-  - path_regex: machines/squid/values/*
+  - path_regex: machines/squid/values/.*
     key_groups:
       - age:
           - *admin_atp
-  - path_regex: machines/squid/secrets/*
+  - path_regex: machines/squid/secrets/.*
     key_groups:
       - age:
           - *admin_atp
