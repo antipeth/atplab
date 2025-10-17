@@ -26,6 +26,16 @@ in {
       default = false;
       description = "Whether to open the openlist port in the firewall";
     };
+    adminPassword = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "The openlist admin password.";
+    };
+    environmentFile = mkOption {
+      type = types.nullOr types.path;
+      default = null;
+      description = "The path of openlist environment file ";
+    };
     user = mkOption {
       type = types.str;
       default = "openlist";
@@ -44,6 +54,8 @@ in {
       after = ["network.target"];
       description = "openlist";
       serviceConfig = {
+        Environment = mkIf (cfg.adminPassword != null) "OPENLIST_ADMIN_PASSWORD=${cfg.adminPassword}";
+        EnvironmentFile = lib.optional (cfg.environmentFile != null) cfg.environmentFile;
         Type = "simple";
         User = cfg.user;
         Group = cfg.group;
