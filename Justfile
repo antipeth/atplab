@@ -56,3 +56,7 @@ format:
   # Use alejandra and deadnix to format code
   deadnix -e
   alejandra .
+
+keygen:
+  # Generate age key by using rage
+  rage-keygen -o ~/.config/sops/age/keys.txt
