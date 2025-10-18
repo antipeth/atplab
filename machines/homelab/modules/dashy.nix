@@ -111,7 +111,7 @@ _: {
                 target = "newtab";
               }
               {
-                title = "openlist";
+                title = "Openlist";
                 description = "File Client for the local";
                 icon = "hl-alist";
                 url = "https://openlist.0pt.lab";
