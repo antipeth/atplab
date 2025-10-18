@@ -13,25 +13,21 @@ in {
       enable = true;
       environmentFile = config.sops.secrets.homelab-openlist-env.path;
     };
-    nginx.virtualHosts = {
-      "openlist.0pt.lab" = {
-        forceSSL = true;
-        kTLS = true;
-        sslCertificate = "/etc/nginx/self-sign.crt";
-        sslCertificateKey = "/etc/nginx/self-sign.key";
+    nginx.virtualHosts."openlist.0pt.lab" = {
+      forceSSL = true;
+      kTLS = true;
+      sslCertificate = "/etc/nginx/self-sign.crt";
+      sslCertificateKey = "/etc/nginx/self-sign.key";
+      extraConfig = ''
+        proxy_hide_header X-Powered-By;
+        proxy_hide_header Server;
+      '';
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:5244";
+        recommendedProxySettings = true;
         extraConfig = ''
-          proxy_hide_header X-Powered-By;
-          proxy_hide_header Server;
+          proxy_buffering off;
         '';
-        locations = {
-          "/" = {
-            proxyPass = "http://127.0.0.1:5244";
-            recommendedProxySettings = true;
-            extraConfig = ''
-              proxy_buffering off;
-            '';
-          };
-        };
       };
     };
   };

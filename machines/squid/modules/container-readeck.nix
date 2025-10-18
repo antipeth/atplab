@@ -17,14 +17,12 @@ _: {
       proxy_hide_header X-Powered-By;
       proxy_hide_header Server;
     '';
-    locations = {
-      "/" = {
-        proxyPass = "http://127.0.0.1:8001";
-        recommendedProxySettings = true;
-        extraConfig = ''
-          proxy_buffering off;
-        '';
-      };
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:8001";
+      recommendedProxySettings = true;
+      extraConfig = ''
+        proxy_buffering off;
+      '';
     };
   };
 }

@@ -19,27 +19,21 @@ in {
       };
       environmentFile = config.sops.secrets.octopus-searxng-env.path;
     };
-    nginx = {
-      virtualHosts = {
-        "search.0pt.dpdns.org" = {
-          forceSSL = true;
-          kTLS = true;
-          sslCertificate = "/etc/nginx/self-sign.crt";
-          sslCertificateKey = "/etc/nginx/self-sign.key";
-          extraConfig = ''
-            proxy_hide_header X-Powered-By;
-            proxy_hide_header Server;
-          '';
-          locations = {
-            "/" = {
-              proxyPass = "http://${toString cfg.settings.server.bind_address}:${toString cfg.settings.server.port}";
-              recommendedProxySettings = true;
-              extraConfig = ''
-                proxy_buffering off;
-              '';
-            };
-          };
-        };
+    nginx.virtualHosts."search.0pt.dpdns.org" = {
+      forceSSL = true;
+      kTLS = true;
+      sslCertificate = "/etc/nginx/self-sign.crt";
+      sslCertificateKey = "/etc/nginx/self-sign.key";
+      extraConfig = ''
+        proxy_hide_header X-Powered-By;
+        proxy_hide_header Server;
+      '';
+      locations."/" = {
+        proxyPass = "http://${toString cfg.settings.server.bind_address}:${toString cfg.settings.server.port}";
+        recommendedProxySettings = true;
+        extraConfig = ''
+          proxy_buffering off;
+        '';
       };
     };
   };

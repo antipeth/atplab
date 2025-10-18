@@ -70,18 +70,16 @@
     sslProtocols = "TLSv1.3";
     serverTokens = false; # Hide version information
 
-    virtualHosts = {
-      "_" = {
-        default = true;
-        forceSSL = true;
-        kTLS = true;
-        sslCertificate = "/etc/nginx/self-sign.crt";
-        sslCertificateKey = "/etc/nginx/self-sign.key";
-        locations."/" = {
-          extraConfig = ''
-            return 403;
-          '';
-        };
+    virtualHosts."_" = {
+      default = true;
+      forceSSL = true;
+      kTLS = true;
+      sslCertificate = "/etc/nginx/self-sign.crt";
+      sslCertificateKey = "/etc/nginx/self-sign.key";
+      locations."/" = {
+        extraConfig = ''
+          return 403;
+        '';
       };
     };
   };

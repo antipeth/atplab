@@ -1,18 +1,14 @@
 _: {
   services = {
-    nginx = {
-      virtualHosts = {
-        "dashy.0pt.lab" = {
-          forceSSL = true;
-          kTLS = true;
-          sslCertificate = "/etc/nginx/self-sign.crt";
-          sslCertificateKey = "/etc/nginx/self-sign.key";
-          extraConfig = ''
-            proxy_hide_header X-Powered-By;
-            proxy_hide_header Server;
-          '';
-        };
-      };
+    nginx.virtualHosts."dashy.0pt.lab" = {
+      forceSSL = true;
+      kTLS = true;
+      sslCertificate = "/etc/nginx/self-sign.crt";
+      sslCertificateKey = "/etc/nginx/self-sign.key";
+      extraConfig = ''
+        proxy_hide_header X-Powered-By;
+        proxy_hide_header Server;
+      '';
     };
     dashy = {
       enable = true;

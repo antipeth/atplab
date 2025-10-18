@@ -13,27 +13,21 @@ in {
         HBOX_STORAGE_CONN_STRING = "file:///var/lib/homebox/data";
       };
     };
-    nginx = {
-      virtualHosts = {
-        "homebox.0pt.lab" = {
-          forceSSL = true;
-          kTLS = true;
-          sslCertificate = "/etc/nginx/self-sign.crt";
-          sslCertificateKey = "/etc/nginx/self-sign.key";
-          extraConfig = ''
-            proxy_hide_header X-Powered-By;
-            proxy_hide_header Server;
-          '';
-          locations = {
-            "/" = {
-              proxyPass = "http://${toString cfg.settings.HBOX_WEB_HOST}:${toString cfg.settings.HBOX_WEB_PORT}";
-              recommendedProxySettings = true;
-              extraConfig = ''
-                proxy_buffering off;
-              '';
-            };
-          };
-        };
+    nginx.virtualHosts."homebox.0pt.lab" = {
+      forceSSL = true;
+      kTLS = true;
+      sslCertificate = "/etc/nginx/self-sign.crt";
+      sslCertificateKey = "/etc/nginx/self-sign.key";
+      extraConfig = ''
+        proxy_hide_header X-Powered-By;
+        proxy_hide_header Server;
+      '';
+      locations."/" = {
+        proxyPass = "http://${toString cfg.settings.HBOX_WEB_HOST}:${toString cfg.settings.HBOX_WEB_PORT}";
+        recommendedProxySettings = true;
+        extraConfig = ''
+          proxy_buffering off;
+        '';
       };
     };
   };
