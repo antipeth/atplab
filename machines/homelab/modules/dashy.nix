@@ -138,6 +138,13 @@ _: {
                 url = "https://glances.0pt.lab";
                 target = "newtab";
               }
+              {
+                title = "Grafana";
+                description = "Monitor Dashboard";
+                icon = "hl-grafana";
+                url = "https://grafana.0pt.lab";
+                target = "newtab";
+              }
             ];
           }
           {
