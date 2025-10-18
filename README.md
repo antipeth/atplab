@@ -2,44 +2,107 @@
 
 This is a 🧊.
 
-This is my homelab and server nixos config, managed by [clan](https://clan.lol).
+This is my Homelab and Server NixOS configuration — a collection of configurations that power my personal infrastructure.
 
-## How to use?
+---
 
-### prepare
+## 🚀 How to use?
 
-In your admin machines(For me is nixos), you need install:
+### 🧩 prepare
 
-- just
-- sops
-- direnv
+On your admin machine (for me, it’s NixOS), make sure you have the following tools installed:
+* 🧃 [**just**](https://github.com/casey/just)
+* 🌱 [**direnv**](https://direnv.net/)
 
-Also, you need to read [the documentation for clan](https://docs.clan.lol) carefully.
+---
 
-### Use sops in local.
+#### ⚙️Use direnv
+I use **direnv** to automatically activate the `devShell` environment defined in the flake, which includes all required packages.
 
-To avoid the critical value commit, I use this method below the few steps.
-#### 0. prepare for sops
+```nix
+devShells.default = pkgs.mkShell {
+  packages = with pkgs; [
+    # Format code
+    alejandra
+    deadnix
+	# Replace nixos-rebuild
+    nixos-rebuild-ng
+	# Encryption tools
+    rage
+    sops
+  ];
+};
+```
 
-You need to read [nix-sops](https://github.com/Mic92/sops-nix) carefully, and edit the `.sops.yaml` in the project root dir.
+You should install **direnv** using one of the following methods:
+* via [Home Manager option](https://mynixos.com/home-manager/options/programs.direnv)
+* via [NixOS option](https://mynixos.com/nixpkgs/options/programs.direnv)
 
-Because the method use sops to encrypt, so you should know how to use sops simply.
+Then, add the shell hook as described in [the official direnv documentation](https://direnv.net/docs/hook.html).
 
-#### 1. mkdir folders
+After installation, go to your project’s root directory and run:
 
-mkdir a folder `sops/eval/<machine-name>`.
+```bash
+direnv allow
+```
 
-#### 2. create the value file
+This allows direnv to automatically activate the `devShell` defined in your `flake.nix`. 🌀
 
-create a `sops/eval/<machine-name>/<value-name>.nix`, the content of this nix file is a strings or a digital, etc. Then I turn to my machine config and imports the nix file like this example:
+---
 
+#### 🔐 Prepare for SOPS
+
+You should first have a basic understanding of how [**direnv**](https://direnv.net/) and [**just**](https://github.com/casey/just) work.
+
+You **must carefully read all three guides** 📚:
+— [sops-nix (official repo)](https://github.com/Mic92/sops-nix)
+- [sops-nix Quick Start Guide](https://blog.0pt.icu/posts/nixos-sops-nix-quick-start-guide/)
+- [Using SOPS to Encrypt Nix Values](https://blog.0pt.icu/posts/nixos-using-sops-to-encrypt-nix-values/)
+
+Then, edit your `.sops.yaml` file located in the project root directory.
+
+Since we’re using **sops** for encryption, you should be familiar with its basic usage.
+
+If you haven’t generated an **age** key yet, you can create one with:
+
+```bash
+just keygen
+```
+
+---
+
+### Use sops to encrypt.
+
+To prevent committing sensitive values in plaintext, follow the steps below 👇
+
+---
+
+#### Using SOPS to Encrypt Nix Values
+##### 1. Create directories
+
+```
+mkdir machines/<machine-name>/values
+```
+
+---
+
+##### 2. Create a value file
+
+Create a file at
+`machines/<machine-name>/values/<value-name>.nix`
+
+Its content can be a string, number, etc.
+
+**Example:**
 [sops/eval/homelab/forgejo-ssh-port.nix]
-```sops/eval/homelab/forgejo-ssh-port.nix
+```nix
 42
 ```
 
-[machines/homelab/services/forgejo.nix]
-```machines/homelab/services/forgejo.nix
+Then, import it in your machine configuration like this:
+
+[machines/homelab/modules/forgejo.nix]
+```nix
 { pkgs, config, ... }:
 {
   services.forgejo = {
@@ -58,41 +121,105 @@ create a `sops/eval/<machine-name>/<value-name>.nix`, the content of this nix fi
 }
 ```
 
-#### 3. Then use:
+---
+
+##### 3. Encrypt the files
 
 ```bash
-just encrypt <machine-name>
+just en <machine-name>
 ```
 
-It will encrypt all .nix file in `sops/eval/<machine-name>` with age.
+This command encrypts all `.nix` files in `machines/<machine-name>/values` using **age**.
 
-#### 4. Update the machines:
+---
+
+##### 4. Deploy your machine
 
 ```bash
-just update <machine-name>
+just deploy <machine-name>
 ```
 
-It will decrypt all .nix file in `sops/eval/<machine-name>` before the `clan machines update`. Once the `clan machines update` command completed, it will encrypt all .nix file in `sops/eval/<machine-name>` with age again. Stay the .nix file in `sops/eval/<machine-name>` encrypted. So you can safely commit and push to git.
+During deployment:
 
-#### 🚨Notice
+* All `.nix` files in `machines/<machine-name>/values` are **temporarily decrypted** before `nixos-rebuild switch`.
+* After rebuilding, they are **re-encrypted automatically**.
 
-1. You must make sure that all <value>.nix on all your machines are in the encrypted state before you commit the git
+This ensures your `.nix` files always remain encrypted — safe to commit and push to Git. 🔐
 
-2. If you want to edit the `sops/eval/<machine-name>/<value-name>.nix`, your can run:
+---
+
+##### 🚨 Post-Deployment Notes
+
+1. ✅ Make sure all `<value>.nix` files are encrypted **before committing** to Git.
+2. 🧰 If you need to edit a value file:
 
 ```bash
-just decrypt <machine-name>
+just de <machine-name`.
 ```
-It decrypt all .nix file in `sops/eval/<machine-name>`. After you've finished your edits, you need to run followed command to stay your .nix file encrypted.
+
+This decrypts all `.nix` files in `machines/<machine-name>/values`.
+After editing, re-encrypt them with:
+
+```bash
+just en <machine-name>
 ```
-just encrypt <machine-name>
+
+---
+
+#### 🔑 Using sops-nix to encrypt file
+##### 1. Create directories
+
+```bash
+mkdir machines/<machine-name>/secrets
 ```
+
+---
+
+##### 2. Use sops encrypt secret files
+
+After configuring `.sops.yaml`, you can simply add a new secret like this:
+```bash
+just as machines/<machine-name>/secrets/<secret-name>
+```
+
+Alternatively, since both the Nix values and secrets are encrypted using **sops**, it’s also valid to perform encryption and decryption operations directly on all files under the `machines/<machine-name>/secrets` directory. Just like this:
+
+```bash
+vim machines/<machine-name>/secrets/<secret-name> # Create a plaintext file.
+just es <machine-name> # Encrypt all files under machines/<machine-name>/secrets
+just ds <machine-name> # Decrypt all files under machines/<machine-name>/secrets
+```
+
+---
+
+##### 🧩 Use secret file
+
+In your configuration, reference the secret like this:
+
+```nix
+{config, ...}: {
+  sops.secrets.<your-want-secret-name> = {
+    mode = "0400";
+    owner = "wakapi";
+    group = "wakapi";
+    format = "binary";
+    sopsFile = path/to/secrets/<secret-name>;
+  };
+  services.wakapi = {
+    # ...
+    passwordSaltFile = config.sops.secrets.<your-want-secret-name>.path;
+  };
+}
+```
+
+> 💡 Note: `<secret-name>` and `<your-want-secret-name>` can be different.
+
+---
 
 ## Acknowledgements
 
 Config:
 - <https://gitlab.com/Zaney/zaneyos>
-- <https://github.com/yonzilch/nix-config>
 - <https://github.com/yonzilch/yzlab>
 - <https://github.com/ryan4yin/nix-config>
 - <https://github.com/xddxdd/nixos-config>
