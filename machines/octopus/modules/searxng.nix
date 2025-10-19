@@ -11,7 +11,6 @@ in {
   services = {
     searx = {
       enable = true;
-      redisCreateLocally = true;
       settings.server = {
         base_url = "https://search.0pt.dpdns.org";
         bind_address = "127.0.0.1";
