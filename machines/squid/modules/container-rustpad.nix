@@ -13,7 +13,7 @@
     owner = "nginx";
     group = "nginx";
     format = "binary";
-    sopsFile = ../secrets/rustpad-basic-auth;
+    sopsFile = ../secrets/nginx-basic-auth;
   };
   services.nginx.virtualHosts."pad.0pt.dpdns.org" = {
     forceSSL = true;
