@@ -1,27 +1,36 @@
-{config, ...}: let
-  secretNames = [
-    "restic-passwd"
-    "restic-remote1-env"
-    "restic-remote1-repo"
-    "restic-remote2-rclone"
-    "restic-remote2-repo"
-  ];
-in {
-  sops.secrets = builtins.listToAttrs (map (n: {
-      name = "octopus-${n}";
-      value = {
-        mode = "0400";
-        format = "binary";
-        sopsFile = ../secrets/${n};
-      };
-    })
-    secretNames);
+{
+  config,
+  lib,
+  ...
+}:
+with lib; {
+  sops.secrets = let
+    secretNames = [
+      "restic-passwd"
+      "restic-remote1-env"
+      "restic-remote1-repo"
+      "restic-remote2-rclone"
+      "restic-remote2-repo"
+      "restic-remote3-env"
+      "restic-remote3-repo"
+      "restic-remote4-env"
+      "restic-remote4-repo"
+    ];
+  in
+    builtins.listToAttrs (map (n: {
+        name = "octopus-${n}";
+        value = {
+          mode = "0400";
+          format = "binary";
+          sopsFile = ../secrets/${n};
+        };
+      })
+      secretNames);
   services.restic = {
-    backups = {
-      remote1 = {
+    backups = let
+      common = {
         initialize = true;
         passwordFile = config.sops.secrets.octopus-restic-passwd.path;
-        environmentFile = config.sops.secrets.octopus-restic-remote1-env.path;
         paths = [
           "/var/lib/grafana"
           "/var/lib/komari-server"
@@ -29,29 +38,32 @@ in {
           "/var/lib/private/uptime-kuma"
           "/var/lib/private/wakapi"
         ];
-        repositoryFile = config.sops.secrets.octopus-restic-remote1-repo.path;
-        timerConfig = {
-          OnCalendar = "21:31:00";
-          Persistent = true;
+        timerConfig.Persistent = true;
+      };
+      remotes = {
+        remote1 = {
+          repositoryFile = config.sops.secrets.octopus-restic-remote1-repo.path;
+          environmentFile = config.sops.secrets.octopus-restic-remote1-env.path;
+          timerConfig.OnCalendar = "11:50:00";
+        };
+        remote2 = {
+          repositoryFile = config.sops.secrets.octopus-restic-remote2-repo.path;
+          rcloneConfigFile = config.sops.secrets.octopus-restic-remote2-rclone.path;
+          timerConfig.OnCalendar = "12:00:00";
+        };
+        remote3 = {
+          repositoryFile = config.sops.secrets.octopus-restic-remote3-repo.path;
+          environmentFile = config.sops.secrets.octopus-restic-remote3-env.path;
+          timerConfig.OnCalendar = "12:10:00";
+        };
+        remote4 = {
+          repositoryFile = config.sops.secrets.octopus-restic-remote4-repo.path;
+          environmentFile = config.sops.secrets.octopus-restic-remote4-env.path;
+          timerConfig.OnCalendar = "12:20:00";
         };
       };
-      remote2 = {
-        initialize = true;
-        passwordFile = config.sops.secrets.octopus-restic-passwd.path;
-        rcloneConfigFile = config.sops.secrets.octopus-restic-remote2-rclone.path;
-        paths = [
-          "/var/lib/grafana"
-          "/var/lib/komari-server"
-          "/var/lib/private/gotify-server"
-          "/var/lib/private/uptime-kuma"
-          "/var/lib/private/wakapi"
-        ];
-        repositoryFile = config.sops.secrets.octopus-restic-remote2-repo.path;
-        timerConfig = {
-          OnCalendar = "22:46:00";
-          Persistent = true;
-        };
-      };
-    };
+      mkBackup = name: cfg: lib.recursiveUpdate common cfg;
+    in
+      lib.mapAttrs mkBackup remotes;
   };
 }
