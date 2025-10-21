@@ -7,6 +7,12 @@
     ports = [
       "127.0.0.1:3030:3030"
     ];
+    labels = {
+      "glance.name" = "rustpad";
+      "glance.icon" = "sh:rustpad";
+      "glance.url" = "https://pad.0pt.dpdns.org";
+      "glance.description" = "Online Shared Pad";
+    };
   };
   sops.secrets.squid-rustpad-basic-auth = {
     mode = "0400";

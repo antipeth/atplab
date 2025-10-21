@@ -11,6 +11,12 @@ _: {
     ports = [
       "127.0.0.1:9883:9883"
     ];
+    labels = {
+      "glance.name" = "atomic-server";
+      "glance.icon" = "https://avatars.githubusercontent.com/u/104755080?s=48&v=4";
+      "glance.url" = "https://atomic.0pt.dpdns.org";
+      "glance.description" = "Real-time Rditor";
+    };
   };
   services.nginx.virtualHosts."atomic.0pt.dpdns.org" = {
     forceSSL = true;

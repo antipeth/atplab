@@ -4,6 +4,12 @@
     ports = [
       "127.0.0.1:15000:5000"
     ];
+    labels = {
+      "glance.name" = "libretranslate";
+      "glance.icon" = "sh:libretranslate";
+      "glance.url" = "https://translate.0pt.dpdns.org";
+      "glance.description" = "Libre Translate";
+    };
   };
   sops.secrets.squid-libretranslate-basic-auth = {
     mode = "0400";

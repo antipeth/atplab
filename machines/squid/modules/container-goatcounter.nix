@@ -7,6 +7,12 @@ _: {
     ports = [
       "127.0.0.1:8082:8080"
     ];
+    labels = {
+      "glance.name" = "goatcounter";
+      "glance.icon" = "sh:goatcounter";
+      "glance.url" = "https://goatcounter.0pt.dpdns.org";
+      "glance.description" = "Website Analyzer";
+    };
   };
   services.nginx.virtualHosts."goatcounter.0pt.dpdns.org" = {
     forceSSL = true;

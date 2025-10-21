@@ -4,6 +4,12 @@
     ports = [
       "127.0.0.1:13000:3000"
     ];
+    labels = {
+      "glance.name" = "mozhi";
+      "glance.icon" = "https://codeberg.org/repo-avatars/d5972faab4a560db70bef77c018e376f531f4ae16393059e0c33396c2ef674a2";
+      "glance.url" = "https://mozhi.0pt.dpdns.org";
+      "glance.description" = "Translate engines Front";
+    };
   };
   sops.secrets.squid-mozhi-basic-auth = {
     mode = "0400";
