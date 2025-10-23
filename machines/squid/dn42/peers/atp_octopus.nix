@@ -1,5 +1,5 @@
 ''
-  protocol bgp dn42_atp-squid_v4 from dnpeers {
+  protocol bgp dn42_atp_squid_v4 from dnpeers {
       neighbor 172.20.192.1 as 4242420003;
       direct;
       ipv6 {
@@ -8,7 +8,7 @@
       };
   };
 
-  protocol bgp dn42_atp-squid_v6 from dnpeers {
+  protocol bgp dn42_atp_squid_v6 from dnpeers {
       neighbor fe80::67b3 % 'dn42-atp' as 4242420003;
       direct;
       ipv4 {
