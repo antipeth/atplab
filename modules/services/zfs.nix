@@ -10,7 +10,7 @@
     ];
     zfs = {
       forceImportRoot = false;
-      devNodes = lib.mkDefault "/dev/disk/by-id";
+      devNodes = lib.mkDefault "/dev/disk/by-path";
       package = inputs.chaotic.legacyPackages.x86_64-linux.zfs_cachyos;
     };
   };
