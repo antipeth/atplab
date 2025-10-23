@@ -8,6 +8,8 @@ in {
       ./hardware.nix
       ./network.nix
       ./user.nix
+
+      ./values/Dko972mcS27c.nix
     ]
     ++ ls ./modules
     ++ ls ../../modules/system
