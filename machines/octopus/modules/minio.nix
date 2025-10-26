@@ -30,7 +30,10 @@ in {
           proxyPass = "http://${toString cfg.listenAddress}";
           recommendedProxySettings = true;
           extraConfig = ''
+            client_max_body_size 50000M;
+            chunked_transfer_encoding off;
             proxy_buffering off;
+            proxy_request_buffering off;
           '';
         };
       };
@@ -39,15 +42,16 @@ in {
         kTLS = true;
         sslCertificate = "/etc/nginx/self-sign.crt";
         sslCertificateKey = "/etc/nginx/self-sign.key";
-        extraConfig = ''
-          proxy_hide_header X-Powered-By;
-          proxy_hide_header Server;
-        '';
         locations."/" = {
           proxyPass = "http://${toString cfg.consoleAddress}";
           recommendedProxySettings = true;
+          proxyWebsockets = true;
           extraConfig = ''
+            client_max_body_size 500M;
+            real_ip_header X-Real-IP;
+            chunked_transfer_encoding off;
             proxy_buffering off;
+            proxy_request_buffering off;
           '';
         };
       };
