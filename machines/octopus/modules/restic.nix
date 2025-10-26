@@ -46,22 +46,22 @@ with lib; {
         remote1 = {
           repositoryFile = config.sops.secrets.octopus-restic-remote1-repo.path;
           environmentFile = config.sops.secrets.octopus-restic-remote1-env.path;
-          timerConfig.OnCalendar = "11:50:00";
+          timerConfig.OnCalendar = "01:00:00";
         };
         remote2 = {
           repositoryFile = config.sops.secrets.octopus-restic-remote2-repo.path;
           rcloneConfigFile = config.sops.secrets.octopus-restic-remote2-rclone.path;
-          timerConfig.OnCalendar = "12:00:00";
+          timerConfig.OnCalendar = "01:20:00";
         };
         remote3 = {
           repositoryFile = config.sops.secrets.octopus-restic-remote3-repo.path;
           environmentFile = config.sops.secrets.octopus-restic-remote3-env.path;
-          timerConfig.OnCalendar = "12:10:00";
+          timerConfig.OnCalendar = "01:30:00";
         };
         remote4 = {
           repositoryFile = config.sops.secrets.octopus-restic-remote4-repo.path;
           environmentFile = config.sops.secrets.octopus-restic-remote4-env.path;
-          timerConfig.OnCalendar = "12:20:00";
+          timerConfig.OnCalendar = "01:40:00";
         };
       };
       mkBackup = name: cfg: lib.recursiveUpdate common cfg;
