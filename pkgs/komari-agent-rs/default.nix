@@ -9,7 +9,7 @@ stdenvNoCC.mkDerivation {
   version = "latest";
   src = fetchurl {
     url = "https://github.com/GenshinMinecraft/komari-monitor-rs/releases/download/latest/komari-monitor-rs-linux-x86_64-musl";
-    sha256 = "sha256-YRvJRMKMp9jan2x0yn3KwtHOEbBsQ0Di3+k1K6JAgc0=";
+    sha256 = "sha256-Ma+XiVdoqkR6zdX1HYp2myQscA2YH/dgCie9tHujWL8=";
   };
   dontUnpack = true;
   installPhase = ''

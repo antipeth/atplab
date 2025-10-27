@@ -9,7 +9,7 @@ stdenvNoCC.mkDerivation {
   version = "1.1.2a";
   src = fetchurl {
     url = "https://github.com/komari-monitor/komari/releases/download/1.1.2a/komari-linux-amd64";
-    sha256 = "sha256-ewsyPTHKL3vKj2toOKWLTLAwvNt6vbpDVzISTto7Fx4=";
+    sha256 = "sha256-C5XQQP8mziHqPCIu7A4SMWJkxRhp+6z+F38dxZLVjmw=";
   };
   dontUnpack = true;
   installPhase = ''
