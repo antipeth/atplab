@@ -1,5 +1,6 @@
 {config, ...}: {
   virtualisation.oci-containers.containers."rustpad" = {
+    pull = "newer";
     image = "ekzhang/rustpad:latest";
     environment = {
       EXPIRY_DAYS = "1";

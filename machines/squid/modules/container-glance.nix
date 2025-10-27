@@ -1,6 +1,7 @@
 _: {
   virtualisation.podman.dockerSocket.enable = true;
   virtualisation.oci-containers.containers."glance" = {
+    pull = "newer";
     image = "glanceapp/glance:latest";
     volumes = [
       "glance:/app/config:rw"

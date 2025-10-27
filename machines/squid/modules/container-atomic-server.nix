@@ -1,5 +1,6 @@
 _: {
   virtualisation.oci-containers.containers."atomic-server" = {
+    pull = "newer";
     image = "joepmeneer/atomic-server:latest";
     environment = {
       ATOMIC_SERVER_URL = "https://atomic.0pt.dpdns.org";

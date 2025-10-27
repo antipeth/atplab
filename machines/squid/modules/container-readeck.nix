@@ -1,5 +1,6 @@
 _: {
   virtualisation.oci-containers.containers."readeck" = {
+    pull = "newer";
     image = "codeberg.org/readeck/readeck:latest";
     volumes = [
       "readeck:/readeck:rw"

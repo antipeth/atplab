@@ -5,6 +5,7 @@
     sopsFile = ../secrets/fusion-env;
   };
   virtualisation.oci-containers.containers."fusion" = {
+    pull = "newer";
     image = "ghcr.io/0x2e/fusion:latest";
     environmentFiles = [config.sops.secrets.squid-fusion-env.path];
     volumes = [

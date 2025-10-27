@@ -1,5 +1,6 @@
 _: {
   virtualisation.oci-containers.containers."goatcounter" = {
+    pull = "newer";
     image = "arp242/goatcounter:latest";
     volumes = [
       "goatcounter:/home/goatcounter/goatcounter-data:rw"
