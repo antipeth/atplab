@@ -4,7 +4,7 @@
     package = pkgs.postgresql_18;
     settings = {
       port = 5432;
-      max_connections = 20;
+      max_connections = 100;
       shared_buffers = "256MB";
       effective_cache_size = "768MB";
       maintenance_work_mem = "64MB";
