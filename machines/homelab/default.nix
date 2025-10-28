@@ -10,7 +10,6 @@ in {
 
       ../../modules/services/zfs.nix
     ]
-    ++ ls ./containers
     ++ ls ./modules
     ++ ls ../../modules/system
     ++ ls ../../modules/options;
