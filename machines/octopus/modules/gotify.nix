@@ -23,6 +23,7 @@ in {
       locations."/" = {
         proxyPass = "http://${toString cfg.environment.GOTIFY_SERVER_LISTENADDR}:${toString cfg.environment.GOTIFY_SERVER_PORT}";
         recommendedProxySettings = true;
+        proxyWebsockets = true;
         extraConfig = ''
           proxy_buffering off;
         '';
