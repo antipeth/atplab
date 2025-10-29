@@ -88,7 +88,7 @@ in {
             TempPath = "";
           };
           General = {
-            Locale = "en_US";
+            Locale = "zh_CN";
           };
           MailNotification = {
             req_auth = true;
@@ -98,15 +98,12 @@ in {
             AlternativeUIEnabled = true;
             AuthSubnetWhitelist = "@Invalid()";
             AuthSubnetWhitelistEnabled = false;
-            # To generate, use this tool https://codeberg.org/feathecutie/qbittorrent_password
-            # Example Password: test
-            Password_PBKDF2 = "@ByteArray(sCkCR5UuR948Ge5di15YQw==:99UQ1gsVtWoJ1EH3tuXd/WbGcKJAMoYKhsxxIIx/BWs1jiZLAfkPOaqMxWWlKvzFh+cldIjkSuufEyTQUuUXYA==)";
+            Password_PBKDF2 = import ../values/qb-passwd.nix;
             RootFolder = "${pkgs.vuetorrent}/share/vuetorrent";
             ServerDomains = "*";
             SessionTimeout = 360000;
             TrustedReverseProxiesList = "127.0.0.1/8";
-            # Change your name;
-            Username = "admin";
+            Username = import ../values/qb-user.nix;
           };
         };
         RSS = {
@@ -117,6 +114,23 @@ in {
             '';
           };
         };
+      };
+    };
+    nginx.virtualHosts."qb.0pt.dpdns.org" = {
+      forceSSL = true;
+      kTLS = true;
+      sslCertificate = "/etc/nginx/self-sign.crt";
+      sslCertificateKey = "/etc/nginx/self-sign.key";
+      extraConfig = ''
+        proxy_hide_header X-Powered-By;
+        proxy_hide_header Server;
+      '';
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${toString cfg.webuiPort}";
+        recommendedProxySettings = true;
+        extraConfig = ''
+          proxy_buffering off;
+        '';
       };
     };
   };
