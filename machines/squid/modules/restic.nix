@@ -1,9 +1,13 @@
 {
   config,
+  hostname,
   lib,
+  pkgs,
   ...
 }:
-with lib; {
+with lib; let
+  grt = import ../values/gotify-restic-token.nix;
+in {
   sops.secrets = let
     secretNames = [
       "restic-passwd"
@@ -26,6 +30,7 @@ with lib; {
         };
       })
       secretNames);
+
   services.restic = {
     backups = let
       common = {
@@ -41,6 +46,22 @@ with lib; {
         ];
         timerConfig.Persistent = true;
       };
+
+      mkNotify = remote: {
+        prepare = ''
+          ${pkgs.curl}/bin/curl "http://127.0.0.1:1245/message?token=${grt}" \
+            -F "title=${hostname} restic ${remote} backup start" \
+            -F "message=$(date "+%H:%M:%S")" \
+            -F "priority=0"
+        '';
+        cleanup = ''
+          ${pkgs.curl}/bin/curl "http://127.0.0.1:1245/message?token=${grt}" \
+            -F "title=${hostname} restic ${remote} logs" \
+            -F "message=$(journalctl -u restic-backups-${remote}.service --since '10 minute ago' -o cat) | over." \
+            -F "priority=0"
+        '';
+      };
+
       remotes = {
         remote1 = {
           repositoryFile = config.sops.secrets.squid-restic-remote1-repo.path;
@@ -63,8 +84,16 @@ with lib; {
           timerConfig.OnCalendar = "01:40:00";
         };
       };
-      mkBackup = name: cfg: lib.recursiveUpdate common cfg;
+
+      mkBackup = name: cfg:
+        recursiveUpdate common (
+          cfg
+          // {
+            backupPrepareCommand = (mkNotify name).prepare;
+            backupCleanupCommand = (mkNotify name).cleanup;
+          }
+        );
     in
-      lib.mapAttrs mkBackup remotes;
+      mapAttrs mkBackup remotes;
   };
 }
