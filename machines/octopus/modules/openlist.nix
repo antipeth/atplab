@@ -13,7 +13,7 @@ _: {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://127.0.0.1:5244";
+        proxyPass = "http://localhost:5244";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
