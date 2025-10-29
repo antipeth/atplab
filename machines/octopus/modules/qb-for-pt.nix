@@ -15,7 +15,7 @@ in {
       serverConfig = {
         Application = {
           FileLogger = {
-            Age = 14;
+            Age = 7;
             AgeType = 0;
             Backup = true;
             DeleteOld = true;
@@ -33,21 +33,31 @@ in {
           Session = {
             AddExtensionToIncompleteFiles = true;
             AddTorrentStopped = false;
-            AddTrackersEnabled = true;
+            AddTrackersEnabled = false;
+            AdditionalTrackers = "";
+            AlternativeGlobalDLSpeedLimit = 1024;
+            AlternativeGlobalUPSpeedLimit = 1024;
+            DHTEnabled = false;
             DefaultSavePath = "${cfg.profileDir}qBittorrent/downloads";
             ExcludedFileNames = "";
-            FinishedTorrentExportDirectory = "";
-            GlobalMaxInactiveSeedingMinutes = 6000;
-            GlobalMaxRatio = 3;
+            FinishedTorrentExportDirectory = "${cfg.profileDir}qBittorrent/downloads/.Saved";
+            GlobalMaxInactiveSeedingMinutes = 15000;
+            GlobalMaxRatio = 10;
+            IncludeOverheadInLimits = true;
+            LSDEnabled = false;
             MaxActiveCheckingTorrents = 1;
             MaxActiveDownloads = 5;
             MaxActiveTorrents = 10;
             MaxActiveUploads = 5;
             MaxConnections = 800;
+            MaxConnectionsPerTorrent = 200;
+            MaxUploads = 30;
             MaxUploadsPerTorrent = 10;
+            PeXEnabled = false;
             Port = cfg.torrentingPort;
             QueueingSystemEnabled = false;
             SSL = {
+              Enabled = true;
               Port = cfg.torrentingPort + 1;
             };
             ShareLimitAction = "Stop";
@@ -55,7 +65,7 @@ in {
             TorrentExportDirectory = "";
             TorrentStopCondition = "MetadataReceived";
             UseAlternativeGlobalSpeedLimit = false;
-            uTPRateLimited = false;
+            uTPRateLimited = true;
           };
         };
         Core = {
@@ -68,9 +78,10 @@ in {
           MigrationVersion = 8;
         };
         Network = {
-          PortForwardingEnabled = true;
+          Cookies = "";
+          PortForwardingEnabled = false;
           Proxy = {
-            HostnameLookupEnabled = true;
+            HostnameLookupEnabled = false;
             Profiles = {
               BitTorrent = true;
               Misc = true;
@@ -81,11 +92,11 @@ in {
         Preferences = {
           Connection = {
             PortRangeMin = cfg.torrentingPort;
-            UPnP = true;
+            UPnP = false;
           };
           Downloads = {
             SavePath = "${cfg.profileDir}qBittorrent/downloads";
-            TempPath = "";
+            TempPath = "${cfg.profileDir}qBittorrent/downloads/temp";
           };
           General = {
             Locale = "zh_CN";
@@ -98,7 +109,10 @@ in {
             AlternativeUIEnabled = true;
             AuthSubnetWhitelist = "@Invalid()";
             AuthSubnetWhitelistEnabled = false;
+            HostHeaderValidation = true;
+            LocalHostAuth = true;
             Password_PBKDF2 = import ../values/qb-passwd.nix;
+            ReverseProxySupportEnabled = true;
             RootFolder = "${pkgs.vuetorrent}/share/vuetorrent";
             ServerDomains = "*";
             SessionTimeout = 360000;
