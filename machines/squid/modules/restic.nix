@@ -41,6 +41,7 @@ in {
           "/var/lib/containers/storage/volumes/fusion"
           "/var/lib/containers/storage/volumes/glance"
           "/var/lib/containers/storage/volumes/goatcounter"
+          "/var/lib/containers/storage/volumes/opengist"
           "/var/lib/containers/storage/volumes/postgres"
           "/var/lib/containers/storage/volumes/readeck"
         ];

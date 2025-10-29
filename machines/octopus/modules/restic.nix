@@ -41,6 +41,7 @@ in {
           "/var/lib/headscale"
           "/var/lib/komari-server"
           "/var/lib/openlist"
+          "/var/lib/private/actual"
           "/var/lib/private/gotify-server"
           "/var/lib/private/uptime-kuma"
           "/var/lib/private/wakapi"
