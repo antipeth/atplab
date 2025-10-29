@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   cfg = config.services.headscale;
 in {
   services = {
@@ -27,6 +31,10 @@ in {
         proxy_hide_header X-Powered-By;
         proxy_hide_header Server;
       '';
+      locations."/web/" = {
+        alias = "${pkgs.headscale-ui}/web/";
+        index = "index.html";
+      };
       locations."/" = {
         proxyPass = "http://${toString cfg.address}:${toString cfg.port}";
         recommendedProxySettings = true;
@@ -37,4 +45,10 @@ in {
       };
     };
   };
+  nixpkgs.overlays = [
+    (final: prev: {
+      headscale-ui = prev.callPackage ../../../pkgs/headscale-ui/default.nix {};
+    })
+  ];
+  environment.systemPackages = [pkgs.headscale-ui];
 }
