@@ -48,6 +48,7 @@ in {
             Port = cfg.torrentingPort;
             QueueingSystemEnabled = false;
             SSL = {
+              Enabled = true;
               Port = cfg.torrentingPort + 1;
             };
             ShareLimitAction = "Stop";
