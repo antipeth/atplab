@@ -15,19 +15,12 @@
       "glance.description" = "Online Shared Pad";
     };
   };
-  sops.secrets.squid-rustpad-basic-auth = {
-    mode = "0400";
-    owner = "nginx";
-    group = "nginx";
-    format = "binary";
-    sopsFile = ../secrets/nginx-basic-auth;
-  };
   services.nginx.virtualHosts."pad.0pt.dpdns.org" = {
     forceSSL = true;
     kTLS = true;
     sslCertificate = "/etc/nginx/self-sign.crt";
     sslCertificateKey = "/etc/nginx/self-sign.key";
-    basicAuthFile = config.sops.secrets.squid-rustpad-basic-auth.path;
+    basicAuthFile = config.sops.secrets.squid-nginx-basic-auth.path;
     extraConfig = ''
       proxy_hide_header X-Powered-By;
       proxy_hide_header Server;
