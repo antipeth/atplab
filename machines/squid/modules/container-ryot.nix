@@ -21,6 +21,12 @@
     ports = [
       "127.0.0.1:18000:8000/tcp"
     ];
+    labels = {
+      "glance.name" = "ryot";
+      "glance.icon" = "sh:ryot";
+      "glance.url" = "https://ryot.0pt.dpdns.org";
+      "glance.description" = "Media tracker";
+    };
   };
   services.nginx.virtualHosts."ryot.0pt.dpdns.org" = {
     forceSSL = true;
