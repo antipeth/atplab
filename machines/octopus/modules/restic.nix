@@ -73,17 +73,17 @@ in {
         remote2 = {
           repositoryFile = config.sops.secrets.octopus-restic-remote2-repo.path;
           rcloneConfigFile = config.sops.secrets.octopus-restic-remote2-rclone.path;
-          timerConfig.OnCalendar = "01:20:00";
+          timerConfig.OnCalendar = "01:10:00";
         };
         remote3 = {
           repositoryFile = config.sops.secrets.octopus-restic-remote3-repo.path;
           environmentFile = config.sops.secrets.octopus-restic-remote3-env.path;
-          timerConfig.OnCalendar = "01:30:00";
+          timerConfig.OnCalendar = "01:20:00";
         };
         remote4 = {
           repositoryFile = config.sops.secrets.octopus-restic-remote4-repo.path;
           environmentFile = config.sops.secrets.octopus-restic-remote4-env.path;
-          timerConfig.OnCalendar = "01:40:00";
+          timerConfig.OnCalendar = "01:30:00";
         };
       };
 

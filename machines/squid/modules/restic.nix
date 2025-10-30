@@ -67,22 +67,22 @@ in {
         remote1 = {
           repositoryFile = config.sops.secrets.squid-restic-remote1-repo.path;
           environmentFile = config.sops.secrets.squid-restic-remote1-env.path;
-          timerConfig.OnCalendar = "01:00:00";
+          timerConfig.OnCalendar = "01:05:00";
         };
         remote2 = {
           repositoryFile = config.sops.secrets.squid-restic-remote2-repo.path;
           rcloneConfigFile = config.sops.secrets.squid-restic-remote2-rclone.path;
-          timerConfig.OnCalendar = "01:20:00";
+          timerConfig.OnCalendar = "01:15:00";
         };
         remote3 = {
           repositoryFile = config.sops.secrets.squid-restic-remote3-repo.path;
           environmentFile = config.sops.secrets.squid-restic-remote3-env.path;
-          timerConfig.OnCalendar = "01:30:00";
+          timerConfig.OnCalendar = "01:25:00";
         };
         remote4 = {
           repositoryFile = config.sops.secrets.squid-restic-remote4-repo.path;
           environmentFile = config.sops.secrets.squid-restic-remote4-env.path;
-          timerConfig.OnCalendar = "01:40:00";
+          timerConfig.OnCalendar = "01:35:00";
         };
       };
 
