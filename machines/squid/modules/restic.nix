@@ -50,13 +50,13 @@ in {
 
       mkNotify = remote: {
         prepare = ''
-          ${pkgs.curl}/bin/curl "http://127.0.0.1:1245/message?token=${grt}" \
+          ${pkgs.curl}/bin/curl "https://gotify.0pt.dpdns.org/message?token=${grt}" \
             -F "title=${hostname} restic ${remote} backup start" \
             -F "message=$(date "+%H:%M:%S")" \
             -F "priority=0"
         '';
         cleanup = ''
-          ${pkgs.curl}/bin/curl "http://127.0.0.1:1245/message?token=${grt}" \
+          ${pkgs.curl}/bin/curl "https://gotify.0pt.dpdns.org/message?token=${grt}" \
             -F "title=${hostname} restic ${remote} logs" \
             -F "message=$(journalctl -u restic-backups-${remote}.service --since '10 minute ago' -o cat) | over." \
             -F "priority=0"
