@@ -2,7 +2,7 @@
   services.fail2ban = {
     enable = true;
     # Ban IP after 3 failures
-    maxretry = 3;
+    maxretry = 5;
     bantime = "24h"; # Ban IPs for one day on the first ban
     bantime-increment = {
       enable = true; # Enable increment of bantime after each violation
@@ -27,7 +27,7 @@
         enabled = config.services.nginx.enable;
       };
       sshd = {
-        enabled = true;
+        enabled = config.services.openssh.enable;
       };
       traefik-auth = {
         enabled = config.services.traefik.enable;
