@@ -24,11 +24,6 @@ _: {
             action = "ALLOW";
           }
           {
-            name = "static-files";
-            path_regex = "^/static/.*$";
-            action = "ALLOW";
-          }
-          {
             name = "robots-txt";
             path_regex = "^/robots.txt$";
             action = "ALLOW";
