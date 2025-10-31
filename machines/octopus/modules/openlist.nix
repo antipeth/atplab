@@ -1,4 +1,4 @@
-_: {
+{config, ...}: {
   services = {
     openlist = {
       enable = true;
@@ -13,7 +13,7 @@ _: {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://localhost:5244";
+        proxyPass = "http://unix:${toString config.services.anubis.instances.openlist.settings.BIND}:";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
@@ -21,5 +21,6 @@ _: {
         '';
       };
     };
+    anubis.instances.openlist.settings.TARGET = "http://127.0.0.1:5244";
   };
 }
