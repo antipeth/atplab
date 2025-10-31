@@ -8,6 +8,11 @@
     ports = [
       "127.0.0.1:11200:11200"
     ];
+    labels = {
+      "glance.name" = "RSSHub";
+      "glance.icon" = "sh:rsshub";
+      "glance.description" = "Everything is RSSible";
+    };
   };
   services = {
     nginx.virtualHosts."rsshub.0pt.dpdns.org" = {

@@ -12,6 +12,12 @@
     volumes = [
       "opengist:/opengist"
     ];
+    labels = {
+      "glance.name" = "opengist";
+      "glance.icon" = "sh:opengist";
+      "glance.url" = "https://opengist.0pt.dpdns.org";
+      "glance.description" = "Open-source alternative to Github Gist";
+    };
   };
   services = {
     nginx.virtualHosts."opengist.0pt.dpdns.org" = {

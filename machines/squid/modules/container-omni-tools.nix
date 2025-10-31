@@ -7,7 +7,7 @@
     ];
     labels = {
       "glance.name" = "omni-tools";
-      "glance.icon" = "sh:omni-tools";
+      "glance.icon" = "sh:omnitools";
       "glance.url" = "https://omni-tools.0pt.dpdns.org";
       "glance.description" = "Web-based tools for everyday tasks";
     };
