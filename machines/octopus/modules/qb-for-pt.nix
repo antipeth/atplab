@@ -140,13 +140,14 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString cfg.webuiPort}";
+        proxyPass = "http://unix:${toString config.services.anubis.instances.qb.settings.BIND}:";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
         '';
       };
     };
+    anubis.instances.qb.settings.TARGET = "http://127.0.0.1:${toString cfg.webuiPort}";
   };
   networking.firewall.allowedTCPPorts = [cfg.torrentingPort];
 }

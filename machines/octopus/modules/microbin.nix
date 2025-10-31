@@ -29,12 +29,13 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://${toString cfg.settings.MICROBIN_BIND}:${toString cfg.settings.MICROBIN_PORT}";
+        proxyPass = "http://unix:${toString config.services.anubis.instances.microbin.settings.BIND}:";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
         '';
       };
     };
+    anubis.instances.microbin.settings.TARGET = "http://${toString cfg.settings.MICROBIN_BIND}:${toString cfg.settings.MICROBIN_PORT}";
   };
 }

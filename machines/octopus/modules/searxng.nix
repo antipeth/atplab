@@ -28,12 +28,13 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://${toString cfg.settings.server.bind_address}:${toString cfg.settings.server.port}";
+        proxyPass = "http://unix:${toString config.services.anubis.instances.search.settings.BIND}:";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
         '';
       };
     };
+    anubis.instances.search.settings.TARGET = "http://${toString cfg.settings.server.bind_address}:${toString cfg.settings.server.port}";
   };
 }

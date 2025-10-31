@@ -48,12 +48,13 @@
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://127.0.0.1:5232";
+        proxyPass = "http://unix:${toString config.services.anubis.instances.radicale.settings.BIND}:";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
         '';
       };
     };
+    anubis.instances.radicale.settings.TARGET = "http://127.0.0.1:5232";
   };
 }

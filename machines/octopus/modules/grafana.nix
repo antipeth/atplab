@@ -24,12 +24,13 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://${toString cfg.settings.server.http_addr}:${toString cfg.settings.server.http_port}";
+        proxyPass = "http://unix:${toString config.services.anubis.instances.grafana.settings.BIND}:";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
         '';
       };
     };
+    anubis.instances.grafana.settings.TARGET = "http://${toString cfg.settings.server.http_addr}:${toString cfg.settings.server.http_port}";
   };
 }

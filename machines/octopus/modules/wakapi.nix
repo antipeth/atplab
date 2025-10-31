@@ -42,12 +42,13 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://${toString cfg.settings.server.listen_ipv4}:${toString cfg.settings.server.port}";
+        proxyPass = "http://unix:${toString config.services.anubis.instances.wakapi.settings.BIND}:";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
         '';
       };
     };
+    anubis.instances.wakapi.settings.TARGET = "http://${toString cfg.settings.server.listen_ipv4}:${toString cfg.settings.server.port}";
   };
 }
