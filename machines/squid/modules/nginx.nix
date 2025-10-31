@@ -73,6 +73,9 @@
       add_header X-XSS-Protection "1; mode=block" always;
       # add_header Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()" always;
 
+      # Show real ip for cloudflare cdn
+      set_real_ip_from 0.0.0.0/0;
+      real_ip_header CF-Connecting-IP;
     '';
     sslProtocols = "TLSv1.3";
     serverTokens = false; # Hide version information

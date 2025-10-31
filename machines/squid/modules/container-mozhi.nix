@@ -12,22 +12,25 @@
       "glance.description" = "Translate engines Front";
     };
   };
-  services.nginx.virtualHosts."mozhi.0pt.dpdns.org" = {
-    forceSSL = true;
-    kTLS = true;
-    sslCertificate = "/etc/nginx/self-sign.crt";
-    sslCertificateKey = "/etc/nginx/self-sign.key";
-    basicAuthFile = config.sops.secrets.squid-nginx-basic-auth.path;
-    extraConfig = ''
-      proxy_hide_header X-Powered-By;
-      proxy_hide_header Server;
-    '';
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:13000";
-      recommendedProxySettings = true;
+  services = {
+    nginx.virtualHosts."mozhi.0pt.dpdns.org" = {
+      forceSSL = true;
+      kTLS = true;
+      sslCertificate = "/etc/nginx/self-sign.crt";
+      sslCertificateKey = "/etc/nginx/self-sign.key";
+      basicAuthFile = config.sops.secrets.squid-nginx-basic-auth.path;
       extraConfig = ''
-        proxy_buffering off;
+        proxy_hide_header X-Powered-By;
+        proxy_hide_header Server;
       '';
+      locations."/" = {
+        proxyPass = "http://unix:${toString config.services.anubis.instances.mozhi.settings.BIND}:";
+        recommendedProxySettings = true;
+        extraConfig = ''
+          proxy_buffering off;
+        '';
+      };
     };
+    anubis.instances.mozhi.settings.TARGET = "http://127.0.0.1:13000";
   };
 }

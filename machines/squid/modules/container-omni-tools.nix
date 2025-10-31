@@ -12,22 +12,25 @@
       "glance.description" = "Web-based tools for everyday tasks";
     };
   };
-  services.nginx.virtualHosts."omni-tools.0pt.dpdns.org" = {
-    forceSSL = true;
-    kTLS = true;
-    sslCertificate = "/etc/nginx/self-sign.crt";
-    sslCertificateKey = "/etc/nginx/self-sign.key";
-    basicAuthFile = config.sops.secrets.squid-nginx-basic-auth.path;
-    extraConfig = ''
-      proxy_hide_header X-Powered-By;
-      proxy_hide_header Server;
-    '';
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:18001";
-      recommendedProxySettings = true;
+  services = {
+    nginx.virtualHosts."omni-tools.0pt.dpdns.org" = {
+      forceSSL = true;
+      kTLS = true;
+      sslCertificate = "/etc/nginx/self-sign.crt";
+      sslCertificateKey = "/etc/nginx/self-sign.key";
+      basicAuthFile = config.sops.secrets.squid-nginx-basic-auth.path;
       extraConfig = ''
-        proxy_buffering off;
+        proxy_hide_header X-Powered-By;
+        proxy_hide_header Server;
       '';
+      locations."/" = {
+        proxyPass = "http://unix:${toString config.services.anubis.instances.omni-tools.settings.BIND}:";
+        recommendedProxySettings = true;
+        extraConfig = ''
+          proxy_buffering off;
+        '';
+      };
     };
+    anubis.instances.omni-tools.settings.TARGET = "http://127.0.0.1:18001";
   };
 }
