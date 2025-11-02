@@ -23,7 +23,7 @@ in {
     fail2ban = {
       enable = true;
       extraPackages = with pkgs; [curl hostname];
-      # Ban IP after 3 failures
+      # Ban IP after 5 failures
       maxretry = 5;
       ignoreIP = [
         (import ../values/ipv4-address1.nix)
