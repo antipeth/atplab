@@ -25,13 +25,13 @@ in {
         };
         s3_web = {
           bind_addr = "127.0.0.1:3902";
-          root_domain = ".garageweb.0pt.olab";
+          root_domain = ".garageweb.0pt.lab";
           index = "index.html";
         };
         admin = {
           api_bind_addr = "127.0.0.1:3903";
-          admin_token = import ../values/garage-admin-token;
-          metrics_token = import ../values/garage-metrics-token;
+          admin_token = import ../values/garage-admin-token.nix;
+          metrics_token = import ../values/garage-metrics-token.nix;
         };
       };
     };
