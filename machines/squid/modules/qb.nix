@@ -117,24 +117,50 @@ in {
         };
       };
     };
-    nginx.virtualHosts."qbee.0pt.dpdns.org" = {
-      forceSSL = true;
-      kTLS = true;
-      sslCertificate = "/etc/nginx/self-sign.crt";
-      sslCertificateKey = "/etc/nginx/self-sign.key";
-      extraConfig = ''
-        proxy_hide_header X-Powered-By;
-        proxy_hide_header Server;
-      '';
-      locations."/" = {
-        proxyPass = "http://unix:${toString config.services.anubis.instances.qb.settings.BIND}:";
-        recommendedProxySettings = true;
+    openlist = {
+      enable = true;
+      user = cfg.user;
+      group = cfg.group;
+    };
+    nginx.virtualHosts = {
+      "qbee.0pt.dpdns.org" = {
+        forceSSL = true;
+        kTLS = true;
+        sslCertificate = "/etc/nginx/self-sign.crt";
+        sslCertificateKey = "/etc/nginx/self-sign.key";
         extraConfig = ''
-          proxy_buffering off;
+          proxy_hide_header X-Powered-By;
+          proxy_hide_header Server;
         '';
+        locations."/" = {
+          proxyPass = "http://unix:${toString config.services.anubis.instances.qb.settings.BIND}:";
+          recommendedProxySettings = true;
+          extraConfig = ''
+            proxy_buffering off;
+          '';
+        };
+      };
+      "ol.0pt.dpdns.org" = {
+        forceSSL = true;
+        kTLS = true;
+        sslCertificate = "/etc/nginx/self-sign.crt";
+        sslCertificateKey = "/etc/nginx/self-sign.key";
+        extraConfig = ''
+          proxy_hide_header X-Powered-By;
+          proxy_hide_header Server;
+        '';
+        locations."/" = {
+          proxyPass = "http://unix:${toString config.services.anubis.instances.openlist.settings.BIND}:";
+          recommendedProxySettings = true;
+          extraConfig = ''
+            proxy_buffering off;
+            client_max_body_size 2000m;
+          '';
+        };
       };
     };
     anubis.instances.qb.settings.TARGET = "http://127.0.0.1:${toString cfg.webuiPort}";
+    anubis.instances.openlist.settings.TARGET = "http://127.0.0.1:5244";
   };
   networking.firewall.allowedTCPPorts = [cfg.torrentingPort];
 }
