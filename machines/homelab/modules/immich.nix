@@ -25,7 +25,7 @@ in
           proxy_hide_header Server;
         '';
         locations."/" = {
-          proxyPass = "http://${toString cfg.host}:${toString cfg.port}";
+          proxyPass = "http://${cfg.host}:${toString cfg.port}";
           proxyWebsockets = true;
           recommendedProxySettings = true;
           extraConfig = ''

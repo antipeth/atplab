@@ -60,7 +60,7 @@ in {
           proxy_hide_header Server;
         '';
         locations."/" = {
-          proxyPass = "http://unix:${toString config.services.anubis.instances.garage.settings.BIND}:";
+          proxyPass = "http://unix:${config.services.anubis.instances.garage.settings.BIND}:";
           recommendedProxySettings = true;
           extraConfig = ''
             proxy_buffering off;
@@ -77,7 +77,7 @@ in {
           proxy_hide_header Server;
         '';
         locations."/" = {
-          proxyPass = "http://unix:${toString config.services.anubis.instances.garage-ui.settings.BIND}:";
+          proxyPass = "http://unix:${config.services.anubis.instances.garage-ui.settings.BIND}:";
           recommendedProxySettings = true;
           extraConfig = ''
             proxy_buffering off;

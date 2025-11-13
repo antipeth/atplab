@@ -140,7 +140,7 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://unix:${toString config.services.anubis.instances.qb.settings.BIND}:";
+        proxyPass = "http://unix:${config.services.anubis.instances.qb.settings.BIND}:";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;

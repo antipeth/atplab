@@ -21,7 +21,7 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://unix:${toString config.services.anubis.instances.gotify.settings.BIND}:";
+        proxyPass = "http://unix:${config.services.anubis.instances.gotify.settings.BIND}:";
         recommendedProxySettings = true;
         proxyWebsockets = true;
         extraConfig = ''
@@ -29,6 +29,6 @@ in {
         '';
       };
     };
-    anubis.instances.gotify.settings.TARGET = "http://${toString cfg.environment.GOTIFY_SERVER_LISTENADDR}:${toString cfg.environment.GOTIFY_SERVER_PORT}";
+    anubis.instances.gotify.settings.TARGET = "http://${cfg.environment.GOTIFY_SERVER_LISTENADDR}:${toString cfg.environment.GOTIFY_SERVER_PORT}";
   };
 }

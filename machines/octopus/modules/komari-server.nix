@@ -25,7 +25,7 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://unix:${toString config.services.anubis.instances.komari-server.settings.BIND}:";
+        proxyPass = "http://unix:${config.services.anubis.instances.komari-server.settings.BIND}:";
         recommendedProxySettings = true;
         proxyWebsockets = true;
         extraConfig = ''
@@ -33,6 +33,6 @@ in {
         '';
       };
     };
-    anubis.instances.komari-server.settings.TARGET = "http://${toString cfg.host}:${toString cfg.port}";
+    anubis.instances.komari-server.settings.TARGET = "http://${cfg.host}:${cfg.port}";
   };
 }

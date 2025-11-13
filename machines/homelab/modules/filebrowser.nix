@@ -19,7 +19,7 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://${toString cfg.settings.address}:${toString cfg.settings.port}";
+        proxyPass = "http://${cfg.settings.address}:${toString cfg.settings.port}";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;

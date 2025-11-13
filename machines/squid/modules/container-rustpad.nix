@@ -27,7 +27,7 @@
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://unix:${toString config.services.anubis.instances.pad.settings.BIND}:";
+        proxyPass = "http://unix:${config.services.anubis.instances.pad.settings.BIND}:";
         extraConfig = ''
           proxy_http_version 1.1;
           proxy_set_header Upgrade $http_upgrade;

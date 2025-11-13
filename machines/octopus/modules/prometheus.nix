@@ -12,7 +12,7 @@ in {
           static_configs = [
             {
               targets = [
-                "${toString cfg.exporters.node.listenAddress}:${toString cfg.exporters.node.port}"
+                "${cfg.exporters.node.listenAddress}:${toString cfg.exporters.node.port}"
                 (import ../values/prometheus-target1.nix)
               ];
             }

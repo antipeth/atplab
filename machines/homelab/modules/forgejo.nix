@@ -73,7 +73,7 @@ in {
         };
       };
     };
-    nginx.virtualHosts."${toString cfg.settings.server.DOMAIN}" = {
+    nginx.virtualHosts."${cfg.settings.server.DOMAIN}" = {
       forceSSL = true;
       kTLS = true;
       sslCertificate = "/etc/nginx/self-sign.crt";
@@ -83,7 +83,7 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://${toString cfg.settings.server.HTTP_ADDR}:${toString cfg.settings.server.HTTP_PORT}";
+        proxyPass = "http://${cfg.settings.server.HTTP_ADDR}:${toString cfg.settings.server.HTTP_PORT}";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;

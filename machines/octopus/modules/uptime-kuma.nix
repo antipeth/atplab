@@ -21,13 +21,13 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://unix:${toString config.services.anubis.instances.uptime.settings.BIND}:";
+        proxyPass = "http://unix:${config.services.anubis.instances.uptime.settings.BIND}:";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
         '';
       };
     };
-    anubis.instances.uptime.settings.TARGET = "http://${toString cfg.settings.HOST}:${toString cfg.settings.PORT}";
+    anubis.instances.uptime.settings.TARGET = "http://${cfg.settings.HOST}:${cfg.settings.PORT}";
   };
 }

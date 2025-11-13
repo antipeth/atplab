@@ -25,7 +25,7 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://${toString cfg.settings.HBOX_WEB_HOST}:${toString cfg.settings.HBOX_WEB_PORT}";
+        proxyPass = "http://${cfg.settings.HBOX_WEB_HOST}:${cfg.settings.HBOX_WEB_PORT}";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;

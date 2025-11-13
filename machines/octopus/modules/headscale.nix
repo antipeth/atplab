@@ -36,7 +36,7 @@ in {
         index = "index.html";
       };
       locations."/" = {
-        proxyPass = "http://${toString cfg.address}:${toString cfg.port}";
+        proxyPass = "http://${cfg.address}:${toString cfg.port}";
         recommendedProxySettings = true;
         proxyWebsockets = true;
         extraConfig = ''

@@ -27,13 +27,13 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://unix:${toString config.services.anubis.instances.kavita.settings.BIND}:";
+        proxyPass = "http://unix:${config.services.anubis.instances.kavita.settings.BIND}:";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
         '';
       };
     };
-    anubis.instances.kavita.settings.TARGET = "http://${toString cfg.settings.IpAddresses}:${toString cfg.settings.Port}";
+    anubis.instances.kavita.settings.TARGET = "http://${cfg.settings.IpAddresses}:${toString cfg.settings.Port}";
   };
 }

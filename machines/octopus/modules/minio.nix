@@ -27,7 +27,7 @@ in {
           proxy_hide_header Server;
         '';
         locations."/" = {
-          proxyPass = "http://unix:${toString config.services.anubis.instances.minio.settings.BIND}:";
+          proxyPass = "http://unix:${config.services.anubis.instances.minio.settings.BIND}:";
           recommendedProxySettings = true;
           extraConfig = ''
             client_max_body_size 50000M;
@@ -43,7 +43,7 @@ in {
         sslCertificate = "/etc/nginx/self-sign.crt";
         sslCertificateKey = "/etc/nginx/self-sign.key";
         locations."/" = {
-          proxyPass = "http://unix:${toString config.services.anubis.instances.minio-ui.settings.BIND}:";
+          proxyPass = "http://unix:${config.services.anubis.instances.minio-ui.settings.BIND}:";
           recommendedProxySettings = true;
           proxyWebsockets = true;
           extraConfig = ''
@@ -56,7 +56,7 @@ in {
         };
       };
     };
-    anubis.instances.minio.settings.TARGET = "http://${toString cfg.listenAddress}";
-    anubis.instances.minio-ui.settings.TARGET = "http://${toString cfg.consoleAddress}";
+    anubis.instances.minio.settings.TARGET = "http://${cfg.listenAddress}";
+    anubis.instances.minio-ui.settings.TARGET = "http://${cfg.consoleAddress}";
   };
 }

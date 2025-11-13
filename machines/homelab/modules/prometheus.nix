@@ -11,7 +11,7 @@ in {
           job_name = "node";
           static_configs = [
             {
-              targets = ["${toString cfg.exporters.node.listenAddress}:${toString cfg.exporters.node.port}"];
+              targets = ["${cfg.exporters.node.listenAddress}:${toString cfg.exporters.node.port}"];
             }
           ];
         }

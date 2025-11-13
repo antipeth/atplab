@@ -24,7 +24,7 @@
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://unix:${toString config.services.anubis.instances.translate.settings.BIND}:";
+        proxyPass = "http://unix:${config.services.anubis.instances.translate.settings.BIND}:";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
