@@ -83,7 +83,7 @@ in {
         };
         clients = [
           {
-            url = "http://127.0.0.1:${config.services.loki.configuration.server.http_listen_port}/loki/api/v1/push";
+            url = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}/loki/api/v1/push";
           }
         ];
         scrape_configs = [
