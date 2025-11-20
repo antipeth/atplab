@@ -26,6 +26,10 @@ in {
             failure-threshold = 2;
           };
         };
+        security.basic = {
+          username = import ../values/gatus-user.nix;
+          password-bcrypt-base64 = import ../values/gatus-passwd.nix;
+        };
       };
     };
     nginx.virtualHosts."gatus.0pt.dpdns.org" = {
