@@ -34,6 +34,19 @@ in {
         user-agent = "Transmission/2.77";
       };
     };
+    gatus.settings.endpoints = [
+      {
+        name = "aria2";
+        group = "${config.networking.hostName}";
+        url = "tcp://127.0.0.1:${toString cfg.settings.rpc-listen-port}";
+        interval = "1h";
+        conditions = [
+          "[CONNECTED] == true"
+          "[RESPONSE_TIME] < 500"
+        ];
+        alerts = [{type = "gotify";}];
+      }
+    ];
     nginx.virtualHosts."ariang.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;

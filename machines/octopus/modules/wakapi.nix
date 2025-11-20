@@ -32,6 +32,19 @@ in {
         };
       };
     };
+    gatus.settings.endpoints = [
+      {
+        name = "wakapi";
+        group = "${config.networking.hostName}";
+        url = "tcp://${cfg.settings.server.listen_ipv4}:${toString cfg.settings.server.port}";
+        interval = "1h";
+        conditions = [
+          "[CONNECTED] == true"
+          "[RESPONSE_TIME] < 500"
+        ];
+        alerts = [{type = "gotify";}];
+      }
+    ];
     nginx.virtualHosts."wakapi.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;

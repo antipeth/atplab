@@ -19,6 +19,19 @@ in {
         MICROBIN_DISABLE_TELEMETRY = true;
       };
     };
+    gatus.settings.endpoints = [
+      {
+        name = "microbin";
+        group = "${config.networking.hostName}";
+        url = "tcp://${cfg.settings.MICROBIN_BIND}:${toString cfg.settings.MICROBIN_PORT}";
+        interval = "1h";
+        conditions = [
+          "[CONNECTED] == true"
+          "[RESPONSE_TIME] < 500"
+        ];
+        alerts = [{type = "gotify";}];
+      }
+    ];
     nginx.virtualHosts."microbin.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;

@@ -38,6 +38,19 @@
         };
       };
     };
+    gatus.settings.endpoints = [
+      {
+        name = "radicale";
+        group = "${config.networking.hostName}";
+        url = "tcp://127.0.0.1:5232";
+        interval = "1h";
+        conditions = [
+          "[CONNECTED] == true"
+          "[RESPONSE_TIME] < 500"
+        ];
+        alerts = [{type = "gotify";}];
+      }
+    ];
     nginx.virtualHosts."radicale.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;

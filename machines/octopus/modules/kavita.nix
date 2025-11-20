@@ -17,6 +17,19 @@ in {
       };
       tokenKeyFile = config.sops.secrets.octopus-kavita-token.path;
     };
+    gatus.settings.endpoints = [
+      {
+        name = "kavita";
+        group = "${config.networking.hostName}";
+        url = "tcp://${cfg.settings.IpAddresses}:${toString cfg.settings.Port}";
+        interval = "1h";
+        conditions = [
+          "[CONNECTED] == true"
+          "[RESPONSE_TIME] < 500"
+        ];
+        alerts = [{type = "gotify";}];
+      }
+    ];
     nginx.virtualHosts."kavita.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;

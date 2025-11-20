@@ -11,6 +11,19 @@ in {
         HOME = "/var/lib/uptime-kuma";
       };
     };
+    gatus.settings.endpoints = [
+      {
+        name = "uptime-kuma";
+        group = "${config.networking.hostName}";
+        url = "tcp://${cfg.settings.HOST}:${cfg.settings.PORT}";
+        interval = "1h";
+        conditions = [
+          "[CONNECTED] == true"
+          "[RESPONSE_TIME] < 500"
+        ];
+        alerts = [{type = "gotify";}];
+      }
+    ];
     nginx.virtualHosts."uptime.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;

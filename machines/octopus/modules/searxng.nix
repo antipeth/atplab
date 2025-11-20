@@ -18,6 +18,19 @@ in {
       };
       environmentFile = config.sops.secrets.octopus-searxng-env.path;
     };
+    gatus.settings.endpoints = [
+      {
+        name = "searxng";
+        group = "${config.networking.hostName}";
+        url = "tcp://${cfg.settings.server.bind_address}:${toString cfg.settings.server.port}";
+        interval = "1h";
+        conditions = [
+          "[CONNECTED] == true"
+          "[RESPONSE_TIME] < 500"
+        ];
+        alerts = [{type = "gotify";}];
+      }
+    ];
     nginx.virtualHosts."search.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;

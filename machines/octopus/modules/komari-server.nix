@@ -15,6 +15,19 @@ in {
       port = "25774";
       environmentFile = config.sops.secrets.octopus-komari-server-env.path;
     };
+    gatus.settings.endpoints = [
+      {
+        name = "komari-server";
+        group = "${config.networking.hostName}";
+        url = "tcp://${cfg.host}:${cfg.port}";
+        interval = "1h";
+        conditions = [
+          "[CONNECTED] == true"
+          "[RESPONSE_TIME] < 500"
+        ];
+        alerts = [{type = "gotify";}];
+      }
+    ];
     nginx.virtualHosts."eye.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;

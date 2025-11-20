@@ -3,6 +3,19 @@
     openlist = {
       enable = true;
     };
+    gatus.settings.endpoints = [
+      {
+        name = "openlist";
+        group = "${config.networking.hostName}";
+        url = "tcp://127.0.0.1:5244";
+        interval = "1h";
+        conditions = [
+          "[CONNECTED] == true"
+          "[RESPONSE_TIME] < 500"
+        ];
+        alerts = [{type = "gotify";}];
+      }
+    ];
     nginx.virtualHosts."openlist.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;

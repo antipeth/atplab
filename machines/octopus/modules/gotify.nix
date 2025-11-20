@@ -11,6 +11,19 @@ in {
         GOTIFY_REGISTRATION = "false";
       };
     };
+    gatus.settings.endpoints = [
+      {
+        name = "gotify";
+        group = "${config.networking.hostName}";
+        url = "tcp://${cfg.environment.GOTIFY_SERVER_LISTENADDR}:${toString cfg.environment.GOTIFY_SERVER_PORT}";
+        interval = "1h";
+        conditions = [
+          "[CONNECTED] == true"
+          "[RESPONSE_TIME] < 500"
+        ];
+        alerts = [{type = "gotify";}];
+      }
+    ];
     nginx.virtualHosts."gotify.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;

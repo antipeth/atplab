@@ -14,6 +14,19 @@ in {
         };
       };
     };
+    gatus.settings.endpoints = [
+      {
+        name = "grafana";
+        group = "${config.networking.hostName}";
+        url = "tcp://${cfg.settings.server.http_addr}:${toString cfg.settings.server.http_port}";
+        interval = "1h";
+        conditions = [
+          "[CONNECTED] == true"
+          "[RESPONSE_TIME] < 500"
+        ];
+        alerts = [{type = "gotify";}];
+      }
+    ];
     nginx.virtualHosts."${cfg.settings.server.domain}" = {
       forceSSL = true;
       kTLS = true;
