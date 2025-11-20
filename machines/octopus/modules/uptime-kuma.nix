@@ -41,6 +41,10 @@ in {
         '';
       };
     };
-    anubis.instances.uptime.settings.TARGET = "http://${cfg.settings.HOST}:${cfg.settings.PORT}";
+    anubis.instances.uptime.settings = {
+      TARGET = "http://${cfg.settings.HOST}:${cfg.settings.PORT}";
+      BIND = "/run/anubis/anubis-uptime/anubis-uptime.sock";
+      METRICS_BIND = "/run/anubis/anubis-uptime/anubis-uptime-metrics.sock";
+    };
   };
 }

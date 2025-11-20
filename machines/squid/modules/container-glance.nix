@@ -35,6 +35,10 @@
         '';
       };
     };
-    anubis.instances.glance.settings.TARGET = "http://127.0.0.1:8083";
+    anubis.instances.glance.settings = {
+      TARGET = "http://127.0.0.1:8083";
+      BIND = "/run/anubis/anubis-glance/anubis-glance.sock";
+      METRICS_BIND = "/run/anubis/anubis-glance/anubis-glance-metrics.sock";
+    };
   };
 }

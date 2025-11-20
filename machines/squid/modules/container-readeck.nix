@@ -33,6 +33,10 @@
         '';
       };
     };
-    anubis.instances.readeck.settings.TARGET = "http://127.0.0.1:8001";
+    anubis.instances.readeck.settings = {
+      TARGET = "http://127.0.0.1:8001";
+      BIND = "/run/anubis/anubis-readeck/anubis-readeck.sock";
+      METRICS_BIND = "/run/anubis/anubis-readeck/anubis-readeck-metrics.sock";
+    };
   };
 }

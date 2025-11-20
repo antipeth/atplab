@@ -31,6 +31,10 @@
         '';
       };
     };
-    anubis.instances.translate.settings.TARGET = "http://127.0.0.1:15000";
+    anubis.instances.translate.settings = {
+      TARGET = "http://127.0.0.1:15000";
+      BIND = "/run/anubis/anubis-translate/anubis-translate.sock";
+      METRICS_BIND = "/run/anubis/anubis-translate/anubis-translate-metrics.sock";
+    };
   };
 }

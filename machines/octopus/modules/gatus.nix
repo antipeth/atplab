@@ -49,6 +49,10 @@ in {
         '';
       };
     };
-    anubis.instances.gatus.settings.TARGET = "http://${cfg.settings.web.address}:${toString cfg.settings.web.port}";
+    anubis.instances.gatus.settings = {
+      TARGET = "http://${cfg.settings.web.address}:${toString cfg.settings.web.port}";
+      BIND = "/run/anubis/anubis-gatus/anubis-gatus.sock";
+      METRICS_BIND = "/run/anubis/anubis-gatus/anubis-gatus-metrics.sock";
+    };
   };
 }

@@ -33,6 +33,10 @@
         '';
       };
     };
-    anubis.instances.goatcounter.settings.TARGET = "http://127.0.0.1:8082";
+    anubis.instances.goatcounter.settings = {
+      TARGET = "http://127.0.0.1:8082";
+      BIND = "/run/anubis/anubis-goatcounter/anubis-goatcounter.sock";
+      METRICS_BIND = "/run/anubis/anubis-goatcounter/anubis-goatcounter-metrics.sock";
+    };
   };
 }

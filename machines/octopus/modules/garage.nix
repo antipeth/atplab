@@ -109,7 +109,17 @@ in {
         };
       };
     };
-    anubis.instances.garage.settings.TARGET = "http://${cfg.settings.s3_api.api_bind_addr}";
-    anubis.instances.garage-ui.settings.TARGET = "http://127.0.0.1:${toString cfgw.port}";
+    anubis.instances = {
+      garage.settings = {
+        TARGET = "http://${cfg.settings.s3_api.api_bind_addr}";
+        BIND = "/run/anubis/anubis-garage/anubis-garage.sock";
+        METRICS_BIND = "/run/anubis/anubis-garage/anubis-garage-metrics.sock";
+      };
+      garage-ui.settings = {
+        TARGET = "http://127.0.0.1:${toString cfgw.port}";
+        BIND = "/run/anubis/anubis-garage-ui/anubis-garage-ui.sock";
+        METRICS_BIND = "/run/anubis/anubis-garage-ui/anubis-garage-ui-metrics.sock";
+      };
+    };
   };
 }

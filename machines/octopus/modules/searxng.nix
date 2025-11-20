@@ -48,6 +48,10 @@ in {
         '';
       };
     };
-    anubis.instances.search.settings.TARGET = "http://${cfg.settings.server.bind_address}:${toString cfg.settings.server.port}";
+    anubis.instances.search.settings = {
+      TARGET = "http://${cfg.settings.server.bind_address}:${toString cfg.settings.server.port}";
+      BIND = "/run/anubis/anubis-search/anubis-search.sock";
+      METRICS_BIND = "/run/anubis/anubis-search/anubis-search-metrics.sock";
+    };
   };
 }

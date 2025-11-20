@@ -46,6 +46,10 @@
         '';
       };
     };
-    anubis.instances.ryot.settings.TARGET = "http://127.0.0.1:18000";
+    anubis.instances.ryot.settings = {
+      TARGET = "http://127.0.0.1:18000";
+      BIND = "/run/anubis/anubis-ryot/anubis-ryot.sock";
+      METRICS_BIND = "/run/anubis/anubis-ryot/anubis-ryot-metrics.sock";
+    };
   };
 }

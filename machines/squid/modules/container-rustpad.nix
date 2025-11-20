@@ -36,6 +36,10 @@
         '';
       };
     };
-    anubis.instances.pad.settings.TARGET = "http://127.0.0.1:3030";
+    anubis.instances.pad.settings = {
+      TARGET = "http://127.0.0.1:3030";
+      BIND = "/run/anubis/anubis-pad/anubis-pad.sock";
+      METRICS_BIND = "/run/anubis/anubis-pad/anubis-pad-metrics.sock";
+    };
   };
 }

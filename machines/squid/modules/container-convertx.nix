@@ -33,6 +33,10 @@
         '';
       };
     };
-    anubis.instances.convertx.settings.TARGET = "http://127.0.0.1:13001";
+    anubis.instances.convertx.settings = {
+      TARGET = "http://127.0.0.1:13001";
+      BIND = "/run/anubis/anubis-convertx/anubis-convertx.sock";
+      METRICS_BIND = "/run/anubis/anubis-convertx/anubis-convertx-metrics.sock";
+    };
   };
 }

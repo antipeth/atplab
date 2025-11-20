@@ -41,6 +41,10 @@
         '';
       };
     };
-    anubis.instances.miniflux.settings.TARGET = "http://127.0.0.1:18081";
+    anubis.instances.miniflux.settings = {
+      TARGET = "http://127.0.0.1:18081";
+      BIND = "/run/anubis/anubis-miniflux/anubis-miniflux.sock";
+      METRICS_BIND = "/run/anubis/anubis-miniflux/anubis-miniflux-metrics.sock";
+    };
   };
 }

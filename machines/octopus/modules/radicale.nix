@@ -68,6 +68,10 @@
         '';
       };
     };
-    anubis.instances.radicale.settings.TARGET = "http://127.0.0.1:5232";
+    anubis.instances.radicale.settings = {
+      TARGET = "http://127.0.0.1:5232";
+      BIND = "/run/anubis/anubis-radicale/anubis-radicale.sock";
+      METRICS_BIND = "/run/anubis/anubis-radicale/anubis-radicale-metrics.sock";
+    };
   };
 }

@@ -32,6 +32,10 @@
         '';
       };
     };
-    anubis.instances.rsshub.settings.TARGET = "http://127.0.0.1:11200";
+    anubis.instances.rsshub.settings = {
+      TARGET = "http://127.0.0.1:11200";
+      BIND = "/run/anubis/anubis-rsshub/anubis-rsshub.sock";
+      METRICS_BIND = "/run/anubis/anubis-rsshub/anubis-rsshub-metrics.sock";
+    };
   };
 }

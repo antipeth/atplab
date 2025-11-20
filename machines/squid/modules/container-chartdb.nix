@@ -31,6 +31,10 @@
         '';
       };
     };
-    anubis.instances.chartdb.settings.TARGET = "http://127.0.0.1:18080";
+    anubis.instances.chartdb.settings = {
+      TARGET = "http://127.0.0.1:18080";
+      BIND = "/run/anubis/anubis-chartdb/anubis-chartdb.sock";
+      METRICS_BIND = "/run/anubis/anubis-chartdb/anubis-chartdb-metrics.sock";
+    };
   };
 }

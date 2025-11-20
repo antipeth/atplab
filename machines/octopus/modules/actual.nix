@@ -40,6 +40,10 @@ in {
         '';
       };
     };
-    anubis.instances.actual.settings.TARGET = "http://${cfg.settings.hostname}:${toString cfg.settings.port}";
+    anubis.instances.actual.settings = {
+      TARGET = "http://${cfg.settings.hostname}:${toString cfg.settings.port}";
+      BIND = "/run/anubis/anubis-actual/anubis-actual.sock";
+      METRICS_BIND = "/run/anubis/anubis-actual/anubis-actual-metrics.sock";
+    };
   };
 }

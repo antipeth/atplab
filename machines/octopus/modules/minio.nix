@@ -80,7 +80,17 @@ in {
         };
       };
     };
-    anubis.instances.minio.settings.TARGET = "http://${cfg.listenAddress}";
-    anubis.instances.minio-ui.settings.TARGET = "http://${cfg.consoleAddress}";
+    anubis.instances = {
+      minio.settings = {
+        TARGET = "http://${cfg.listenAddress}";
+        BIND = "/run/anubis/anubis-minio/anubis-minio.sock";
+        METRICS_BIND = "/run/anubis/anubis-minio/anubis-minio-metrics.sock";
+      };
+      minio-ui.settings = {
+        TARGET = "http://${cfg.consoleAddress}";
+        BIND = "/run/anubis/anubis-minio-ui/anubis-minio-ui.sock";
+        METRICS_BIND = "/run/anubis/anubis-minio-ui/anubis-minio-ui-metrics.sock";
+      };
+    };
   };
 }

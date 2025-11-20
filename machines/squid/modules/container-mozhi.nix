@@ -31,6 +31,10 @@
         '';
       };
     };
-    anubis.instances.mozhi.settings.TARGET = "http://127.0.0.1:13000";
+    anubis.instances.mozhi.settings = {
+      TARGET = "http://127.0.0.1:13000";
+      BIND = "/run/anubis/anubis-mozhi/anubis-mozhi.sock";
+      METRICS_BIND = "/run/anubis/anubis-mozhi/anubis-mozhi-metrics.sock";
+    };
   };
 }

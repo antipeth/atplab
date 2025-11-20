@@ -47,6 +47,10 @@ in {
         '';
       };
     };
-    anubis.instances.kavita.settings.TARGET = "http://${cfg.settings.IpAddresses}:${toString cfg.settings.Port}";
+    anubis.instances.kavita.settings = {
+      TARGET = "http://${cfg.settings.IpAddresses}:${toString cfg.settings.Port}";
+      BIND = "/run/anubis/anubis-kavita/anubis-kavita.sock";
+      METRICS_BIND = "/run/anubis/anubis-kavita/anubis-kavita-metrics.sock";
+    };
   };
 }

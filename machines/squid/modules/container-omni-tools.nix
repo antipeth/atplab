@@ -31,6 +31,10 @@
         '';
       };
     };
-    anubis.instances.omni-tools.settings.TARGET = "http://127.0.0.1:18001";
+    anubis.instances.omni-tools.settings = {
+      TARGET = "http://127.0.0.1:18001";
+      BIND = "/run/anubis/anubis-omni-tools/anubis-omni-tools.sock";
+      METRICS_BIND = "/run/anubis/anubis-omni-tools/anubis-omni-tools-metrics.sock";
+    };
   };
 }

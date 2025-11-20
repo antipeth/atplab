@@ -34,6 +34,10 @@
         '';
       };
     };
-    anubis.instances.openlist.settings.TARGET = "http://127.0.0.1:5244";
+    anubis.instances.openlist.settings = {
+      TARGET = "http://127.0.0.1:5244";
+      BIND = "/run/anubis/anubis-openlist/anubis-openlist.sock";
+      METRICS_BIND = "/run/anubis/anubis-openlist/anubis-openlist-metrics.sock";
+    };
   };
 }

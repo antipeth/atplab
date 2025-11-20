@@ -62,6 +62,10 @@ in {
         '';
       };
     };
-    anubis.instances.wakapi.settings.TARGET = "http://${cfg.settings.server.listen_ipv4}:${toString cfg.settings.server.port}";
+    anubis.instances.wakapi.settings = {
+      TARGET = "http://${cfg.settings.server.listen_ipv4}:${toString cfg.settings.server.port}";
+      BIND = "/run/anubis/anubis-wakapi/anubis-wakapi.sock";
+      METRICS_BIND = "/run/anubis/anubis-wakapi/anubis-wakapi-metrics.sock";
+    };
   };
 }

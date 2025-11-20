@@ -44,6 +44,10 @@ in {
         '';
       };
     };
-    anubis.instances.grafana.settings.TARGET = "http://${cfg.settings.server.http_addr}:${toString cfg.settings.server.http_port}";
+    anubis.instances.grafana.settings = {
+      TARGET = "http://${cfg.settings.server.http_addr}:${toString cfg.settings.server.http_port}";
+      BIND = "/run/anubis/anubis-grafana/anubis-grafana.sock";
+      METRICS_BIND = "/run/anubis/anubis-grafana/anubis-grafana-metrics.sock";
+    };
   };
 }

@@ -46,6 +46,10 @@ in {
         '';
       };
     };
-    anubis.instances.komari-server.settings.TARGET = "http://${cfg.host}:${cfg.port}";
+    anubis.instances.komari-server.settings = {
+      TARGET = "http://${cfg.host}:${cfg.port}";
+      BIND = "/run/anubis/anubis-komari-server/anubis-komari-server.sock";
+      METRICS_BIND = "/run/anubis/anubis-komari-server/anubis-komari-server-metrics.sock";
+    };
   };
 }

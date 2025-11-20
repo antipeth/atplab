@@ -42,6 +42,10 @@ in {
         '';
       };
     };
-    anubis.instances.gotify.settings.TARGET = "http://${cfg.environment.GOTIFY_SERVER_LISTENADDR}:${toString cfg.environment.GOTIFY_SERVER_PORT}";
+    anubis.instances.gotify.settings = {
+      TARGET = "http://${cfg.environment.GOTIFY_SERVER_LISTENADDR}:${toString cfg.environment.GOTIFY_SERVER_PORT}";
+      BIND = "/run/anubis/anubis-gotify/anubis-gotify.sock";
+      METRICS_BIND = "/run/anubis/anubis-gotify/anubis-gotify-metrics.sock";
+    };
   };
 }

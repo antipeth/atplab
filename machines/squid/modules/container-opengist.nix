@@ -37,6 +37,10 @@
         '';
       };
     };
-    anubis.instances.opengist.settings.TARGET = "http://127.0.0.1:6157";
+    anubis.instances.opengist.settings = {
+      TARGET = "http://127.0.0.1:6157";
+      BIND = "/run/anubis/anubis-opengist/anubis-opengist.sock";
+      METRICS_BIND = "/run/anubis/anubis-opengist/anubis-opengist-metrics.sock";
+    };
   };
 }

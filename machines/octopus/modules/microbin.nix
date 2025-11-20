@@ -49,6 +49,10 @@ in {
         '';
       };
     };
-    anubis.instances.microbin.settings.TARGET = "http://${cfg.settings.MICROBIN_BIND}:${toString cfg.settings.MICROBIN_PORT}";
+    anubis.instances.microbin.settings = {
+      TARGET = "http://${cfg.settings.MICROBIN_BIND}:${toString cfg.settings.MICROBIN_PORT}";
+      BIND = "/run/anubis/anubis-microbin/anubis-microbin.sock";
+      METRICS_BIND = "/run/anubis/anubis-microbin/anubis-microbin-metrics.sock";
+    };
   };
 }

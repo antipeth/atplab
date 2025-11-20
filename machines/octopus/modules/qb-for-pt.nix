@@ -160,7 +160,11 @@ in {
         '';
       };
     };
-    anubis.instances.qb.settings.TARGET = "http://127.0.0.1:${toString cfg.webuiPort}";
+    anubis.instances.qb.settings = {
+      TARGET = "http://127.0.0.1:${toString cfg.webuiPort}";
+      BIND = "/run/anubis/anubis-qb/anubis-qb.sock";
+      METRICS_BIND = "/run/anubis/anubis-qb/anubis-qb-metrics.sock";
+    };
   };
   networking.firewall.allowedTCPPorts = [cfg.torrentingPort];
 }

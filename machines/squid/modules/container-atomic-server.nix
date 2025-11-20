@@ -37,6 +37,10 @@
         '';
       };
     };
-    anubis.instances.atomic.settings.TARGET = "http://127.0.0.1:9883";
+    anubis.instances.atomic.settings = {
+      TARGET = "http://127.0.0.1:9883";
+      BIND = "/run/anubis/anubis-atomic/anubis-atomic.sock";
+      METRICS_BIND = "/run/anubis/anubis-atomic/anubis-atomic-metrics.sock";
+    };
   };
 }

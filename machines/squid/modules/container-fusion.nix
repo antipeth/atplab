@@ -39,6 +39,10 @@
         '';
       };
     };
-    anubis.instances.fusion.settings.TARGET = "http://127.0.0.1:8081";
+    anubis.instances.fusion.settings = {
+      TARGET = "http://127.0.0.1:8081";
+      BIND = "/run/anubis/anubis-fusion/anubis-fusion.sock";
+      METRICS_BIND = "/run/anubis/anubis-fusion/anubis-fusion-metrics.sock";
+    };
   };
 }

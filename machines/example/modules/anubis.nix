@@ -37,9 +37,21 @@ _: {
       };
     };
     instances = {
-      gotify.settings.TARGET = "http://127.0.0.1:1245";
-      openlist.settings.TARGET = "http://127.0.0.1:5244";
-      wakapi.settings.TARGET = "http://127.0.0.1:3000";
+      gotify.settings = {
+        TARGET = "http://127.0.0.1:1245";
+        BIND = "/run/anubis/anubis-gotify/anubis-gotify.sock";
+        METRICS_BIND = "/run/anubis/anubis-gotify/anubis-gotify-metrics.sock";
+      };
+      openlist.settings = {
+        TARGET = "http://127.0.0.1:5244";
+        BIND = "/run/anubis/anubis-openlist/anubis-openlist.sock";
+        METRICS_BIND = "/run/anubis/anubis-openlist/anubis-openlist-metrics.sock";
+      };
+      anubis.instances.wakapi.settings = {
+        TARGET = "http://127.0.0.1:3000";
+        BIND = "/run/anubis/anubis-wakapi/anubis-wakapi.sock";
+        METRICS_BIND = "/run/anubis/anubis-wakapi/anubis-wakapi-metrics.sock";
+      };
     };
   };
 }
