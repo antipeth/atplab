@@ -81,7 +81,7 @@
     timers.dn42-roa = {
       description = "Trigger a monthly ROA table update";
       timerConfig = {
-        OnCalendar = "daily";
+        OnCalendar = "hourly";
         Unit = "dn42-roa.service";
       };
       wantedBy = ["timers.target"];
