@@ -33,9 +33,9 @@
             "fe80::/64"
           ];
           endpoint = import ../values/dn42-peer-atp-squid.nix;
-          # publicKey: L4c8C+/CPPfD0PuuwDUVz7mtzO8c9eCtf4vkBoxPSWc=
         }
       ];
+      # publicKey: L4c8C+/CPPfD0PuuwDUVz7mtzO8c9eCtf4vkBoxPSWc=
       privateKeyFile = config.sops.secrets.octopus-dn42-wg-privatekey.path;
     };
   };
