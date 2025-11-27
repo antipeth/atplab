@@ -9,6 +9,7 @@ in {
       ./network.nix
       ./user.nix
 
+      ./dn42
       ./values/Dko972mcS27c.nix
     ]
     ++ ls ./modules
