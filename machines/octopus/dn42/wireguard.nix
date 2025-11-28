@@ -12,27 +12,30 @@
   networking.wg-quick.interfaces = {
     dn42-atp = {
       listenPort = 20003;
+      table = "off";
       address = [
         "fe80::67b3/64"
         "172.20.192.1/28"
         "fd25:5547:5a89::1/48"
       ];
-      postUp = ''
-        ${pkgs.iproute2}/bin/ip addr add fe80::67b3/64 dev dn42-atp
-        ${pkgs.iproute2}/bin/ip addr add fd25:5547:5a89::1/128 dev dn42-atp
-        ${pkgs.iproute2}/bin/ip addr add 172.20.192.1/32 peer 172.20.192.2/32 dev dn42-atp
-      '';
       peers = [
         {
           publicKey = "1w7XcnqKbjzLRp12JcLn0BEz4C3AMR4R+a6fbSHR5HM=";
           allowedIPs = [
-            "10.0.0.0/8"
-            "172.20.0.0/14"
-            "172.31.0.0/16"
-            "fd00::/8"
-            "fe80::/64"
+            "172.20.192.2"
+            "fd25:5547:5a89::2"
+            "fe80::b72b/64"
           ];
           endpoint = import ../values/dn42-peer-atp-squid.nix;
+        }
+        {
+          publicKey = "rE4mEBQo2Z/kLkg7a89bSLN76asevkqA7GygPJfv5D8=";
+          allowedIPs = [
+            "172.20.192.3"
+            "fd25:5547:5a89::3"
+            "fe80::9334/64"
+          ];
+          endpoint = import ../values/dn42-peer-atp-cthulhu.nix;
         }
       ];
       # publicKey: L4c8C+/CPPfD0PuuwDUVz7mtzO8c9eCtf4vkBoxPSWc=
@@ -40,7 +43,11 @@
     };
   };
   networking.firewall = {
-    allowedTCPPorts = [20003];
+    allowedTCPPorts = [
+      20003
+      # BGP
+      179
+    ];
     allowedUDPPorts = [20003];
   };
 }

@@ -8,7 +8,7 @@
   };
   # Generate peers config in /etc/bird/peers/* location
   environment.etc = let
-    birdPeers = ["atp_octopus" "atp_cthulhu"];
+    birdPeers = ["atp_octopus" "atp_squid"];
     mkConf = name: {
       user = "bird";
       group = "bird";

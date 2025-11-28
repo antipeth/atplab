@@ -4,7 +4,7 @@
   ...
 }: {
   # Wireguard Peer
-  sops.secrets.squid-dn42-wg-privatekey = {
+  sops.secrets.cthulhu-dn42-wg-privatekey = {
     mode = "0400";
     format = "binary";
     sopsFile = ../secrets/dn42-wg-private;
@@ -14,9 +14,9 @@
       listenPort = 20003;
       table = "off";
       address = [
-        "fe80::b72b/64"
-        "172.20.192.2/28"
-        "fd25:5547:5a89::2/48"
+        "fe80::9334/64"
+        "172.20.192.3/28"
+        "fd25:5547:5a89::3/48"
       ];
       peers = [
         {
@@ -29,17 +29,17 @@
           endpoint = import ../values/dn42-peer-atp-octopus.nix;
         }
         {
-          publicKey = "rE4mEBQo2Z/kLkg7a89bSLN76asevkqA7GygPJfv5D8=";
+          publicKey = "1w7XcnqKbjzLRp12JcLn0BEz4C3AMR4R+a6fbSHR5HM=";
           allowedIPs = [
-            "172.20.192.3"
-            "fd25:5547:5a89::3"
-            "fe80::9334/64"
+            "172.20.192.2"
+            "fd25:5547:5a89::2"
+            "fe80::b72b/64"
           ];
-          endpoint = import ../values/dn42-peer-atp-cthulhu.nix;
+          endpoint = import ../values/dn42-peer-atp-squid.nix;
         }
       ];
-      # publicKey: 1w7XcnqKbjzLRp12JcLn0BEz4C3AMR4R+a6fbSHR5HM=
-      privateKeyFile = config.sops.secrets.squid-dn42-wg-privatekey.path;
+      # publicKey: rE4mEBQo2Z/kLkg7a89bSLN76asevkqA7GygPJfv5D8=
+      privateKeyFile = config.sops.secrets.cthulhu-dn42-wg-privatekey.path;
     };
   };
   networking.firewall = {
