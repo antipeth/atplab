@@ -1,9 +1,11 @@
-_: {
+{config, ...}: let
+  cfg = config.services.tailscale;
+in {
   services.tailscale = {
     enable = true;
     openFirewall = true;
     useRoutingFeatures = "both";
     extraSetFlags = ["--accept-dns=false"];
   };
-  networking.firewall.trustedInterfaces = ["tailscale0"];
+  networking.firewall.trustedInterfaces = [cfg.interfaceName];
 }
