@@ -2,7 +2,7 @@ _: {
   services.tailscale = {
     enable = true;
     openFirewall = true;
-    useRoutingFeatures = "both";
+    useRoutingFeatures = "client";
     extraSetFlags = ["--accept-dns=false"];
   };
   networking.firewall.trustedInterfaces = ["tailscale0"];
