@@ -6,10 +6,10 @@
 }:
 stdenvNoCC.mkDerivation {
   pname = "komari-agent";
-  version = "1.1.34";
+  version = "1.1.40";
   src = fetchurl {
-    url = "https://github.com/komari-monitor/komari-agent/releases/download/1.1.34/komari-agent-linux-amd64";
-    sha256 = "sha256-tXyQ8oaEMle2DAZ9ouBF3S9Ppced5PumKmMMQ+66i0c=";
+    url = "https://github.com/komari-monitor/komari-agent/releases/download/1.1.40/komari-agent-linux-amd64";
+    sha256 = "sha256-4/G/Uf7cNE2eWb4rZYjw94E86wmEgINYOi13LhVI8R0=";
   };
   dontUnpack = true;
   installPhase = ''
