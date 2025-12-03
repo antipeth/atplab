@@ -27,6 +27,7 @@ in {
       maxretry = 5;
       ignoreIP = [
         (import ../values/ipv4-address1.nix)
+        (import ../values/dn42-peer-atp-cthulhu.nix)
         (import ../values/dn42-peer-atp-octopus.nix)
       ];
       bantime = "300d"; # Ban IPs for one day on the first ban
