@@ -49,30 +49,6 @@ in {
       s3EndpointUrl = "http://${cfg.settings.s3_api.api_bind_addr}";
       environmentFile = config.sops.secrets.octopus-garage-webui-env.path;
     };
-    gatus.settings.endpoints = [
-      {
-        name = "garage";
-        group = "${config.networking.hostName}";
-        url = "tcp://${cfg.settings.s3_api.api_bind_addr}";
-        interval = "1h";
-        conditions = [
-          "[CONNECTED] == true"
-          "[RESPONSE_TIME] < 500"
-        ];
-        alerts = [{type = "gotify";}];
-      }
-      {
-        name = "garage-webui";
-        group = "${config.networking.hostName}";
-        url = "tcp://127.0.0.1:${toString cfgw.port}";
-        interval = "1h";
-        conditions = [
-          "[CONNECTED] == true"
-          "[RESPONSE_TIME] < 500"
-        ];
-        alerts = [{type = "gotify";}];
-      }
-    ];
     nginx.virtualHosts = {
       "garage.0pt.dpdns.org" = {
         forceSSL = true;

@@ -10,19 +10,6 @@ in {
         allowedLoginMethods = ["password"];
       };
     };
-    gatus.settings.endpoints = [
-      {
-        name = "actual";
-        group = "${config.networking.hostName}";
-        url = "tcp://${cfg.settings.hostname}:${toString cfg.settings.port}";
-        interval = "1h";
-        conditions = [
-          "[CONNECTED] == true"
-          "[RESPONSE_TIME] < 500"
-        ];
-        alerts = [{type = "gotify";}];
-      }
-    ];
     nginx.virtualHosts."actual.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;

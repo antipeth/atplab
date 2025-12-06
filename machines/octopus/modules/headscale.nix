@@ -22,19 +22,6 @@ in {
         server_url = "https://hs.0pt.dpdns.org";
       };
     };
-    gatus.settings.endpoints = [
-      {
-        name = "headscale";
-        group = "${config.networking.hostName}";
-        url = "tcp://${cfg.address}:${toString cfg.port}";
-        interval = "1h";
-        conditions = [
-          "[CONNECTED] == true"
-          "[RESPONSE_TIME] < 500"
-        ];
-        alerts = [{type = "gotify";}];
-      }
-    ];
     nginx.virtualHosts."hs.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;

@@ -32,7 +32,7 @@ in {
         };
       };
     };
-    nginx.virtualHosts."gatus.0pt.de5.net" = {
+    nginx.virtualHosts."gatus.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;
       sslCertificate = "/etc/nginx/self-sign.crt";

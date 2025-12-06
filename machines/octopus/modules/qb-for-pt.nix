@@ -130,19 +130,6 @@ in {
         };
       };
     };
-    gatus.settings.endpoints = [
-      {
-        name = "qb-for-pt";
-        group = "${config.networking.hostName}";
-        url = "tcp://127.0.0.1:${toString cfg.webuiPort}";
-        interval = "1h";
-        conditions = [
-          "[CONNECTED] == true"
-          "[RESPONSE_TIME] < 500"
-        ];
-        alerts = [{type = "gotify";}];
-      }
-    ];
     nginx.virtualHosts."qb.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;

@@ -16,30 +16,6 @@ in {
       consoleAddress = "127.0.0.1:19001";
       rootCredentialsFile = config.sops.secrets.octopus-minio-env.path;
     };
-    gatus.settings.endpoints = [
-      {
-        name = "minio";
-        group = "${config.networking.hostName}";
-        url = "tcp://${cfg.listenAddress}";
-        interval = "1h";
-        conditions = [
-          "[CONNECTED] == true"
-          "[RESPONSE_TIME] < 500"
-        ];
-        alerts = [{type = "gotify";}];
-      }
-      {
-        name = "minio-ui";
-        group = "${config.networking.hostName}";
-        url = "tcp://${cfg.consoleAddress}";
-        interval = "1h";
-        conditions = [
-          "[CONNECTED] == true"
-          "[RESPONSE_TIME] < 500"
-        ];
-        alerts = [{type = "gotify";}];
-      }
-    ];
     nginx.virtualHosts = {
       "minio.0pt.dpdns.org" = {
         forceSSL = true;

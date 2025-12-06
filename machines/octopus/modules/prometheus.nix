@@ -36,29 +36,5 @@ in {
         };
       };
     };
-    gatus.settings.endpoints = [
-      {
-        name = "prometheus";
-        group = "${config.networking.hostName}";
-        url = "tcp://${cfg.listenAddress}:${toString cfg.port}";
-        interval = "1h";
-        conditions = [
-          "[CONNECTED] == true"
-          "[RESPONSE_TIME] < 500"
-        ];
-        alerts = [{type = "gotify";}];
-      }
-      {
-        name = "prometheus-node";
-        group = "${config.networking.hostName}";
-        url = "tcp://${cfg.exporters.node.listenAddress}:${toString cfg.exporters.node.port}";
-        interval = "1h";
-        conditions = [
-          "[CONNECTED] == true"
-          "[RESPONSE_TIME] < 500"
-        ];
-        alerts = [{type = "gotify";}];
-      }
-    ];
   };
 }
