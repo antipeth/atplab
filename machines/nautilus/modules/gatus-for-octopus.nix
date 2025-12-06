@@ -10,10 +10,6 @@ _: {
         url = "https://ariang.0pt.dpdns.org";
       }
       {
-        name = "garage";
-        url = "https://garage.0pt.dpdns.org";
-      }
-      {
         name = "garage-webui";
         url = "https://garage-ui.0pt.dpdns.org";
       }
@@ -26,10 +22,6 @@ _: {
         url = "https://grafana.0pt.dpdns.org";
       }
       {
-        name = "headscale";
-        url = "https://hs.0pt.dpdns.org";
-      }
-      {
         name = "kavita";
         url = "https://kavita.0pt.dpdns.org";
       }
@@ -40,10 +32,6 @@ _: {
       {
         name = "microbin";
         url = "https://microbin.0pt.dpdns.org";
-      }
-      {
-        name = "minio";
-        url = "https://minio.0pt.dpdns.org";
       }
       {
         name = "minio-ui";
@@ -81,7 +69,7 @@ _: {
         interval = "1h";
         conditions = [
           "[STATUS] == any(200, 401)"
-          "[RESPONSE_TIME] < 1000"
+          "[RESPONSE_TIME] < 3000"
         ];
         alerts = [{type = "gotify";}];
       };

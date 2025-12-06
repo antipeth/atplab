@@ -29,7 +29,7 @@ _: {
         interval = "1h";
         conditions = [
           "[STATUS] == 200"
-          "[RESPONSE_TIME] < 1000"
+          "[RESPONSE_TIME] < 5000"
         ];
         alerts = [{type = "gotify";}];
       };
