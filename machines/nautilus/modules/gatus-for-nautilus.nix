@@ -5,6 +5,10 @@ _: {
         name = "cyberchef";
         url = "https://cyberchef.0pt.dpdns.org";
       }
+      {
+        name = "searxng";
+        url = "https://search.0pt.dpdns.org";
+      }
     ];
     toEndpoint = svc:
       svc

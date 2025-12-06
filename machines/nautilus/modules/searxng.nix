@@ -1,7 +1,7 @@
 {config, ...}: let
   cfg = config.services.searx;
 in {
-  sops.secrets.octopus-searxng-env = {
+  sops.secrets.nautilus-searxng-env = {
     mode = "0400";
     owner = "searx";
     group = "searx";
@@ -16,7 +16,7 @@ in {
         bind_address = "127.0.0.1";
         port = 8081;
       };
-      environmentFile = config.sops.secrets.octopus-searxng-env.path;
+      environmentFile = config.sops.secrets.nautilus-searxng-env.path;
     };
     nginx.virtualHosts."search.0pt.dpdns.org" = {
       forceSSL = true;
