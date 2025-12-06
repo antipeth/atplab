@@ -9,6 +9,14 @@ _: {
         name = "searxng";
         url = "https://search.0pt.dpdns.org";
       }
+      {
+        name = "uptime-kuma";
+        url = "https://uptime.0pt.dpdns.org";
+      }
+      {
+        name = "gotify";
+        url = "https://gotify.0pt.dpdns.org";
+      }
     ];
     toEndpoint = svc:
       svc
