@@ -6,16 +6,20 @@ _: {
         url = "https://cyberchef.0pt.dpdns.org";
       }
       {
+        name = "gotify";
+        url = "https://gotify.0pt.dpdns.org";
+      }
+      {
+        name = "komari-server";
+        url = "https://komari.0pt.dpdns.org";
+      }
+      {
         name = "searxng";
         url = "https://search.0pt.dpdns.org";
       }
       {
         name = "uptime-kuma";
         url = "https://uptime.0pt.dpdns.org";
-      }
-      {
-        name = "gotify";
-        url = "https://gotify.0pt.dpdns.org";
       }
     ];
     toEndpoint = svc:

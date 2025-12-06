@@ -22,10 +22,6 @@ _: {
         url = "https://kavita.0pt.dpdns.org";
       }
       {
-        name = "komari-server";
-        url = "https://eye.0pt.dpdns.org";
-      }
-      {
         name = "microbin";
         url = "https://microbin.0pt.dpdns.org";
       }
