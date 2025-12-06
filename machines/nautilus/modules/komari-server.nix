@@ -1,7 +1,7 @@
 {config, ...}: let
   cfg = config.services.komari-server;
 in {
-  sops.secrets.octopus-komari-server-env = {
+  sops.secrets.nautilus-komari-server-env = {
     mode = "0440";
     owner = cfg.user;
     group = cfg.group;
@@ -13,9 +13,9 @@ in {
       enable = true;
       host = "127.0.0.1";
       port = "25774";
-      environmentFile = config.sops.secrets.octopus-komari-server-env.path;
+      environmentFile = config.sops.secrets.nautilus-komari-server-env.path;
     };
-    nginx.virtualHosts."eye.0pt.dpdns.org" = {
+    nginx.virtualHosts."komari.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;
       sslCertificate = "/etc/nginx/self-sign.crt";
