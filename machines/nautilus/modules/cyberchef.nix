@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  services.nginx.virtualHosts."cyberchef.0pt.de5.net" = {
+  services.nginx.virtualHosts."cyberchef.0pt.dpdns.org" = {
     forceSSL = true;
     kTLS = true;
     sslCertificate = "/etc/nginx/self-sign.crt";
