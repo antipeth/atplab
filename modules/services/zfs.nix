@@ -1,8 +1,4 @@
-{
-  inputs,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   boot = {
     supportedFilesystems = ["zfs"];
     kernelParams = [
@@ -11,7 +7,6 @@
     zfs = {
       forceImportRoot = false;
       devNodes = lib.mkDefault "/dev/disk/by-path";
-      package = inputs.chaotic.legacyPackages.x86_64-linux.zfs_cachyos;
     };
   };
   # Where hostID can be generated with:

@@ -1,6 +1,6 @@
 {
-  inputs,
   lib,
+  pkgs,
   ...
 }:
 with lib; {
@@ -65,7 +65,7 @@ with lib; {
       };
     };
     kernelModules = ["tcp_bbr"];
-    kernelPackages = mkDefault inputs.chaotic.legacyPackages.x86_64-linux.linuxPackages_cachyos-server;
+    kernelPackages = mkDefault pkgs.linuxPackages_zen;
     kernelParams = [
       "audit=0"
       "console=tty1"
