@@ -30,7 +30,7 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://${cfg.bindAddress}:${toString cfg.port}:";
+        proxyPass = "http://${cfg.bindAddress}:${toString cfg.port}";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
