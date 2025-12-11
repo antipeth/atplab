@@ -34,6 +34,7 @@ in {
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
+          client_max_body_size 20000m;
         '';
       };
     };
