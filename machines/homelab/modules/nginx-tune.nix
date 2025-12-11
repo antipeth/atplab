@@ -9,6 +9,13 @@
       text = import ../values/self-sign-key.nix;
     };
   };
+  sops.secrets.homelab-nginx-basic-auth = {
+    mode = "0400";
+    owner = "nginx";
+    group = "nginx";
+    format = "binary";
+    sopsFile = ../secrets/nginx-basic-auth;
+  };
   services.nginx = {
     enable = true;
     package = pkgs.nginxMainline;
