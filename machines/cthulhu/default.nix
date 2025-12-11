@@ -8,6 +8,8 @@ in {
       ./hardware.nix
       ./network.nix
       ./user.nix
+
+      ./dn42
     ]
     ++ ls ./modules
     ++ ls ../../modules/system
