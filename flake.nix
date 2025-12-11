@@ -38,7 +38,6 @@
             system = "x86_64-linux";
             modules = with inputs; [
               ./machines/${hostname}
-              chaotic.nixosModules.default
               disko.nixosModules.disko
               sops-nix.nixosModules.sops
             ];
