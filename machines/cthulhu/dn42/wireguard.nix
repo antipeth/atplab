@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{config, ...}: {
   # Wireguard Peer
   sops.secrets.cthulhu-dn42-wg-privatekey = {
     mode = "0400";
