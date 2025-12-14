@@ -1,6 +1,6 @@
 {lib, ...}: let
   ls = lib.filesystem.listFilesRecursive;
-  primary-disk = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
+  primary-disk = "/dev/disk/by-path/virtio-pci-0000:00:07.0";
 in {
   imports =
     [
@@ -17,7 +17,7 @@ in {
 
   boot.loader.limine.biosDevice = primary-disk;
   disko.devices.disk.main.device = primary-disk;
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
   networking.hostId = "87e87438";
   swapDevices = [];
   zramSwap.enable = true;
