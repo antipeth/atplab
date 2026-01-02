@@ -1,10 +1,15 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   boot = {
     supportedFilesystems = ["zfs"];
     kernelParams = [
       "zfs_force=1"
     ];
     zfs = {
+      package = pkgs.zfs_unstable;
       forceImportRoot = false;
       devNodes = lib.mkDefault "/dev/disk/by-path";
     };
