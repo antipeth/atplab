@@ -1,6 +1,6 @@
 {lib, ...}: let
   ls = lib.filesystem.listFilesRecursive;
-  primary-disk = "/dev/disk/by-path/virtio-pci-0000:00:07.0";
+  primary-disk = "/dev/disk/by-path/virtio-pci-0000:07:00.0";
 in {
   imports =
     [
