@@ -5,6 +5,7 @@ in {
   imports =
     [
       ./disko.nix
+      ./encrypt.nix
       ./hardware.nix
       ./network.nix
       ./user.nix
@@ -17,7 +18,7 @@ in {
 
   boot.loader.limine.biosDevice = primary-disk;
   disko.devices.disk.main.device = primary-disk;
-  system.stateVersion = "26.05";
+  system.stateVersion = "26.11";
   networking.hostId = "87e87438";
   swapDevices = [];
   zramSwap.enable = true;
