@@ -9,7 +9,7 @@ in {
       ./network.nix
       ./user.nix
 
-      ./dn42
+      # ./dn42
     ]
     ++ ls ./modules
     ++ ls ../../modules/system
