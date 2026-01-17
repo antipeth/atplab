@@ -26,7 +26,6 @@
       enable = true; # hdd no need
       interval = "weekly";
     };
-    autoSnapshot.enable = true;
   };
   systemd.services = {
     zfs-share.enable = lib.mkForce false;
