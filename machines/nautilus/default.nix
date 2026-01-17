@@ -5,6 +5,7 @@ in {
   imports =
     [
       ./disko.nix
+      ./encrypt.nix
       ./hardware.nix
       ./network.nix
       ./user.nix

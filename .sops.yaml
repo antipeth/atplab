@@ -8,7 +8,7 @@ keys:
   - &server_octopus age1w9nd8s78k0gfzjdqe53dgvqpuey84qthphur3nj5hre9dg0h2cpsdlv73m
   - &server_squid age19nnysn8lz8sdvd0ujak5gm6xlgr539mh32753v8ku50ma4nff4nqwjj5tm
   - &server_cthulhu age1hrk8hspmdva9dvv5vwfymunxdmwce5qcrhtew54f4vkljm70xq0qaffa87
-  - &server_nautilus age1204u99jlx256u0p2purqpqc067rt7eufkhehu9vdl8j78wdl7ghq4eqspj
+  - &server_nautilus age1tl7qz9vum9m9a8sz6flumhrt3luwzshpnsaalyl68w6mn8j8ngjs92tfe9
 creation_rules:
   - path_regex: machines/auction/values/.*
     key_groups:
