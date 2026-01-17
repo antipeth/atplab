@@ -5,20 +5,25 @@ in {
   imports =
     [
       ./disko.nix
+      ./encrypt.nix
       ./hardware.nix
       ./network.nix
       ./user.nix
 
       ./dn42
       ./values/Dko972mcS27c.nix
+
+      ../../modules/services/zfs.nix
     ]
     ++ ls ./modules
     ++ ls ../../modules/system
     ++ ls ../../modules/options;
 
   boot.loader.limine.biosDevice = primary-disk;
+  boot.zfs.devNodes = "/dev/disk/by-id";
+  boot.kernelParams = ["zfs.zfs_arc_max=2147483648"];
   disko.devices.disk.main.device = primary-disk;
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
   networking.hostId = "b677c87d";
   swapDevices = [];
   zramSwap.enable = true;

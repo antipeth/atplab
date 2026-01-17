@@ -12,14 +12,20 @@ _: {
         ];
       };
       enable = true;
+      storage.settings = {
+        storage.driver = "zfs";
+        storage.graphroot = "/var/lib/containers/storage";
+        storage.runroot = "/run/containers/storage";
+        storage.options.zfs.fsname = "zroot/root";
+      };
     };
+    oci-containers.backend = "podman";
     podman = {
-      enable = true;
-      dockerCompat = true;
       autoPrune = {
         enable = true;
         dates = "weekly";
       };
+      enable = true;
       defaultNetwork.settings = {
         dns_enabled = true;
         ipv6_enabled = true;
@@ -34,7 +40,8 @@ _: {
           }
         ];
       };
+      dockerCompat = true;
+      dockerSocket.enable = true;
     };
-    oci-containers.backend = "podman";
   };
 }
