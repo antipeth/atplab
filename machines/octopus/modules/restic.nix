@@ -40,6 +40,7 @@ in {
           "/var/lib/grafana"
           "/var/lib/headscale"
           "/var/lib/openlist"
+          "/var/lib/radicale"
           "/var/lib/private/actual"
           "/var/lib/private/wakapi"
         ];
