@@ -4,74 +4,59 @@ _: {
       main = {
         type = "disk";
         content = {
-          type = "gpt";
           partitions = {
             boot = {
+              attributes = [0];
               priority = 1;
               size = "1M";
               type = "EF02";
             };
             esp = {
-              priority = 2;
-              size = "256M";
-              type = "EF00";
               content = {
                 type = "filesystem";
                 format = "vfat";
-                mountpoint = "/boot";
                 mountOptions = ["umask=0077"];
+                mountpoint = "/boot";
               };
+              priority = 2;
+              size = "256M";
+              type = "EF00";
             };
-            luks = {
-              size = "100%";
+            zfs = {
               content = {
-                type = "luks";
-                name = "crypted";
-                extraOpenArgs = [];
-                settings = {
-                  # if you want to use the key for interactive login be sure there is no trailing newline
-                  # for example use `echo -n "password" > /tmp/secret.key`
-                  keyFile = "/tmp/secret.key";
-                  allowDiscards = true;
-                };
-                content = {
-                  type = "lvm_pv";
-                  vg = "pool";
-                };
+                pool = "zroot";
+                type = "zfs";
               };
+              size = "100%";
             };
           };
+          type = "gpt";
         };
       };
     };
-    lvm_vg = {
-      pool = {
-        type = "lvm_vg";
-        lvs = {
-          root = {
-            size = "100%";
-            content = {
-              type = "filesystem";
-              format = "xfs";
-              mountpoint = "/";
-              extraArgs = [
-                "-b"
-                "size=4096" # block size
-                "-i"
-                "size=512" # inode size
-                "-l"
-                "size=128m" # log size
-                "-n"
-                "size=8192" # directory block size
-                "-s"
-                "size=4096" # sector size
-              ];
-              mountOptions = [
-                "allocsize=128k,logbsize=256k,inode64,largeio,nodiscard,noatime,swalloc"
-              ];
+    zpool = {
+      zroot = {
+        datasets = {
+          "root" = {
+            mountpoint = "/";
+            options = {
+              encryption = "aes-256-gcm";
+              keyformat = "passphrase";
+              keylocation = "prompt";
+              "com.sun:auto-snapshot" = "false";
             };
+            type = "zfs_fs";
           };
         };
+        options.ashift = "12";
+        rootFsOptions = {
+          acltype = "posixacl";
+          atime = "off";
+          compression = "zstd";
+          mountpoint = "none";
+          xattr = "sa";
+        };
+        type = "zpool";
       };
     };
   };

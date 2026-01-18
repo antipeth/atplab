@@ -11,14 +11,16 @@ in {
       ./user.nix
 
       # ./dn42
+      ../../modules/services/zfs.nix
     ]
     ++ ls ./modules
     ++ ls ../../modules/system
     ++ ls ../../modules/options;
 
   boot.loader.limine.biosDevice = primary-disk;
+  boot.kernelParams = ["zfs.zfs_arc_max=1610612736"];
   disko.devices.disk.main.device = primary-disk;
-  system.stateVersion = "26.11";
+  system.stateVersion = "26.05";
   networking.hostId = "87e87438";
   swapDevices = [];
   zramSwap.enable = true;

@@ -7,7 +7,7 @@ keys:
   - &server_icecream age1uxu7lwlge36s6vrep05jq23kt44ftvxmg3j5ymtdkje9llte7elq7tejwh
   - &server_octopus age1w9nd8s78k0gfzjdqe53dgvqpuey84qthphur3nj5hre9dg0h2cpsdlv73m
   - &server_squid age19nnysn8lz8sdvd0ujak5gm6xlgr539mh32753v8ku50ma4nff4nqwjj5tm
-  - &server_cthulhu age1hrk8hspmdva9dvv5vwfymunxdmwce5qcrhtew54f4vkljm70xq0qaffa87
+  - &server_cthulhu age1g007d9q5j2gupvav8yfk98zwp46swqgxsrgp4s3g5dj78n6cn3gs6vu0nm
   - &server_nautilus age1tl7qz9vum9m9a8sz6flumhrt3luwzshpnsaalyl68w6mn8j8ngjs92tfe9
 creation_rules:
   - path_regex: machines/auction/values/.*
