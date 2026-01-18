@@ -22,28 +22,41 @@ _: {
               size = "256M";
               type = "EF00";
             };
-            luks-root = {
+            zfs = {
               content = {
-                content = {
-                  type = "filesystem";
-                  format = "f2fs";
-                  mountpoint = "/";
-                  extraArgs = [
-                    "-O"
-                    "compression,extra_attr,inode_checksum,sb_checksum"
-                  ];
-                  mountOptions = [
-                    "atgc,compress_algorithm=zstd:6,compress_chksum,gc_merge,lazytime,nodiscard"
-                  ];
-                };
-                name = "luks-root";
-                type = "luks";
+                pool = "zroot";
+                type = "zfs";
               };
               size = "100%";
             };
           };
           type = "gpt";
         };
+      };
+    };
+    zpool = {
+      zroot = {
+        datasets = {
+          "root" = {
+            mountpoint = "/";
+            options = {
+              encryption = "aes-256-gcm";
+              keyformat = "passphrase";
+              keylocation = "prompt";
+              "com.sun:auto-snapshot" = "false";
+            };
+            type = "zfs_fs";
+          };
+        };
+        options.ashift = "12";
+        rootFsOptions = {
+          acltype = "posixacl";
+          atime = "off";
+          compression = "zstd";
+          mountpoint = "none";
+          xattr = "sa";
+        };
+        type = "zpool";
       };
     };
   };

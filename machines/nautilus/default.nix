@@ -9,12 +9,15 @@ in {
       ./hardware.nix
       ./network.nix
       ./user.nix
+
+      ../../modules/services/zfs.nix
     ]
     ++ ls ./modules
     ++ ls ../../modules/system
     ++ ls ../../modules/options;
 
   boot.loader.limine.biosDevice = primary-disk;
+  boot.kernelParams = ["zfs.zfs_arc_max=1073741824"];
   disko.devices.disk.main.device = primary-disk;
   system.stateVersion = "26.05";
   networking.hostId = "a77f473e";
