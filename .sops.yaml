@@ -5,7 +5,7 @@ keys:
   - &server_freezer age1c5pu3h32u47c7k3g6xhqexsu3wyuj68us0cktgy78v0luyxxx5xqed37zk
   - &server_homelab age1y3fpqvn85xagmg0c8nzefum7g6g27vzul6gk66474xmdy62j5ycq5ezaa2
   - &server_icecream age1uxu7lwlge36s6vrep05jq23kt44ftvxmg3j5ymtdkje9llte7elq7tejwh
-  - &server_octopus age1w9nd8s78k0gfzjdqe53dgvqpuey84qthphur3nj5hre9dg0h2cpsdlv73m
+  - &server_octopus age17dsxdapjtfed2u9mgf9vx4pk4emwt7dg7h6298n7xu4mz3fhkflsg6jecw
   - &server_squid age19nnysn8lz8sdvd0ujak5gm6xlgr539mh32753v8ku50ma4nff4nqwjj5tm
   - &server_cthulhu age1g007d9q5j2gupvav8yfk98zwp46swqgxsrgp4s3g5dj78n6cn3gs6vu0nm
   - &server_nautilus age1g54wdqkq50tqmwmgstss0tag4wzx0g8z4aywx3646hj8aujee34q0020zr

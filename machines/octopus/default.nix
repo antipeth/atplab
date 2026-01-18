@@ -10,7 +10,7 @@ in {
       ./network.nix
       ./user.nix
 
-      ./dn42
+      # ./dn42
       ./values/5d34qGBR17c.nix
 
       ../../modules/services/zfs.nix
@@ -20,7 +20,6 @@ in {
     ++ ls ../../modules/options;
 
   boot.loader.limine.biosDevice = primary-disk;
-  boot.zfs.devNodes = "/dev/disk/by-id";
   boot.kernelParams = ["zfs.zfs_arc_max=2147483648"];
   disko.devices.disk.main.device = primary-disk;
   system.stateVersion = "26.05";
