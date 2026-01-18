@@ -1,7 +1,7 @@
 _: {
   services.prometheus.exporters = {
     node = {
-      enable = true;
+      enable = false;
       listenAddress = import ../values/prometheus-node-address.nix;
       port = 9000;
       enabledCollectors = [
