@@ -1,5 +1,6 @@
 keys:
   - &admin_atp age1gym933jnyln9nud8vhg44vtp983prgfpnlxr0zw2tr9x9s575vyqyufmyd
+  - &server_ammonite age1luz57tez0kjk5njt3xpep25cvnlva2z9dqeca3df733mxdhhwvdsz06yf4
   - &server_auction age1ccwqnh66ktsccup8urtmdwqku3wc37s754j3l7k9vqagp6ll3veqhwjhxl
   - &server_crystal age1vacywlqvmx6d2tfshssjky3k8zeg0z80jeja44mepq0vtuderdjq4sl78v
   - &server_freezer age1c5pu3h32u47c7k3g6xhqexsu3wyuj68us0cktgy78v0luyxxx5xqed37zk
@@ -10,6 +11,16 @@ keys:
   - &server_cthulhu age1g007d9q5j2gupvav8yfk98zwp46swqgxsrgp4s3g5dj78n6cn3gs6vu0nm
   - &server_nautilus age1g54wdqkq50tqmwmgstss0tag4wzx0g8z4aywx3646hj8aujee34q0020zr
 creation_rules:
+  - path_regex: machines/ammonite/values/.*
+    key_groups:
+      - age:
+          - *admin_atp
+  - path_regex: machines/ammonite/secrets/.*
+    key_groups:
+      - age:
+          - *admin_atp
+          - *server_ammonite
+
   - path_regex: machines/auction/values/.*
     key_groups:
       - age:
