@@ -1,5 +1,5 @@
 {config, ...}: {
-  sops.secrets.octopus-hashedPassword = {
+  sops.secrets.nautilus-hashedPassword = {
     format = "binary";
     sopsFile = secrets/hashedPassword;
     neededForUsers = true;
@@ -8,7 +8,7 @@
     mutableUsers = false;
     users = {
       root = {
-        hashedPasswordFile = config.sops.secrets.octopus-hashedPassword.path;
+        hashedPasswordFile = config.sops.secrets.nautilus-hashedPassword.path;
         openssh.authorizedKeys.keys = [
           (import values/public-key.nix)
         ];
