@@ -37,8 +37,10 @@ in {
         initialize = true;
         passwordFile = config.sops.secrets.octopus-restic-passwd.path;
         paths = [
+          "/var/lib/akkoma"
           "/var/lib/grafana"
           "/var/lib/headscale"
+          "/var/lib/kavita"
           "/var/lib/openlist"
           "/var/lib/radicale"
           "/var/lib/private/actual"
