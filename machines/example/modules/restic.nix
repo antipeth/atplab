@@ -16,6 +16,12 @@
           OnCalendar = "21:00:00";
           Persistent = true;
         };
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 4"
+          "--keep-monthly 12"
+          "--keep-yearly 2"
+        ];
         backupPrepareCommand = ''
           ${pkgs.curl}/bin/curl "http://127.0.0.1:1245/message?token=AkFEQLUQdbIP7yG" \
             -F "title=restic local backup start" \
@@ -45,6 +51,12 @@
           OnCalendar = "21:10:00";
           Persistent = true;
         };
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 4"
+          "--keep-monthly 12"
+          "--keep-yearly 2"
+        ];
         backupPrepareCommand = ''
           ${pkgs.curl}/bin/curl "http://127.0.0.1:1245/message?token=AkFEQLUQdbIP7yG" \
             -F "title=restic remote1 backup start" \

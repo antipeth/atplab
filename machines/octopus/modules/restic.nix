@@ -45,6 +45,12 @@ in {
           "/var/lib/private/wakapi"
         ];
         timerConfig.Persistent = true;
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 4"
+          "--keep-monthly 12"
+          "--keep-yearly 2"
+        ];
       };
 
       mkNotify = remote: {
