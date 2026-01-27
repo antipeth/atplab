@@ -37,6 +37,7 @@ in {
         initialize = true;
         passwordFile = config.sops.secrets.squid-restic-passwd.path;
         paths = [
+          "/var/lib/containers/storage/volumes/archivebox"
           "/var/lib/containers/storage/volumes/atomic-storage"
           "/var/lib/containers/storage/volumes/fusion"
           "/var/lib/containers/storage/volumes/glance"
