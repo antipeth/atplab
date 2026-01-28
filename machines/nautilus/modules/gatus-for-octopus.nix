@@ -6,6 +6,10 @@ _: {
         url = "https://actual.0pt.dpdns.org";
       }
       {
+        name = "akkoma";
+        url = "https://akkoma.0pt.dpdns.org";
+      }
+      {
         name = "aria2";
         url = "https://ariang.0pt.dpdns.org";
       }
@@ -28,6 +32,10 @@ _: {
       {
         name = "minio-ui";
         url = "https://minio-ui.0pt.dpdns.org";
+      }
+      {
+        name = "lemmy";
+        url = "https://lemmy.0pt.dpdns.org";
       }
       {
         name = "openlist";

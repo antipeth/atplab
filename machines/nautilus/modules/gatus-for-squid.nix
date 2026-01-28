@@ -2,6 +2,10 @@ _: {
   services.gatus.settings.endpoints = let
     servicesList = [
       {
+        name = "archivebox";
+        url = "https://archivebox.0pt.dpdns.org";
+      }
+      {
         name = "atomic-server";
         url = "https://atomic.0pt.dpdns.org";
       }
@@ -28,6 +32,10 @@ _: {
       {
         name = "libretranslate";
         url = "https://translate.0pt.dpdns.org";
+      }
+      {
+        name = "miniflux";
+        url = "https://miniflux.0pt.dpdns.org";
       }
       {
         name = "mozhi";
