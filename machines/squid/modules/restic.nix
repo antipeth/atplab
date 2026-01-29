@@ -44,7 +44,6 @@ in {
           "/var/lib/containers/storage/volumes/goatcounter"
           "/var/lib/containers/storage/volumes/opengist"
           "/var/lib/containers/storage/volumes/postgres"
-          "/var/lib/containers/storage/volumes/readeck"
         ];
         timerConfig.Persistent = true;
         pruneOpts = [

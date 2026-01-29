@@ -44,6 +44,7 @@ in {
           "/var/lib/openlist"
           "/var/lib/radicale"
           "/var/lib/private/actual"
+          "/var/lib/private/readeck"
           "/var/lib/private/wakapi"
         ];
         timerConfig.Persistent = true;
