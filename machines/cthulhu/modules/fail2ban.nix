@@ -11,9 +11,9 @@ in {
       [Definition]
       norestored = true
 
-      actionban = curl "http://127.0.0.1:1245/message?token=${gft}" -F "title=[Fail2Ban] <ip> banned" -F "message=<name> jail has banned <ip> on $(hostname) after <failures> failed attempts." -F "priority=3"
+      actionban = curl "https://gotify.0pt.dpdns.org/message?token=${gft}" -F "title=[Fail2Ban] <ip> banned" -F "message=<name> jail has banned <ip> on $(hostname) after <failures> failed attempts." -F "priority=3"
 
-      actionunban = curl "http://127.0.0.1:1245/message?token=${gft}" -F "title=[Fail2Ban] <ip> unbanned" -F "message=<name> jail has unbanned <ip> on $(hostname)." -F "priority=2"
+      actionunban = curl "https://gotify.0pt.dpdns.org/message?token=${gft}" -F "title=[Fail2Ban] <ip> unbanned" -F "message=<name> jail has unbanned <ip> on $(hostname)." -F "priority=2"
     '');
   };
   services = {
