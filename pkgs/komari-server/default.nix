@@ -6,10 +6,10 @@
 }:
 stdenvNoCC.mkDerivation {
   pname = "komari-server";
-  version = "1.1.3";
+  version = "1.1.4";
   src = fetchurl {
-    url = "https://github.com/komari-monitor/komari/releases/download/1.1.3/komari-linux-amd64";
-    sha256 = "sha256-ZISq9sjJ2zXzSR5GjEC8iMR26DaN9IyAN+1sJzvT2oA=";
+    url = "https://github.com/komari-monitor/komari/releases/download/1.1.4/komari-linux-amd64";
+    sha256 = "sha256-v/I3l44F3ruZiyFtwNxuLHf/3ddt73lwPy1utTmrvnI=";
   };
   dontUnpack = true;
   installPhase = ''
