@@ -50,16 +50,12 @@ _: {
         url = "https://opengist.0pt.dpdns.org";
       }
       {
-        name = "readeck";
-        url = "https://readeck.0pt.dpdns.org";
-      }
-      {
         name = "rsshub";
         url = "https://rsshub.0pt.dpdns.org";
       }
       {
         name = "rustpad";
-        url = "https://pad.0pt.dpdns.org";
+        url = "https://rustpad.0pt.dpdns.org";
       }
       {
         name = "ryot";

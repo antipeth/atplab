@@ -50,6 +50,10 @@ _: {
         url = "https://radicale.0pt.dpdns.org";
       }
       {
+        name = "readeck";
+        url = "https://readeck.0pt.dpdns.org";
+      }
+      {
         name = "wakapi";
         url = "https://wakapi.0pt.dpdns.org";
       }
