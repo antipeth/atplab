@@ -11,12 +11,12 @@
     labels = {
       "glance.name" = "rustpad";
       "glance.icon" = "sh:rustpad";
-      "glance.url" = "https://pad.0pt.dpdns.org";
+      "glance.url" = "https://rustpad.0pt.dpdns.org";
       "glance.description" = "Online Shared Pad";
     };
   };
   services = {
-    nginx.virtualHosts."pad.0pt.dpdns.org" = {
+    nginx.virtualHosts."rustpad.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;
       sslCertificate = "/etc/nginx/self-sign.crt";
@@ -27,7 +27,7 @@
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://unix:${config.services.anubis.instances.pad.settings.BIND}:";
+        proxyPass = "http://unix:${config.services.anubis.instances.rustpad.settings.BIND}:";
         extraConfig = ''
           proxy_http_version 1.1;
           proxy_set_header Upgrade $http_upgrade;
@@ -36,10 +36,10 @@
         '';
       };
     };
-    anubis.instances.pad.settings = {
+    anubis.instances.rustpad.settings = {
       TARGET = "http://127.0.0.1:3030";
-      BIND = "/run/anubis/anubis-pad/anubis-pad.sock";
-      METRICS_BIND = "/run/anubis/anubis-pad/anubis-pad-metrics.sock";
+      BIND = "/run/anubis/anubis-rustpad/anubis-rustpad.sock";
+      METRICS_BIND = "/run/anubis/anubis-rustpad/anubis-rustpad-metrics.sock";
     };
   };
 }
