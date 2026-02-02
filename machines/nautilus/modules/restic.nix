@@ -19,6 +19,8 @@ in {
       "restic-remote3-repo"
       "restic-remote4-env"
       "restic-remote4-repo"
+      "restic-remote5-rclone"
+      "restic-remote5-repo"
     ];
   in
     builtins.listToAttrs (map (n: {
@@ -37,6 +39,7 @@ in {
         initialize = true;
         passwordFile = config.sops.secrets.nautilus-restic-passwd.path;
         paths = [
+          "/var/lib/fail2ban"
           "/var/lib/komari-server"
           "/var/lib/private/gatus"
           "/var/lib/private/gotify-server"
@@ -67,22 +70,27 @@ in {
         remote1 = {
           repositoryFile = config.sops.secrets.nautilus-restic-remote1-repo.path;
           environmentFile = config.sops.secrets.nautilus-restic-remote1-env.path;
-          timerConfig.OnCalendar = "01:00:00";
+          timerConfig.OnCalendar = "02:00:00";
         };
         remote2 = {
           repositoryFile = config.sops.secrets.nautilus-restic-remote2-repo.path;
           rcloneConfigFile = config.sops.secrets.nautilus-restic-remote2-rclone.path;
-          timerConfig.OnCalendar = "01:10:00";
+          timerConfig.OnCalendar = "02:05:00";
         };
         remote3 = {
           repositoryFile = config.sops.secrets.nautilus-restic-remote3-repo.path;
           environmentFile = config.sops.secrets.nautilus-restic-remote3-env.path;
-          timerConfig.OnCalendar = "01:20:00";
+          timerConfig.OnCalendar = "02:10:00";
         };
         remote4 = {
           repositoryFile = config.sops.secrets.nautilus-restic-remote4-repo.path;
           environmentFile = config.sops.secrets.nautilus-restic-remote4-env.path;
-          timerConfig.OnCalendar = "01:30:00";
+          timerConfig.OnCalendar = "02:15:00";
+        };
+        remote5 = {
+          repositoryFile = config.sops.secrets.nautilus-restic-remote5-repo.path;
+          rcloneConfigFile = config.sops.secrets.nautilus-restic-remote5-rclone.path;
+          timerConfig.OnCalendar = "02:20:00";
         };
       };
 
