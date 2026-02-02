@@ -19,6 +19,8 @@ in {
       "restic-remote3-repo"
       "restic-remote4-env"
       "restic-remote4-repo"
+      "restic-remote5-rclone"
+      "restic-remote5-repo"
     ];
   in
     builtins.listToAttrs (map (n: {
@@ -37,6 +39,7 @@ in {
         initialize = true;
         passwordFile = config.sops.secrets.squid-restic-passwd.path;
         paths = [
+          "/var/lib/fail2ban"
           "/var/lib/containers/storage/volumes/archivebox"
           "/var/lib/containers/storage/volumes/atomic-storage"
           "/var/lib/containers/storage/volumes/fusion"
@@ -86,6 +89,11 @@ in {
           repositoryFile = config.sops.secrets.squid-restic-remote4-repo.path;
           environmentFile = config.sops.secrets.squid-restic-remote4-env.path;
           timerConfig.OnCalendar = "01:35:00";
+        };
+        remote5 = {
+          repositoryFile = config.sops.secrets.squid-restic-remote5-repo.path;
+          rcloneConfigFile = config.sops.secrets.squid-restic-remote5-rclone.path;
+          timerConfig.OnCalendar = "01:45:00";
         };
       };
 
