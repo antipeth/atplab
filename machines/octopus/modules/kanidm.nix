@@ -20,13 +20,6 @@ in {
       format = "binary";
       sopsFile = ../secrets/kanidm-idmadmin;
     };
-    octopus-kanidm-miniflux-bs = {
-      mode = "0444";
-      owner = "kanidm";
-      group = "kanidm";
-      format = "binary";
-      sopsFile = ../secrets/kanidm-miniflux-bs;
-    };
   };
   services = {
     kanidm = {
@@ -56,22 +49,6 @@ in {
         groups = {
           testgp = {
             members = ["test"];
-          };
-        };
-        systems.oauth2 = {
-          miniflux = {
-            displayName = "Miniflux";
-            basicSecretFile = config.sops.secrets.octopus-kanidm-miniflux-bs.path;
-            originUrl = "https://test.0pt.dpdns.org/oauth2/oidc/callback";
-            originLanding = "https://test.0pt.dpdns.org";
-            preferShortUsername = true;
-            scopeMaps = {
-              testgp = [
-                "openid"
-                "email"
-                "profile"
-              ];
-            };
           };
         };
       };

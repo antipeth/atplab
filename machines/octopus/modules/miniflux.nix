@@ -1,9 +1,17 @@
 {config, ...}: let
   cfg = config.services.miniflux;
 in {
+  sops.secrets.octopus-kanidm-miniflux-bs = {
+    mode = "0444";
+    owner = "miniflux";
+    group = "miniflux";
+    format = "binary";
+    sopsFile = ../secrets/kanidm-miniflux-bs;
+  };
   services = {
     miniflux = {
       enable = true;
+      # adminCredentialsFile = /run/secret;
       config = {
         CREATE_ADMIN = false;
         LISTEN_ADDR = "127.0.0.1:8005";
@@ -12,12 +20,12 @@ in {
         OAUTH2_OIDC_PROVIDER_NAME = "Kanidm";
         OAUTH2_CLIENT_ID = "miniflux";
         OAUTH2_CLIENT_SECRET_FILE = config.sops.secrets.octopus-kanidm-miniflux-bs.path;
-        OAUTH2_REDIRECT_URL = "https://test.0pt.dpdns.org/oauth2/oidc/callback";
+        OAUTH2_REDIRECT_URL = "https://miniflux.0pt.dpdns.org/oauth2/oidc/callback";
         OAUTH2_OIDC_DISCOVERY_ENDPOINT = "https://kanidm.0pt.dpdns.org/oauth2/openid/miniflux";
-        OAUTH2_USER_CREATION = 1; # For OIDC Register
+        OAUTH2_USER_CREATION = 0; # Set 1 to allow OIDC Register
       };
     };
-    nginx.virtualHosts."test.0pt.dpdns.org" = {
+    nginx.virtualHosts."miniflux.0pt.dpdns.org" = {
       forceSSL = true;
       kTLS = true;
       sslCertificate = "/etc/nginx/self-sign.crt";
@@ -39,6 +47,20 @@ in {
       TARGET = "http://${cfg.config.LISTEN_ADDR}";
       BIND = "/run/anubis/anubis-miniflux/anubis-miniflux.sock";
       METRICS_BIND = "/run/anubis/anubis-miniflux/anubis-miniflux-metrics.sock";
+    };
+    kanidm.provision.systems.oauth2.miniflux = {
+      displayName = "Miniflux";
+      basicSecretFile = config.sops.secrets.octopus-kanidm-miniflux-bs.path;
+      originUrl = "https://miniflux.0pt.dpdns.org/oauth2/oidc/callback";
+      originLanding = "https://miniflux.0pt.dpdns.org";
+      preferShortUsername = true;
+      scopeMaps = {
+        testgp = [
+          "openid"
+          "email"
+          "profile"
+        ];
+      };
     };
   };
   users.users.miniflux = {
