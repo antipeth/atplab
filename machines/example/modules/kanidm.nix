@@ -46,6 +46,7 @@ in {
             basicSecretFile = /run/basicSecretFile;
             originUrl = "https://miniflux.example.com/oauth2/oidc/callback";
             originLanding = "https://miniflux.example.com";
+            enableLegacyCrypto = false; # Set false to use ES256. Set true to use RS256.
             preferShortUsername = true;
             scopeMaps = {
               testgp = [
