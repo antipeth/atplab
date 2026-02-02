@@ -19,6 +19,8 @@ in {
       "restic-remote3-repo"
       "restic-remote4-env"
       "restic-remote4-repo"
+      "restic-remote5-rclone"
+      "restic-remote5-repo"
     ];
   in
     builtins.listToAttrs (map (n: {
@@ -38,10 +40,12 @@ in {
         passwordFile = config.sops.secrets.octopus-restic-passwd.path;
         paths = [
           "/var/lib/akkoma"
+          "/var/lib/fail2ban"
           "/var/lib/grafana"
-          "/var/lib/headscale"
+          "/var/lib/kanidm"
           "/var/lib/kavita"
           "/var/lib/openlist"
+          "/var/lib/postgresql"
           "/var/lib/radicale"
           "/var/lib/private/actual"
           "/var/lib/private/readeck"
@@ -88,6 +92,11 @@ in {
           repositoryFile = config.sops.secrets.octopus-restic-remote4-repo.path;
           environmentFile = config.sops.secrets.octopus-restic-remote4-env.path;
           timerConfig.OnCalendar = "01:30:00";
+        };
+        remote5 = {
+          repositoryFile = config.sops.secrets.octopus-restic-remote5-repo.path;
+          rcloneConfigFile = config.sops.secrets.octopus-restic-remote5-rclone.path;
+          timerConfig.OnCalendar = "01:40:00";
         };
       };
 
