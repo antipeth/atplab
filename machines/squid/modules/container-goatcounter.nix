@@ -1,4 +1,4 @@
-{config, ...}: {
+_: {
   virtualisation.oci-containers.containers."goatcounter" = {
     pull = "newer";
     image = "arp242/goatcounter:latest";
@@ -26,17 +26,12 @@
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://unix:${config.services.anubis.instances.goatcounter.settings.BIND}:";
+        proxyPass = "http://127.0.0.1:8082";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
         '';
       };
-    };
-    anubis.instances.goatcounter.settings = {
-      TARGET = "http://127.0.0.1:8082";
-      BIND = "/run/anubis/anubis-goatcounter/anubis-goatcounter.sock";
-      METRICS_BIND = "/run/anubis/anubis-goatcounter/anubis-goatcounter-metrics.sock";
     };
   };
 }
