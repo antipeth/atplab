@@ -14,7 +14,15 @@ _: {
         url = "https://ariang.0pt.dpdns.org";
       }
       {
-        name = "garage-webui";
+        name = "conduit";
+        url = "https://ariang.0pt.dpdns.org";
+      }
+      {
+        name = "garage";
+        url = "https://garage.0pt.dpdns.org";
+      }
+      {
+        name = "garage-ui";
         url = "https://garage-ui.0pt.dpdns.org";
       }
       {
@@ -22,27 +30,51 @@ _: {
         url = "https://grafana.0pt.dpdns.org";
       }
       {
+        name = "headscale";
+        url = "https://hs.0pt.dpdns.org/windows";
+      }
+      {
+        name = "headscale-ui";
+        url = "https://hs.0pt.dpdns.org/web/";
+      }
+      {
+        name = "kanidm";
+        url = "https://kanidm.0pt.dpdns.org";
+      }
+      {
+        name = "karakeep";
+        url = "https://karakeep.0pt.dpdns.org";
+      }
+      {
         name = "kavita";
         url = "https://kavita.0pt.dpdns.org";
-      }
-      {
-        name = "microbin";
-        url = "https://microbin.0pt.dpdns.org";
-      }
-      {
-        name = "minio-ui";
-        url = "https://minio-ui.0pt.dpdns.org";
       }
       {
         name = "lemmy";
         url = "https://lemmy.0pt.dpdns.org";
       }
       {
+        name = "microbin";
+        url = "https://microbin.0pt.dpdns.org";
+      }
+      {
+        name = "miniflux";
+        url = "https://miniflux.0pt.dpdns.org";
+      }
+      {
+        name = "minio";
+        url = "https://minio.0pt.dpdns.org";
+      }
+      {
+        name = "minio-ui";
+        url = "https://minio-ui.0pt.dpdns.org";
+      }
+      {
         name = "openlist";
         url = "https://openlist.0pt.dpdns.org";
       }
       {
-        name = "qb-for-pt";
+        name = "qbitorrent";
         url = "https://qb.0pt.dpdns.org";
       }
       {
@@ -52,6 +84,10 @@ _: {
       {
         name = "readeck";
         url = "https://readeck.0pt.dpdns.org";
+      }
+      {
+        name = "umami";
+        url = "https://umami.0pt.dpdns.org";
       }
       {
         name = "wakapi";
@@ -64,8 +100,8 @@ _: {
         group = "octopus";
         interval = "1h";
         conditions = [
-          "[STATUS] == any(200, 401)"
-          "[RESPONSE_TIME] < 3000"
+          "[STATUS] == any(200, 401, 403)"
+          "[RESPONSE_TIME] < 5000"
         ];
         alerts = [{type = "gotify";}];
       };

@@ -42,12 +42,28 @@ _: {
         url = "https://mozhi.0pt.dpdns.org";
       }
       {
+        name = "myip";
+        url = "https://myip.0pt.dpdns.org";
+      }
+      {
+        name = "myspeed";
+        url = "https://myspeed.0pt.dpdns.org";
+      }
+      {
         name = "omni-tools";
         url = "https://omni-tools.0pt.dpdns.org";
       }
       {
         name = "opengist";
         url = "https://opengist.0pt.dpdns.org";
+      }
+      {
+        name = "openlist for bt";
+        url = "https://ol.0pt.dpdns.org";
+      }
+      {
+        name = "qbitorrent for bt";
+        url = "https://qbee.0pt.dpdns.org/";
       }
       {
         name = "rsshub";
