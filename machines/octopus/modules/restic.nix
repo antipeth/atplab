@@ -54,6 +54,7 @@ in {
         timerConfig.Persistent = true;
         pruneOpts = [
           "--keep-daily 7"
+          "--group-by host"
         ];
       };
 
