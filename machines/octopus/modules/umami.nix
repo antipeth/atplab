@@ -14,7 +14,7 @@ in {
       createPostgresqlDatabase = true;
       settings = {
         APP_SECRET_FILE = config.sops.secrets.octopus-umami-secret.path;
-        COLLECT_API_ENDPOINT = "/appui";
+        COLLECT_API_ENDPOINT = "/api/appui";
         TRACKER_SCRIPT_NAME = ["login.js"];
         HOSTNAME = "127.0.0.1";
         PORT = 3002;
@@ -32,18 +32,13 @@ in {
         proxy_hide_header Server;
       '';
       locations."/" = {
-        proxyPass = "http://unix:${config.services.anubis.instances.umami.settings.BIND}:";
+        proxyPass = "http://${cfg.settings.HOSTNAME}:${toString cfg.settings.PORT}";
         recommendedProxySettings = true;
         extraConfig = ''
           proxy_buffering off;
           client_max_body_size 20000m;
         '';
       };
-    };
-    anubis.instances.umami.settings = {
-      TARGET = "http://${cfg.settings.HOSTNAME}:${toString cfg.settings.PORT}";
-      BIND = "/run/anubis/anubis-umami/anubis-umami.sock";
-      METRICS_BIND = "/run/anubis/anubis-umami/anubis-umami-metrics.sock";
     };
   };
   users.users.umami = {
