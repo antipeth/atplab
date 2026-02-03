@@ -62,6 +62,7 @@
       add_header 'Referrer-Policy' 'origin-when-cross-origin';
 
       # Disable embedding as a frame
+      # It would cause etherpad problem: https://github.com/ether/etherpad-lite/issues/5829
       add_header X-Frame-Options DENY;
 
       # Prevent injection of code in other mime types (XSS Attacks)
