@@ -16,7 +16,7 @@ in {
       # ''
       # WAKAPI_PASSWORD_SALT=xxxxxxxxxxxxxxxxxxxxx
       # ''
-      passwordSaltFile = config.sops.secrets.octopus-wakapi-passwd-salt.path;
+      environmentFiles = [config.sops.secrets.octopus-wakapi-passwd-salt.path];
       settings = {
         env = "production";
         server = {
