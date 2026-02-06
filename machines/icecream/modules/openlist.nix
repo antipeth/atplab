@@ -1,0 +1,25 @@
+_: {
+  services = {
+    openlist = {
+      enable = true;
+    };
+    nginx.virtualHosts."openlist.0pt.lab" = {
+      forceSSL = true;
+      kTLS = true;
+      sslCertificate = "/etc/nginx/self-sign.crt";
+      sslCertificateKey = "/etc/nginx/self-sign.key";
+      extraConfig = ''
+        proxy_hide_header X-Powered-By;
+        proxy_hide_header Server;
+      '';
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:5244";
+        recommendedProxySettings = true;
+        extraConfig = ''
+          client_max_body_size 10G;
+          proxy_buffering off;
+        '';
+      };
+    };
+  };
+}
