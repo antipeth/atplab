@@ -9,7 +9,7 @@
       "zfs_force=1"
     ];
     zfs = {
-      package = pkgs.zfs_unstable;
+      # package = pkgs.zfs_unstable;
       forceImportRoot = false;
       devNodes = lib.mkDefault "/dev/disk/by-path";
     };
