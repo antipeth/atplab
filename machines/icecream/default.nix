@@ -20,4 +20,5 @@ in {
   networking.hostId = "2896c4e1";
   boot.kernelParams = ["zfs.zfs_arc_max=4294967296"]; # Zfs arc is a beast, it would eat out all memory if you don't set limit!
   boot.zfs.devNodes = "/dev/disk/by-id";
+  zramSwap.enable = true;
 }
