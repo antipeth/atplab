@@ -10,10 +10,10 @@
       "nouveau"
       "nvidia"
       "radeon"
-      # "amdgpu"
+      "amdgpu"
       "snd_hda_intel" # Disable audio
       "snd_hda_codec_hdmi"
-      "i915"
+      # "i915"
     ];
     kernelParams = [
       "pcie_aspm=force"
@@ -45,5 +45,7 @@
   };
   services.scx = {
     enable = false;
+    package = pkgs.scx.rustscheds;
+    scheduler = "scx_bpfland";
   };
 }

@@ -14,6 +14,6 @@ in {
 
   boot.loader.limine.biosDevice = primary-disk;
   disko.devices.disk.main.device = primary-disk;
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
   networking.hostId = "2896c4e1";
 }

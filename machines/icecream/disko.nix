@@ -1,87 +1,59 @@
-{
+_: {
   disko.devices = {
     disk = {
       main = {
         type = "disk";
         content = {
-          type = "gpt";
           partitions = {
             boot = {
-              size = "1M";
-              type = "EF02"; # for grub MBR
-              priority = 0;
-            };
-            ESP = {
-              size = "512M";
-              type = "EF00";
+              attributes = [0];
               priority = 1;
+              size = "1M";
+              type = "EF02";
+            };
+            esp = {
               content = {
                 type = "filesystem";
                 format = "vfat";
-                mountpoint = "/boot";
                 mountOptions = ["umask=0077"];
+                mountpoint = "/boot";
               };
+              priority = 2;
+              size = "256M";
+              type = "EF00";
             };
             zfs = {
-              size = "100%";
               content = {
-                type = "zfs";
                 pool = "zroot";
+                type = "zfs";
               };
+              size = "100%";
             };
           };
+          type = "gpt";
         };
       };
     };
     zpool = {
       zroot = {
-        type = "zpool";
-        rootFsOptions = {
-          # https://wiki.archlinux.org/title/Install_Arch_Linux_on_ZFS
-          acltype = "posixacl";
-          atime = "off";
-          compression = "lz4";
-          mountpoint = "none";
-          xattr = "sa";
-        };
-        options.ashift = "12";
-
         datasets = {
-          home = {
-            type = "zfs_fs";
-            mountpoint = "/home";
-            # Used by services.zfs.autoSnapshot options.
-            options = {
-              "com.sun:auto-snapshot" = "true";
-              mountpoint = "legacy";
-            };
-          };
-          nix = {
-            type = "zfs_fs";
-            mountpoint = "/nix";
-            options = {
-              "com.sun:auto-snapshot" = "false";
-              mountpoint = "legacy";
-            };
-          };
-          persist = {
-            type = "zfs_fs";
-            mountpoint = "/persist";
-            options = {
-              "com.sun:auto-snapshot" = "false";
-              mountpoint = "legacy";
-            };
-          };
-          root = {
-            type = "zfs_fs";
+          "root" = {
             mountpoint = "/";
             options = {
               "com.sun:auto-snapshot" = "false";
-              mountpoint = "legacy";
             };
-            postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^zroot/root@blank$' || zfs snapshot zroot/root@blank";
+            type = "zfs_fs";
           };
         };
+        options.ashift = "12";
+        rootFsOptions = {
+          acltype = "posixacl";
+          atime = "off";
+          compression = "zstd";
+          mountpoint = "none";
+          xattr = "sa";
+        };
+        type = "zpool";
       };
     };
   };
