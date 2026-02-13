@@ -14,10 +14,6 @@ _: {
         url = "https://ariang.0pt.dpdns.org";
       }
       {
-        name = "conduit";
-        url = "https://ariang.0pt.dpdns.org";
-      }
-      {
         name = "garage";
         url = "https://garage.0pt.dpdns.org";
       }
@@ -88,6 +84,10 @@ _: {
       {
         name = "umami";
         url = "https://umami.0pt.dpdns.org";
+      }
+      {
+        name = "tuwunel";
+        url = "https://tuwunel.0pt.dpdns.org";
       }
       {
         name = "wakapi";
