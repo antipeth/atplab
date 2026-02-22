@@ -15,7 +15,6 @@
 in {
   options.services.zeroclaw = {
     enable = mkEnableOption "zeroclaw";
-
     openFirewall = mkOption {
       type = types.bool;
       default = false;
@@ -30,6 +29,11 @@ in {
       type = types.str;
       default = "3000";
       description = "The port for zeroclaw to listen";
+    };
+    dataDir = mkOption {
+      type = types.path;
+      default = "/var/lib/zeroclaw";
+      description = "Directory where Zeroclaw stores its database.";
     };
     user = mkOption {
       type = types.str;
@@ -82,9 +86,11 @@ in {
         name = "zeroclaw";
         group = cfg.group;
         isSystemUser = true;
-        home = "/var/lib/zeroclaw";
+        useDefaultShell = true;
+        home = cfg.dataDir;
       };
     };
     users.groups = mkIf (cfg.group == "zeroclaw") {zeroclaw = {};};
+    environment.systemPackages = [pkgs.zeroclaw];
   };
 }
