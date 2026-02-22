@@ -10,7 +10,7 @@ in {
       ./network.nix
       ./user.nix
 
-      # ./dn42
+      ./dn42
       ./values/Dko972mcS27c.nix
 
       ../../modules/services/zfs.nix

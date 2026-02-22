@@ -10,7 +10,7 @@ in {
       ./network.nix
       ./user.nix
 
-      # ./dn42
+      ./dn42
       ../../modules/services/zfs.nix
     ]
     ++ ls ./modules
