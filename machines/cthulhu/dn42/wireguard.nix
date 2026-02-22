@@ -1,6 +1,10 @@
-{config, ...}: {
+{
+  config,
+  hostname,
+  ...
+}: {
   # Wireguard Peer
-  sops.secrets.cthulhu-dn42-wg-privatekey = {
+  sops.secrets."${hostname}-dn42-wg-privatekey" = {
     mode = "0400";
     format = "binary";
     sopsFile = ../secrets/dn42-wg-private;
@@ -35,7 +39,7 @@
         }
       ];
       # publicKey: rE4mEBQo2Z/kLkg7a89bSLN76asevkqA7GygPJfv5D8=
-      privateKeyFile = config.sops.secrets.cthulhu-dn42-wg-privatekey.path;
+      privateKeyFile = config.sops.secrets."${hostname}-dn42-wg-privatekey".path;
     };
   };
   networking.firewall = {

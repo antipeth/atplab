@@ -1,10 +1,10 @@
 {
   config,
-  pkgs,
+  hostname,
   ...
 }: {
   # Wireguard Peer
-  sops.secrets.squid-dn42-wg-privatekey = {
+  sops.secrets."${hostname}-dn42-wg-privatekey" = {
     mode = "0400";
     format = "binary";
     sopsFile = ../secrets/dn42-wg-private;
@@ -39,7 +39,7 @@
         }
       ];
       # publicKey: 1w7XcnqKbjzLRp12JcLn0BEz4C3AMR4R+a6fbSHR5HM=
-      privateKeyFile = config.sops.secrets.squid-dn42-wg-privatekey.path;
+      privateKeyFile = config.sops.secrets."${hostname}-dn42-wg-privatekey".path;
     };
   };
   networking.firewall = {

@@ -1,10 +1,10 @@
 {
   config,
-  pkgs,
+  hostname,
   ...
 }: {
   # Wireguard Peer
-  sops.secrets.octopus-dn42-wg-privatekey = {
+  sops.secrets."${hostname}-dn42-wg-privatekey" = {
     mode = "0400";
     format = "binary";
     sopsFile = ../secrets/dn42-wg-private;
@@ -39,7 +39,7 @@
         }
       ];
       # publicKey: L4c8C+/CPPfD0PuuwDUVz7mtzO8c9eCtf4vkBoxPSWc=
-      privateKeyFile = config.sops.secrets.octopus-dn42-wg-privatekey.path;
+      privateKeyFile = config.sops.secrets."${hostname}-dn42-wg-privatekey".path;
     };
   };
   networking.firewall = {
