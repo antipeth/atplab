@@ -28,6 +28,7 @@
             deadnix
             rage
             sops
+            pre-commit
           ];
         };
       };
