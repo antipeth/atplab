@@ -1,0 +1,11 @@
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.24.2
+    hooks:
+      - id: gitleaks
+  - repo: local
+    hooks:
+      - id: values-sops-keywords
+        name: Check sops
+        entry: ./scripts/pre-commit-values-check.sh
+        language: script
