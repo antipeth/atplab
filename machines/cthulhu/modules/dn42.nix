@@ -49,6 +49,20 @@
           neighborLinkLocal = "fe80::b72b"; # Comment this to use dn42 ipv6 address for bgp (optionally)
         };
       };
+      as20728 = {
+        wg = {
+          listenPort = 20728;
+          publicKey = "rxVEiqcS4UseSPlLyHI716WRKOWgKp3QtTWXs/2FdGw=";
+          endpoint = import ../values/dn42-peer-as20728.nix;
+          linkLocal = "fe80::9334/64";
+          remoteV4 = "172.22.106.29";
+          remoteV6 = "fd38:8b09:eb92::29";
+        };
+        bgp = {
+          remoteAs = 4242420728;
+          neighborLinkLocal = "fe80::0728";
+        };
+      };
     };
   };
 }
