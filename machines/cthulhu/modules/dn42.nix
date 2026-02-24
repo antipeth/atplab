@@ -46,7 +46,7 @@
         };
         bgp = {
           remoteAs = 4242420003;
-          neighborLinkLocal = "fe80::b72b";
+          # neighborLinkLocal = "fe80::b72b"; # Comment this to use dn42 ipv6 address for bgp (optionally)
         };
       };
     };
