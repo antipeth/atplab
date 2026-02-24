@@ -40,13 +40,13 @@
           listenPort = 40001;
           publicKey = "rE4mEBQo2Z/kLkg7a89bSLN76asevkqA7GygPJfv5D8=";
           endpoint = import ../values/dn42-peer-atp-cthulhu.nix;
-          linkLocal = "fe80::67b3/64";
+          linkLocal = "fe80::b72b/64";
           remoteV4 = "172.20.192.3";
           remoteV6 = "fd25:5547:5a89::3";
         };
         bgp = {
           remoteAs = 4242420003;
-          # neighborLinkLocal = "fe80::9334"; # Comment this to use dn42 ipv6 address for bgp. (optionally)
+          neighborLinkLocal = "fe80::9334"; # Comment this to use dn42 ipv6 address for bgp. (optionally)
         };
       };
     };

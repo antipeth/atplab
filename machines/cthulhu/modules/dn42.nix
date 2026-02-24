@@ -40,13 +40,13 @@
           listenPort = 40001;
           publicKey = "1w7XcnqKbjzLRp12JcLn0BEz4C3AMR4R+a6fbSHR5HM=";
           endpoint = import ../values/dn42-peer-atp-squid.nix;
-          linkLocal = "fe80::67b3/64";
+          linkLocal = "fe80::9334/64";
           remoteV4 = "172.20.192.2";
           remoteV6 = "fd25:5547:5a89::2";
         };
         bgp = {
           remoteAs = 4242420003;
-          # neighborLinkLocal = "fe80::b72b"; # Comment this to use dn42 ipv6 address for bgp (optionally)
+          neighborLinkLocal = "fe80::b72b"; # Comment this to use dn42 ipv6 address for bgp (optionally)
         };
       };
     };
