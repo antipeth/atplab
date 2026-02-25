@@ -77,6 +77,7 @@
           neighborLinkLocal = "fe80::cd2a";
         };
       };
+      # Automatic Peering: https://dn42.routedbits.io
       as20207 = {
         wg = {
           listenPort = 20207;
