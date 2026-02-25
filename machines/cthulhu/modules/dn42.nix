@@ -91,6 +91,23 @@
           remoteAs = 4242420207;
         };
       };
+      # Automatic Peering: https://blog.moe233.net/dn42/
+      as20253 = {
+        wg = {
+          listenPort = 20253;
+          publicKey = "vRRfNnGL7jpKGBJjLZg612vHQulDOtICkgXCC++1+2g=";
+          endpoint = "ams.dn42.moe233.net:20003";
+          linkLocal = "fe80::9334/64";
+          remoteV4 = "172.23.69.162";
+          remoteV6 = "fd05:4b:cce::2";
+        };
+        bgp = {
+          remoteAs = 4242420253;
+          enableV4 = false;
+          enableMpBGP = true;
+          neighborLinkLocal = "fe80::253";
+        };
+      };
     };
   };
 }
