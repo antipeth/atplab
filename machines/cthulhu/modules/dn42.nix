@@ -123,6 +123,21 @@
           neighborLinkLocal = "fe80::263";
         };
       };
+      # Automatic Peering: https://peer-dn42.nedifinita.com/
+      as20454 = {
+        wg = {
+          listenPort = 20454;
+          publicKey = "pCTgngczpFgIDbZzfxtz6tiaiFo59b2GbeJEEc21mA0=";
+          endpoint = import ../values/dn42-peer-as20454.nix;
+          linkLocal = "fe80::9334/64";
+          remoteV4 = "172.22.159.102";
+          remoteV6 = "fdef:fa9b:62b:f102::1";
+        };
+        bgp = {
+          remoteAs = 4242420454;
+          neighborLinkLocal = "fe80::454:102";
+        };
+      };
     };
   };
 }
