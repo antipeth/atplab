@@ -14,7 +14,7 @@ in {
         domain = "";
         servers = ["${hostname}<127.0.0.1>"];
         netSpecificMode = "dn42";
-        protocolFilter = ["bgp"];
+        protocolFilter = ["bgp" "rpki"];
         extraArgs = ["--trust-proxy-headers"];
       };
       proxy = {
