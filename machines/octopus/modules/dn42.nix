@@ -21,7 +21,7 @@
     ownNetv6 = "fd25:5547:5a89::/48";
     peers = {
       # Key becomes the peer name used in interface/BGP session names
-      atp_2 = {
+      atp2 = {
         wg = {
           listenPort = 40000;
           publicKey = "1w7XcnqKbjzLRp12JcLn0BEz4C3AMR4R+a6fbSHR5HM=";
@@ -35,7 +35,7 @@
           neighborLinkLocal = "fe80::b72b";
         };
       };
-      atp_3 = {
+      atp3 = {
         wg = {
           listenPort = 40001;
           publicKey = "rE4mEBQo2Z/kLkg7a89bSLN76asevkqA7GygPJfv5D8=";
