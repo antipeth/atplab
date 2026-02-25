@@ -106,6 +106,56 @@ in {
       description = "Your DN42 IPv6 prefix (e.g. fd00::/48).";
     };
 
+    bgpTemplate = mkOption {
+      type = types.lines;
+      description = ''
+        BIRD2 BGP template for DN42 peers.
+        This defines import/export filters and common BGP behavior.
+      '';
+      default = ''
+        template bgp dnpeers {
+          local as OWNAS;
+          path metric 1;
+
+          ipv4 {
+            import filter {
+              if is_valid_network() && !is_self_net() then {
+                if (roa_check(dn42_roa, net, bgp_path.last) != ROA_VALID) then {
+                  print "[dn42] ROA check failed for ", net, " ASN ", bgp_path.last;
+                  reject;
+                } else accept;
+              } else reject;
+            };
+
+            export filter {
+              if is_valid_network() && source ~ [RTS_STATIC, RTS_BGP] then accept;
+              else reject;
+            };
+
+            import limit 9000 action block;
+          };
+
+          ipv6 {
+            import filter {
+              if is_valid_network_v6() && !is_self_net_v6() then {
+                if (roa_check(dn42_roa_v6, net, bgp_path.last) != ROA_VALID) then {
+                  print "[dn42] ROA check failed for ", net, " ASN ", bgp_path.last;
+                  reject;
+                } else accept;
+              } else reject;
+            };
+
+            export filter {
+              if is_valid_network_v6() && source ~ [RTS_STATIC, RTS_BGP] then accept;
+              else reject;
+            };
+
+            import limit 9000 action block;
+          };
+        }
+      '';
+    };
+
     extraBirdConfig = mkOption {
       type = types.lines;
       default = "";
@@ -280,40 +330,7 @@ in {
           ipv6 { import all; export none; };
         }
 
-        template bgp dnpeers {
-          local as OWNAS;
-          path metric 1;
-          ipv4 {
-            import filter {
-              if is_valid_network() && !is_self_net() then {
-                if (roa_check(dn42_roa, net, bgp_path.last) != ROA_VALID) then {
-                  print "[dn42] ROA check failed for ", net, " ASN ", bgp_path.last;
-                  reject;
-                } else accept;
-              } else reject;
-            };
-            export filter {
-              if is_valid_network() && source ~ [RTS_STATIC, RTS_BGP] then accept;
-              else reject;
-            };
-            import limit 9000 action block;
-          };
-          ipv6 {
-            import filter {
-              if is_valid_network_v6() && !is_self_net_v6() then {
-                if (roa_check(dn42_roa_v6, net, bgp_path.last) != ROA_VALID) then {
-                  print "[dn42] ROA check failed for ", net, " ASN ", bgp_path.last;
-                  reject;
-                } else accept;
-              } else reject;
-            };
-            export filter {
-              if is_valid_network_v6() && source ~ [RTS_STATIC, RTS_BGP] then accept;
-              else reject;
-            };
-            import limit 9000 action block;
-          };
-        }
+        ${cfg.bgpTemplate}
 
         include "/etc/bird/peers/*";
 
