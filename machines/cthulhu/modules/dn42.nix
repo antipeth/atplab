@@ -63,6 +63,20 @@
           neighborLinkLocal = "fe80::0728";
         };
       };
+      as21984 = {
+        wg = {
+          listenPort = 21984;
+          publicKey = "Nt69jupNZY1M9QloP3+qu37OVO5Ua6zNynF4HTmygkQ=";
+          endpoint = import ../values/dn42-peer-as21984.nix;
+          linkLocal = "fe80::9334/64";
+          remoteV4 = "172.21.118.129";
+          remoteV6 = "fdee:6aaa:1d9::1";
+        };
+        bgp = {
+          remoteAs = 4242421984;
+          neighborLinkLocal = "fe80::cd2a";
+        };
+      };
     };
   };
 }
