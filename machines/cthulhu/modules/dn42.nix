@@ -108,6 +108,22 @@
           neighborLinkLocal = "fe80::253";
         };
       };
+      # Automatic Peering: https://hcartiaux.github.io/dn42/
+      as20263 = {
+        wg = {
+          listenPort = 20263;
+          publicKey = "d7ICCZTiZaYlf9ueUuPlVV1QdLWLobIlCiI9fxet+H4=";
+          endpoint = "de-fra1.flap42.eu:52030";
+          linkLocal = "fe80::9334/64";
+          # remoteV6 = "fd05:4b:cce::2";
+        };
+        bgp = {
+          remoteAs = 4242420263;
+          enableV4 = false;
+          enableMpBGP = true;
+          neighborLinkLocal = "fe80::263";
+        };
+      };
     };
   };
 }
