@@ -115,7 +115,6 @@
           publicKey = "d7ICCZTiZaYlf9ueUuPlVV1QdLWLobIlCiI9fxet+H4=";
           endpoint = "de-fra1.flap42.eu:52030";
           linkLocal = "fe80::9334/64";
-          # remoteV6 = "fd05:4b:cce::2";
         };
         bgp = {
           remoteAs = 4242420263;
