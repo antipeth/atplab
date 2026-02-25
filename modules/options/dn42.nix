@@ -44,6 +44,7 @@
         };
         remoteV4 = mkOption {
           type = types.str;
+          default = null;
           description = "Remote IPv4 tunnel address, no prefix (e.g. 172.20.0.2).";
         };
         remoteV6 = mkOption {
@@ -55,6 +56,16 @@
 
       # BGP side
       bgp = {
+        enableV4 = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Enable IPv4 BGP session for this peer.";
+        };
+        enableV6 = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Enable IPv6 BGP session for this peer.";
+        };
         remoteAs = mkOption {
           type = types.int;
           description = "Remote AS number.";
@@ -214,11 +225,11 @@ in {
               }
             ];
             postSetup = ''
-              ${lib.optionalString (peer.wg.linkLocal != null)
+              ${lib.optionalString (peer.bgp.enableV6 && peer.wg.linkLocal != null)
                 "${pkgs.iproute2}/bin/ip -6 addr add ${peer.wg.linkLocal} dev ${ifName}"}
-              ${lib.optionalString (peer.wg.remoteV4 != null)
+              ${lib.optionalString (peer.bgp.enableV4 && peer.wg.remoteV4 != null)
                 "${pkgs.iproute2}/bin/ip addr add ${cfg.ownIP}/32 peer ${peer.wg.remoteV4}/32 dev ${ifName}"}
-              ${lib.optionalString (peer.wg.remoteV6 != null)
+              ${lib.optionalString (peer.bgp.enableV6 && peer.wg.remoteV6 != null)
                 "${pkgs.iproute2}/bin/ip -6 addr add ${cfg.ownIPv6}/128 peer ${peer.wg.remoteV6}/128 dev ${ifName}"}
             '';
           }
@@ -351,18 +362,23 @@ in {
                 if peer.bgp.neighborLinkLocal != null
                 then peer.bgp.neighborLinkLocal
                 else peer.wg.remoteV6;
-            in ''
-              protocol bgp dn42_${peerName}_v4 from dnpeers {
-                neighbor ${peer.wg.remoteV4} as ${toString peer.bgp.remoteAs};
-                direct;
-                ipv6 { import none; export none; };
-              };
-              protocol bgp dn42_${peerName}_v6 from dnpeers {
-                neighbor ${neighborV6} % 'dn42-${peerName}' as ${toString peer.bgp.remoteAs};
-                direct;
-                ipv4 { import none; export none; };
-              };
-            '';
+            in
+              lib.concatStringsSep "\n" (
+                lib.optional peer.bgp.enableV4 ''
+                  protocol bgp dn42_${peerName}_v4 from dnpeers {
+                    neighbor ${peer.wg.remoteV4} as ${toString peer.bgp.remoteAs};
+                    direct;
+                    ipv6 { import none; export none; };
+                  };
+                ''
+                ++ lib.optional peer.bgp.enableV6 ''
+                  protocol bgp dn42_${peerName}_v6 from dnpeers {
+                    neighbor ${neighborV6} % 'dn42-${peerName}' as ${toString peer.bgp.remoteAs};
+                    direct;
+                    ipv4 { import none; export none; };
+                  };
+                ''
+              );
           }
       )
       cfg.peers;
