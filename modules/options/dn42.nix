@@ -66,6 +66,18 @@
           default = true;
           description = "Enable IPv6 BGP session for this peer.";
         };
+        enableMpBGP = mkOption {
+          type = types.bool;
+          default = false;
+          description = ''
+            Enable MP-BGP IPv4 over IPv6 (Extended Next Hop).
+            When enabled:
+              - No IPv4 BGP session is created
+              - IPv4 routes are exchanged over the IPv6 BGP session
+              - Requires enableV6 = true
+              - Does NOT require IPv4 address on the tunnel interface
+          '';
+        };
         remoteAs = mkOption {
           type = types.int;
           description = "Remote AS number.";
@@ -200,6 +212,20 @@ in {
 
   # ── implementation ────────────────────────────────────────────────────────
   config = mkIf cfg.enable {
+    assertions = lib.flatten (
+      lib.mapAttrsToList (_: peer: [
+        {
+          assertion = !(peer.bgp.enableMpBGP && !peer.bgp.enableV6);
+          message = "enableMpBGP requires bgp.enableV6 = true";
+        }
+        {
+          assertion = !(peer.bgp.enableMpBGP && peer.bgp.enableV4);
+          message = "enableMpBGP is incompatible with bgp.enableV4 (no separate IPv4 session)";
+        }
+      ])
+      cfg.peers
+    );
+
     # ── WireGuard interfaces (one per peer) ───────────────────────────────
     networking.wireguard.interfaces = lib.listToAttrs (
       lib.mapAttrsToList (
@@ -227,7 +253,7 @@ in {
             postSetup = ''
               ${lib.optionalString (peer.bgp.enableV6 && peer.wg.linkLocal != null)
                 "${pkgs.iproute2}/bin/ip -6 addr add ${peer.wg.linkLocal} dev ${ifName}"}
-              ${lib.optionalString (peer.bgp.enableV4 && peer.wg.remoteV4 != null)
+              ${lib.optionalString (peer.bgp.enableV4 && !peer.bgp.enableMpBGP && peer.wg.remoteV4 != null)
                 "${pkgs.iproute2}/bin/ip addr add ${cfg.ownIP}/32 peer ${peer.wg.remoteV4}/32 dev ${ifName}"}
               ${lib.optionalString (peer.bgp.enableV6 && peer.wg.remoteV6 != null)
                 "${pkgs.iproute2}/bin/ip -6 addr add ${cfg.ownIPv6}/128 peer ${peer.wg.remoteV6}/128 dev ${ifName}"}
@@ -364,20 +390,39 @@ in {
                 else peer.wg.remoteV6;
             in
               lib.concatStringsSep "\n" (
-                lib.optional peer.bgp.enableV4 ''
+                lib.optional (peer.bgp.enableV4 && !peer.bgp.enableMpBGP) ''
                   protocol bgp dn42_${peerName}_v4 from dnpeers {
                     neighbor ${peer.wg.remoteV4} as ${toString peer.bgp.remoteAs};
                     direct;
                     ipv6 { import none; export none; };
                   };
                 ''
-                ++ lib.optional peer.bgp.enableV6 ''
-                  protocol bgp dn42_${peerName}_v6 from dnpeers {
-                    neighbor ${neighborV6} % 'dn42-${peerName}' as ${toString peer.bgp.remoteAs};
-                    direct;
-                    ipv4 { import none; export none; };
-                  };
-                ''
+                ++ lib.optional peer.bgp.enableV6 (
+                  if peer.bgp.enableMpBGP
+                  then ''
+                    protocol bgp dn42_${peerName}_mpbgp from dnpeers {
+                      enable extended messages on;
+                      neighbor ${neighborV6} % 'dn42-${peerName}' as ${toString peer.bgp.remoteAs};
+                      direct;
+
+                      ipv4 {
+                        extended next hop on;
+                      };
+
+                      ipv6 {
+                        import none;
+                        export none;
+                      };
+                    };
+                  ''
+                  else ''
+                    protocol bgp dn42_${peerName}_v6 from dnpeers {
+                      neighbor ${neighborV6} % 'dn42-${peerName}' as ${toString peer.bgp.remoteAs};
+                      direct;
+                      ipv4 { import none; export none; };
+                    };
+                  ''
+                )
               );
           }
       )
