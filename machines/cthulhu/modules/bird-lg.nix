@@ -12,7 +12,11 @@ in {
         listenAddresses = "127.0.0.1:15000";
         proxyPort = 18000;
         domain = "";
-        servers = ["${hostname}<127.0.0.1>"];
+        servers = [
+          "${hostname}<127.0.0.1>"
+          "octopus<172.20.192.1>"
+          "squid<172.20.192.2>"
+        ];
         netSpecificMode = "dn42";
         protocolFilter = ["bgp" "rpki"];
         extraArgs = ["--trust-proxy-headers"];
