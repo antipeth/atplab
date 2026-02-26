@@ -151,6 +151,21 @@
       #     enableV6 = false;
       #   };
       # };
+      # Automatic Peering: https://iedon.net/
+      as22189 = {
+        wg = {
+          listenPort = 22189;
+          publicKey = "FHp0OR4UpAS8/Ra0FUNffTk18soUYCa6NcvZdOgxY0k=";
+          endpoint = import ../values/dn42-peer-as22189.nix;
+          linkLocal = "fe80::9334/64";
+          remoteV4 = "172.23.91.125";
+          remoteV6 = "fd42:4242:2189:e9::1";
+        };
+        bgp = {
+          remoteAs = 4242422189;
+          neighborLinkLocal = "fe80::2189:e9";
+        };
+      };
     };
   };
 }
