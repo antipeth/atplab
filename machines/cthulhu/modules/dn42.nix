@@ -139,18 +139,18 @@
         };
       };
       # Automatic Peering: https://www.chrismoos.com/dn42-peering/
-      as21588 = {
-        wg = {
-          listenPort = 21588;
-          publicKey = "MD1EdVe9a0yycUdXCH3A61s3HhlDn17m5d07e4H33S0=";
-          endpoint = import ../values/dn42-peer-as21588.nix;
-          remoteV4 = "172.20.16.141";
-        };
-        bgp = {
-          remoteAs = 4242421588;
-          enableV6 = false;
-        };
-      };
+      # as21588 = {
+      #   wg = {
+      #     listenPort = 21588;
+      #     publicKey = "MD1EdVe9a0yycUdXCH3A61s3HhlDn17m5d07e4H33S0=";
+      #     endpoint = import ../values/dn42-peer-as21588.nix;
+      #     remoteV4 = "172.20.16.141";
+      #   };
+      #   bgp = {
+      #     remoteAs = 4242421588;
+      #     enableV6 = false;
+      #   };
+      # };
     };
   };
 }
