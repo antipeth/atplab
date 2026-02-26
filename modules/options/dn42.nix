@@ -410,8 +410,7 @@ in {
                       };
 
                       ipv6 {
-                        import none;
-                        export none;
+                        extended next hop off;
                       };
                     };
                   ''
